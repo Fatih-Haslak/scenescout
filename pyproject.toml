@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "scenescout"
-version = "0.1.0"
+version = "0.2.0"
 description = "Find the moment you remember. Local visual video search with EmbeddingGemma 2."
 readme = "README.md"
 requires-python = ">=3.12,<3.14"
@@ -19,6 +19,41 @@ dependencies = [
 
 [project.scripts]
 scenescout = "scenescout.__main__:main"
+
+[project.optional-dependencies]
+cpu = ["torch==2.14.1", "torchvision==0.29.1"]
+cuda = ["torch==2.14.1", "torchvision==0.29.1"]
+
+[dependency-groups]
+dev = [
+    "pytest>=8,<10",
+    "pytest-cov>=6,<8",
+    "httpx>=0.28,<1",
+    "ruff==0.17.0",
+    "httpx2>=2.13.1",
+]
+evaluation = ["imageio-ffmpeg>=0.6,<1", "matplotlib>=3.10,<4", "psutil>=7,<8"]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu130"
+url = "https://download.pytorch.org/whl/cu130"
+explicit = true
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu", extra = "cpu" }, { index = "pytorch-cu130", extra = "cuda" }]
+torchvision = [{ index = "pytorch-cpu", extra = "cpu" }, { index = "pytorch-cu130", extra = "cuda" }]
+
+[tool.uv]
+conflicts = [[{ extra = "cpu" }, { extra = "cuda" }]]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = ["error::ResourceWarning"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/scenescout"]

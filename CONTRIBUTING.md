@@ -3,10 +3,11 @@
 Open an issue with the use case before expanding the feature set. Keep the visual-search workflow focused and avoid adding cloud dependencies to the default path.
 
 ```sh
-uv sync --frozen
-uv run scenescout
-uvx ruff check src examples
-uvx ruff format --check src examples
+uv sync --frozen --extra cpu --group dev
+uv run --no-sync scenescout
+uv run --no-sync pytest --cov=scenescout --cov-fail-under=80
+uv run --no-sync ruff check src examples scripts evaluation tests
+uv run --no-sync ruff format --check src examples scripts evaluation tests
 npx --yes prettier@3.9.10 --check "src/scenescout/static/*.{js,css,html}"
 ```
 

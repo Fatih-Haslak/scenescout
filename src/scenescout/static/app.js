@@ -52,6 +52,9 @@ const translations = {
     indexing: "Indexing",
     ready: "Ready",
     error: "Could not index",
+    paused: "Paused · frames saved",
+    resume: "Resume indexing",
+    resuming: "Continuing from saved frames…",
     removing: "Removing",
     frames: "frames",
     uploading: "Importing",
@@ -132,6 +135,9 @@ const translations = {
     indexing: "İndeksleniyor",
     ready: "Hazır",
     error: "İndekslenemedi",
+    paused: "Duraklatıldı · kareler kaydedildi",
+    resume: "İndekslemeye devam et",
+    resuming: "Kaydedilen karelerden devam ediliyor…",
     removing: "Kaldırılıyor",
     frames: "kare",
     uploading: "İçe aktarılıyor",
@@ -180,6 +186,7 @@ const state = {
   queryType: "text",
   librarySignature: "",
   previewStatus: null,
+  searchEpoch: 0,
 };
 const emptyResults = $("results").firstElementChild.cloneNode(true);
 const timecode = (seconds) => {
@@ -269,19 +276,20 @@ function renderScope() {
 }
 function renderLibrary() {
   const list = $("library-list");
+  const focused = document.activeElement?.dataset.libraryKey;
   list.replaceChildren();
   $("video-count").textContent = state.videos.length;
   state.videos.forEach((video) => {
     const row = el("div", "library-item" + (state.scope === video.id ? " selected" : ""));
     const select = el("button", "library-select");
+    select.dataset.libraryKey = `${video.id}:select`;
     select.title = video.error || video.name;
     select.append(el("strong", null, video.name));
-    const progress =
-      video.status === "indexing"
-        ? ` ${video.progress}/${video.total || "…"}`
-        : video.status === "ready"
-          ? ` · ${timecode(video.duration)} · ${video.progress} ${t("frames")}`
-          : "";
+    const progress = ["indexing", "paused", "error"].includes(video.status)
+      ? ` ${video.progress}/${video.total || "…"}`
+      : video.status === "ready"
+        ? ` · ${timecode(video.duration)} · ${video.progress} ${t("frames")}`
+        : "";
     select.append(el("small", null, t(video.status) + progress));
     select.onclick = () => {
       state.scope = video.id;
@@ -292,14 +300,41 @@ function renderLibrary() {
       showVideo(video.id, 0);
     };
     const remove = el("button", "remove-button", "×");
+    remove.dataset.libraryKey = `${video.id}:remove`;
     remove.setAttribute("aria-label", `${t("deleteLabel")} ${video.name}`);
     remove.onclick = () => {
       state.deleting = video.id;
       $("remove-dialog").showModal();
     };
-    row.append(select, remove);
+    row.append(select);
+    const actions = el("div", "library-actions");
+    if (["paused", "error"].includes(video.status)) {
+      const resume = el("button", "resume-button", "↻");
+      resume.dataset.libraryKey = `${video.id}:resume`;
+      resume.setAttribute("aria-label", `${t("resume")} ${video.name}`);
+      resume.title = t("resume");
+      resume.onclick = async () => {
+        resume.disabled = true;
+        try {
+          await api(`/api/videos/${video.id}/resume`, { method: "POST" });
+          notice(t("resuming"));
+          await refresh();
+        } catch (error) {
+          notice(error.message, true);
+          resume.disabled = false;
+        }
+      };
+      actions.append(resume);
+    }
+    actions.append(remove);
+    row.append(actions);
     list.append(row);
   });
+  if (focused) {
+    [...list.querySelectorAll("button")]
+      .find((button) => button.dataset.libraryKey === focused)
+      ?.focus({ preventScroll: true });
+  }
 }
 async function refresh() {
   try {
@@ -468,6 +503,7 @@ async function search(image) {
     return;
   }
   state.busy = true;
+  const epoch = state.searchEpoch;
   $("search-button").disabled = true;
   $("reference-button").disabled = true;
   $("search-button").textContent = t("finding");
@@ -491,6 +527,7 @@ async function search(image) {
       state.queryLabel = query;
       state.queryType = "text";
     }
+    if (epoch !== state.searchEpoch) return;
     state.results = response;
     state.selected = response.results[0]?.id || null;
     renderResults();
@@ -637,6 +674,7 @@ $("export-results").onclick = () => {
 $("remove-dialog").onclose = async () => {
   if ($("remove-dialog").returnValue !== "confirm" || !state.deleting) return;
   try {
+    state.searchEpoch += 1;
     await api(`/api/videos/${state.deleting}`, { method: "DELETE" });
     if (state.preview === state.deleting) clearPreview();
     if (state.scope === state.deleting) state.scope = null;

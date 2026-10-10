@@ -1,5 +1,7 @@
 # Recorded demo observations
 
+Historical **v0.1** observations. See the [v0.2 evaluation](evaluation.md) for labelled retrieval metrics, actual CUDA execution, longer-video throughput and synthetic cache scaling.
+
 Recorded on **2026-10-10** with actual local inference. Small-sample observations, not broad quality or throughput claims.
 
 | Setting | Value |

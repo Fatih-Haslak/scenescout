@@ -1,17 +1,39 @@
 """SQLite metadata + float32 vectors; each operation owns its connection."""
 
 import sqlite3
+import shutil
+import threading
+import logging
 from contextlib import contextmanager
 
 from .config import DATA_DIR
 
+_generation = 0
+_generation_lock = threading.Lock()
+logger = logging.getLogger(__name__)
+
+
+def invalidate():
+    global _generation
+    with _generation_lock:
+        _generation += 1
+
+
+def generation():
+    with _generation_lock:
+        return _generation
+
 
 @contextmanager
 def connection():
-    with sqlite3.connect(DATA_DIR / "library.sqlite3", timeout=30) as db:
+    db = sqlite3.connect(DATA_DIR / "library.sqlite3", timeout=30)
+    try:
         db.row_factory = sqlite3.Row
         db.execute("PRAGMA foreign_keys=ON")
-        yield db
+        with db:
+            yield db
+    finally:
+        db.close()
 
 
 def initialize():
@@ -37,10 +59,19 @@ def initialize():
             CREATE INDEX IF NOT EXISTS scenes_video ON scenes(video_id);
         """)
         db.execute(
-            """UPDATE videos SET status='error', error=?
+            """UPDATE videos SET status='paused', error=?
                       WHERE status IN ('queued','indexing')""",
-            ("Indexing was interrupted. Remove and import this video again.",),
+            ("Indexing interrupted. Resume to continue from saved frames.",),
         )
+    # A persisted tombstone makes interrupted removal recoverable, including file cleanup.
+    for item in videos():
+        if item["status"] == "removing":
+            try:
+                remove(item["id"])
+            except OSError:
+                logger.exception("Removal recovery blocked for %s", item["id"])
+                update(item["id"], error="File is in use. Close its player and retry removal.")
+    invalidate()
 
 
 def videos():
@@ -61,3 +92,30 @@ def update(video_id, **fields):
     with connection() as db:
         assignments = ", ".join(f"{key}=?" for key in fields)
         db.execute(f"UPDATE videos SET {assignments} WHERE id=?", (*fields.values(), video_id))
+    if "status" in fields:
+        invalidate()
+
+
+def checkpoint(video_id, scenes):
+    """Commit a batch and its progress together; retries reuse already committed scene IDs."""
+    with connection() as db:
+        db.executemany("INSERT OR REPLACE INTO scenes VALUES (?,?,?,?)", scenes)
+        db.execute(
+            "UPDATE videos SET progress=(SELECT COUNT(*) FROM scenes WHERE video_id=?) WHERE id=?",
+            (video_id, video_id),
+        )
+
+
+def remove(video_id):
+    item = video(video_id)
+    if not item:
+        return
+    update(video_id, status="removing")
+    # Delete metadata last. If file cleanup fails/crashes, the next startup retries it.
+    (DATA_DIR / "videos" / f"{video_id}{item['extension']}").unlink(missing_ok=True)
+    thumb_dir = DATA_DIR / "thumbnails" / video_id
+    if thumb_dir.exists():
+        shutil.rmtree(thumb_dir)
+    with connection() as db:
+        db.execute("DELETE FROM videos WHERE id=?", (video_id,))
+    invalidate()

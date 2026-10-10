@@ -1,0 +1,23 @@
+[
+  {
+    "id": "bunny",
+    "name": "Big Buck Bunny",
+    "clip_start": 30,
+    "duration": 60.0,
+    "sha256": "c24fd22364552223c81852d854f5cb6c713caec7d3ab8a8f9a9e49491f54e9d2"
+  },
+  {
+    "id": "sintel",
+    "name": "Sintel trailer",
+    "clip_start": 0,
+    "duration": 45.0,
+    "sha256": "575b834a1ab9671e97a6a9c2e5d0acdcd08e95131223dd195dc3f795918b438d"
+  },
+  {
+    "id": "dream",
+    "name": "Elephants Dream",
+    "clip_start": 30,
+    "duration": 60.0,
+    "sha256": "f923894da4a96981f187b03b773f75850d211930054cb52a06afe026550f1105"
+  }
+]

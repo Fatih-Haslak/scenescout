@@ -10,12 +10,14 @@ Video ekle, gördüğün sahneyi tarif et ve sonuçtan o ana git. İstersen örn
 
 ## Kurulum
 
-**Python 3.12 veya 3.13** ve [uv](https://docs.astral.sh/uv/getting-started/installation/) gerekir. Birkaç GB boş RAM ve disk alanı bırak.
+**Windows için kolay kurulum:** [v0.2.0 paketini](https://github.com/Fatih-Haslak/scenescout/releases/tag/v0.2.0) indir, ZIP’i bir klasöre çıkart ve `Start.cmd` dosyasına çift tıkla. Python ve bağımlılıklar otomatik hazırlanır; elle Python/uv kurmak gerekmez. İlk açılış internet ve birkaç GB boş alan gerektirir. NVIDIA GPU için `Start-GPU.cmd` kullanılabilir. [Kurulum ayrıntıları](docs/installation.md).
+
+Kaynak koddan kurmak için Python 3.12/3.13 ve [uv](https://docs.astral.sh/uv/getting-started/installation/) kullan:
 
 ```sh
 git clone https://github.com/Fatih-Haslak/scenescout.git
 cd scenescout
-uv run --frozen scenescout --open-browser
+uv run --frozen --extra cpu scenescout --open-browser
 ```
 
 Windows’ta **Start.cmd** dosyasına çift tıklayabilirsin. İlk açılışta bağımlılıklar, ilk videoda yaklaşık 1,5 GB model dosyası indirilir. Uygulamayı [http://127.0.0.1:8765](http://127.0.0.1:8765) adresinde kullan. Sunucuyu terminalinde Ctrl+C ile durdur.
@@ -26,6 +28,14 @@ Windows’ta **Start.cmd** dosyasına çift tıklayabilirsin. İlk açılışta 
 4. Sonuca tıkla; oynatıcı ilgili zaman koduna gider.
 
 Görsel simgesiyle bir referans görsel yükleyebilir, zaman çizelgesinden videoyu gezebilir ve sonuçları JSON olarak dışa aktarabilirsin. Dil düğmesi Türkçe ve İngilizce arasında geçiş yapar.
+
+Yarım kalan indeksler kayıtlı kareleri korur. Kitaplıktaki **İndekslemeye devam et** düğmesiyle yeniden yüklemeden devam edebilirsin. Silme sırasında uygulama kapanırsa temizlik sonraki açılışta tamamlanır.
+
+## Doğrulama ve ölçümler
+
+40 davranış testi; Windows/Linux ve Python 3.12/3.13 için otomatik kontroller. Gerçek model ayrıca CPU ve RTX 4060 Ti GPU üzerinde çalıştırıldı. Üç filmden 55 kare ve 36 Türkçe/İngilizce sorgudan oluşan küçük geliştirme setinde doğru sahne 24 sorguda ilk sırada, 36 sorgunun tamamında ilk beşte bulundu. Isınmış metin aramasında ortanca süre CPU’da 66 ms, GPU’da 32 ms ölçüldü.
+
+Bu küçük set genel doğruluk garantisi değildir. Beklenen sahneler aramalardan önce kaydedildi; ilk sonucu kaçıran sorgular da raporda yer alır. [Ham sonuçlar, yöntem ve tekrar çalıştırma](docs/evaluation.md).
 
 ## Örnek video
 
@@ -41,7 +51,7 @@ Oluşan `examples/demo.mp4` dosyasını 3 saniyelik kare aralığıyla ekle. Ble
 - Örnekleme kısa olayları kaçırabilir. Zaman kodları örneklenen karelere aittir.
 - Video başına 512 MB, iki saat ve 2.000 kare sınırı vardır. Kare aralığını artırmak indeksleme maliyetini azaltır.
 - Benzerlik puanı doğruluk yüzdesi değildir. İlgisiz sorgular da en yakın sonuçları getirir.
-- Windows kurulumu CPU kullanır; GPU için uyumlu CUDA PyTorch kurulumu gerekir. GPU hızı ölçülmedi.
+- CPU için `--extra cpu`, uyumlu NVIDIA GPU için `--extra cuda` seçilir. GPU ölçümü RTX 4060 Ti ile yapıldı.
 - Kopyalar ve indeks `.data/`, model dosyaları Hugging Face önbelleğindedir. Videoyu kaldırmak orijinalini silmez.
 - İndirmeler tamamlandıktan sonra yerelde çalışır. Tam çevrimdışı model yüklemek için `HF_HUB_OFFLINE=1` kullanılabilir.
 

@@ -1,7 +1,8 @@
 <p align="center"><img src="src/scenescout/static/logo.svg" width="64" alt="SceneScout logo"></p>
 <h1 align="center">SceneScout</h1>
+<p align="center"><a href="https://github.com/Fatih-Haslak/scenescout/actions/workflows/checks.yml"><img src="https://github.com/Fatih-Haslak/scenescout/actions/workflows/checks.yml/badge.svg" alt="Checks"></a></p>
 <p align="center"><strong>Find the moment you remember.</strong><br>Private, local visual video search with Google EmbeddingGemma 2.</p>
-<p align="center"><a href="README.tr.md">Türkçe</a> · <a href="#quick-start">Quick start</a> · <a href="docs/architecture.md">Architecture</a> · <a href="docs/performance.md">Measured demo</a> · <a href="SECURITY.md">Privacy</a></p>
+<p align="center"><a href="README.tr.md">Türkçe</a> · <a href="#quick-start">Quick start</a> · <a href="docs/architecture.md">Architecture</a> · <a href="docs/evaluation.md">Measured evaluation</a> · <a href="SECURITY.md">Privacy</a></p>
 
 ![SceneScout finding a rabbit scene in a real video](docs/scenescout.jpg)
 
@@ -19,19 +20,22 @@ This animation combines three real application screenshots. The demo uses a 30-s
 
 - English/Turkish scene queries and reference-image search.
 - Clickable results, seek-to-timecode playback and an interactive filmstrip.
-- Adjustable sampling, indexing progress and content-hash deduplication.
+- Adjustable sampling, batch indexing, progress and content-hash deduplication.
+- Resume failed/interrupted imports from committed frames; recover interrupted removal on restart.
 - Library-wide or single-video search, timecode copying and JSON export.
 - Bilingual, responsive UI with keyboard access and local assets.
 - Documented local API, OpenAPI schema, locked dependencies and pinned model revision.
 
 ## Quick start
 
-Requires **Python 3.12 or 3.13** and [uv](https://docs.astral.sh/uv/getting-started/installation/). Leave several GB of RAM and disk space free. CPU inference works; indexing is slower than text search.
+Source installation uses **Python 3.12 or 3.13** and [uv](https://docs.astral.sh/uv/getting-started/installation/). Leave several GB of RAM and disk space free. CPU inference works; indexing is slower than text search.
+
+**Windows without a manual Python setup:** download the [v0.2.0 starter ZIP](https://github.com/Fatih-Haslak/scenescout/releases/tag/v0.2.0), extract it, and double-click `Start.cmd`. It prepares Python and dependencies automatically. `Start-GPU.cmd` selects CUDA on a supported NVIDIA machine. [Installation details](docs/installation.md).
 
 ```sh
 git clone https://github.com/Fatih-Haslak/scenescout.git
 cd scenescout
-uv run --frozen scenescout --open-browser
+uv run --frozen --extra cpu scenescout --open-browser
 ```
 
 Open [http://127.0.0.1:8765](http://127.0.0.1:8765). Windows: double-click **Start.cmd**. macOS/Linux: `sh start.sh`. Stop the server with Ctrl+C in its terminal.
@@ -69,7 +73,13 @@ flowchart LR
 
 Each sampled frame is embedded as an image. The audio tower is disabled; this release does not process whole video sequences or reason over motion. Text uses the model's `SearchQuery` prompt. Normalized 768-dimensional float32 vectors are persisted in SQLite. Inference uses float32 on CPU or bfloat16 on compatible CUDA devices, never float16.
 
-Windows defaults to CPU PyTorch. A matching CUDA installation of PyTorch and torchvision enables GPU detection. GPU speed was not measured for this release. [PyTorch installation](https://pytorch.org/get-started/locally/).
+Select CPU with `--extra cpu`, or CUDA 13.0 with `--extra cuda` on a compatible NVIDIA system. Both variants are locked. `--device cpu|cuda|auto` controls inference; `--batch-size 1..16` controls indexing memory/throughput (default 2). GPU inference was measured on an RTX 4060 Ti. [Measured results and limitations](docs/evaluation.md), [uv/PyTorch backend configuration](https://docs.astral.sh/uv/guides/integration/pytorch/).
+
+## Evidence you can inspect
+
+40 automated behavioral tests cover interrupted jobs, resumed indexing, connection cleanup, duplicate/invalid imports, search/removal concurrency and safe dtype selection. CI runs on Windows/Linux and Python 3.12/3.13; model-loading tests use explicit doubles to avoid downloading weights in CI. Real-model evaluation is separate.
+
+On a small labelled development set of 3 films / 55 frames / 36 English/Turkish queries, **Hit@1 = 66.7%** and **Hit@5 = 100%** on both measured backends. Warm text-query p50/p95 was **66/73 ms CPU** and **32/34 ms GPU**. These are sample observations, not a general accuracy or speed guarantee. Raw rankings include the 12 first-result misses. [Reproduce the evaluation](docs/evaluation.md).
 
 ## Developer API
 
@@ -81,7 +91,7 @@ curl http://127.0.0.1:8765/api/search \
   -d '{"query":"a rabbit sitting in the grass","limit":12}'
 ```
 
-FastAPI, SQLite, NumPy and OpenCV power the backend. Plain JavaScript and CSS ship inside the Python wheel; no frontend build or Node installation is needed. [Architecture and tradeoffs](docs/architecture.md). [Local source checks and optional CI template](docs/source-checks.md).
+FastAPI, SQLite, NumPy and OpenCV power the backend. Plain JavaScript and CSS ship inside the Python wheel; no frontend build or Node installation is needed. [Architecture and tradeoffs](docs/architecture.md). [Checks and verification](docs/source-checks.md).
 
 ## Current limits
 
@@ -90,9 +100,9 @@ FastAPI, SQLite, NumPy and OpenCV power the backend. Plain JavaScript and CSS sh
 - Per video: **512 MB**, **2 hours**, **2,000 sampled frames**. Filmstrip: up to 80 thumbnails.
 - Similarity is a ranking, not a confidence percentage. Unrelated queries still return nearest neighbors.
 - Search scans vectors in memory. Large archives will need a dedicated vector index.
-- One indexing worker; search can wait for the current frame. Interrupted imports can be removed and re-imported.
+- One indexing worker; search can wait for the current batch. Interrupted imports expose a resume action.
 - Browser codec support varies; H.264 MP4 is recommended.
-- Windows CPU operation was observed. macOS/Linux and CUDA execution are unverified in this release.
+- Real model inference was observed on Windows CPU/CUDA. macOS inference remains unverified; CI covers core behavior separately from real model execution.
 
 ## Privacy and licensing
 

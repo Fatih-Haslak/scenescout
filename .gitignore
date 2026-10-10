@@ -10,3 +10,9 @@ work-notes.md
 examples/.cache/
 examples/demo.mp4
 docs/demo-*.jpg
+work/
+.pytest_cache/
+.coverage
+htmlcov/
+evaluation/media/
+.bootstrap/

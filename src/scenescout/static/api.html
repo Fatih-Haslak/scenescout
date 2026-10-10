@@ -36,6 +36,11 @@
           Remove the imported copy, thumbnails and vectors. Original files remain untouched. Running
           inference finishes its current frame before cleanup.
         </dd>
+        <dt><code>POST /api/videos/{id}/resume</code></dt>
+        <dd>
+          Continue a failed or paused index from saved frames. Returns 202; active or ready jobs
+          return 409. Interrupted removals finish on restart.
+        </dd>
       </dl>
       <h2>Search</h2>
       <pre><code>curl http://127.0.0.1:8765/api/search \

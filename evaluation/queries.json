@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "annotation_method": "Contact sheets reviewed before model retrieval. Paired EN/TR descriptions of visible sampled frames; one annotator (Codex), no human adjudication or output-driven tuning.",
+  "sampling_seconds": 3,
+  "cases": [
+    {"id":"b1","video":"bunny","windows":[[0,0]],"en":"A wide view of a mossy tree with a hole at its base","tr":"Tabanında oyuk bulunan yosunlu bir ağacın geniş görüntüsü"},
+    {"id":"b2","video":"bunny","windows":[[18,24]],"en":"A large rabbit sitting in the grass outside its burrow","tr":"Yuvasının dışında çimenlerde oturan büyük bir tavşan"},
+    {"id":"b3","video":"bunny","windows":[[36,39],[45,45]],"en":"A rabbit smelling white daisy flowers","tr":"Beyaz papatya çiçeklerini koklayan bir tavşan"},
+    {"id":"b4","video":"bunny","windows":[[48,51]],"en":"A pink butterfly near a white rabbit's face","tr":"Beyaz bir tavşanın yüzünün yakınında pembe bir kelebek"},
+    {"id":"b5","video":"bunny","windows":[[30,33]],"en":"A low angle close-up of a rabbit against a blue sky","tr":"Mavi gökyüzünün önünde aşağıdan görülen bir tavşanın yakın çekimi"},
+    {"id":"b6","video":"bunny","windows":[[42,42]],"en":"A small brown animal in the foreground watching a rabbit","tr":"Ön planda bir tavşanı izleyen küçük kahverengi bir hayvan"},
+    {"id":"s1","video":"sintel","windows":[[6,6]],"en":"A woman holding a staff in snowy mountains","tr":"Karlı dağlarda asa tutan bir kadın"},
+    {"id":"s2","video":"sintel","windows":[[15,15]],"en":"A close-up of a red-haired woman in a dark room","tr":"Karanlık bir odada kızıl saçlı bir kadının yakın çekimi"},
+    {"id":"s3","video":"sintel","windows":[[21,21]],"en":"A narrow empty alley between old buildings","tr":"Eski binalar arasında dar ve boş bir sokak"},
+    {"id":"s4","video":"sintel","windows":[[27,27]],"en":"A dragon flying against orange clouds","tr":"Turuncu bulutların önünde uçan bir ejderha"},
+    {"id":"s5","video":"sintel","windows":[[30,33]],"en":"A woman reaching out to touch a small dragon","tr":"Küçük bir ejderhaya dokunmak için elini uzatan bir kadın"},
+    {"id":"s6","video":"sintel","windows":[[36,39]],"en":"Golden desert sand dunes beneath a cloudy sky","tr":"Bulutlu gökyüzünün altında altın renkli çöl kumulları"},
+    {"id":"d1","video":"dream","windows":[[3,6]],"en":"Mechanical pipes and circular machinery crossed by black cables","tr":"Siyah kabloların geçtiği mekanik borular ve dairesel makineler"},
+    {"id":"d2","video":"dream","windows":[[9,18]],"en":"Two men on a metal platform in a bright industrial room","tr":"Aydınlık endüstriyel bir odada metal platform üzerindeki iki adam"},
+    {"id":"d3","video":"dream","windows":[[21,24]],"en":"A close-up of a young man with short dark hair","tr":"Kısa koyu saçlı genç bir adamın yakın çekimi"},
+    {"id":"d4","video":"dream","windows":[[27,33]],"en":"A close-up of a pale balding older man","tr":"Solgun ve saçları dökülmüş yaşlı bir adamın yakın çekimi"},
+    {"id":"d5","video":"dream","windows":[[36,39]],"en":"A small circular metal platform suspended beside many cables","tr":"Çok sayıda kablonun yanında asılı küçük dairesel metal platform"},
+    {"id":"d6","video":"dream","windows":[[51,57]],"en":"A dark metal walkway surrounded by wires and cables","tr":"Teller ve kablolarla çevrili karanlık bir metal geçit"}
+  ]
+}

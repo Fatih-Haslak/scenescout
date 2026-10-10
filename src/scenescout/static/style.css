@@ -162,7 +162,7 @@ button:hover:not(:disabled) {
 }
 .library-item {
   display: grid;
-  grid-template-columns: 1fr 24px;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   padding: 9px 5px;
   border-bottom: 1px solid #f0f2f6;
@@ -194,6 +194,7 @@ button:hover:not(:disabled) {
   font-size: 11px;
   margin-top: 5px;
 }
+.resume-button,
 .remove-button {
   border: 0;
   background: transparent;
@@ -202,6 +203,11 @@ button:hover:not(:disabled) {
   padding: 0;
   width: 24px;
   height: 30px;
+}
+.library-actions {
+  display: flex;
+  gap: 4px;
+  align-items: center;
 }
 .sidebar-foot {
   font-size: 11px;

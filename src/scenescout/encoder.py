@@ -2,6 +2,7 @@
 
 import threading
 import time
+import os
 
 import numpy as np
 
@@ -27,7 +28,12 @@ class Encoder:
             import torch
             from sentence_transformers import SentenceTransformer
 
-            self.device = "cuda" if torch.cuda.is_available() else "cpu"
+            requested = os.getenv("SCENESCOUT_DEVICE", "auto")
+            if requested not in {"auto", "cpu", "cuda"}:
+                raise ValueError("SCENESCOUT_DEVICE must be auto, cpu or cuda")
+            if requested == "cuda" and not torch.cuda.is_available():
+                raise ValueError("CUDA was requested but this PyTorch installation cannot use it")
+            self.device = "cuda" if requested != "cpu" and torch.cuda.is_available() else "cpu"
             dtype = (
                 torch.bfloat16
                 if self.device == "cuda" and torch.cuda.is_bf16_supported()
@@ -48,15 +54,33 @@ class Encoder:
             raise
 
     def encode(self, content, prompt_name=None):
+        return self.encode_many([content], prompt_name)[0]
+
+    def encode_many(self, contents, prompt_name=None):
+        if not contents:
+            return np.empty((0, 768), dtype=np.float32)
         with self.lock:
             self._load()
-            kwargs = {"normalize_embeddings": True, "show_progress_bar": False, "batch_size": 1}
+            kwargs = {
+                "normalize_embeddings": True,
+                "show_progress_bar": False,
+                "batch_size": len(contents),
+            }
             if prompt_name:
                 kwargs["prompt_name"] = prompt_name
-            vector = np.asarray(self.model.encode(content, **kwargs), dtype=np.float32).reshape(-1)
-            if vector.shape != (768,) or not np.isfinite(vector).all():
+            vectors = np.asarray(self.model.encode(contents, **kwargs), dtype=np.float32)
+            if vectors.shape != (len(contents), 768) or not np.isfinite(vectors).all():
                 raise ValueError("Model produced an invalid embedding; no index was published.")
-            return vector / max(float(np.linalg.norm(vector)), 1e-12)
+            norms = np.linalg.norm(vectors, axis=1, keepdims=True)
+            if np.any(norms <= 1e-12):
+                raise ValueError("Model produced a zero embedding; no index was published.")
+            return vectors / norms
+
+    def batch_size(self):
+        value = int(os.getenv("SCENESCOUT_BATCH_SIZE", "2"))
+        if not 1 <= value <= 16:
+            raise ValueError("SCENESCOUT_BATCH_SIZE must be between 1 and 16")
+        return value
 
     def status(self):
         return {
@@ -66,6 +90,7 @@ class Encoder:
             "model": MODEL_ID,
             "revision": MODEL_REVISION,
             "load_seconds": self.load_seconds,
+            "batch_size": self.batch_size(),
         }
 
 

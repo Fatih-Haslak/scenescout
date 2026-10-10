@@ -20,6 +20,7 @@ from . import store
 from .config import DATA_DIR, MAX_UPLOAD_BYTES, STATIC_DIR
 from .encoder import encoder
 from .indexer import indexer
+from .retrieval import retrieval, rank
 
 logger = logging.getLogger(__name__)
 
@@ -33,7 +34,7 @@ async def lifespan(app):
 
 app = FastAPI(
     title="SceneScout",
-    version="0.1.0",
+    version="0.2.0",
     lifespan=lifespan,
     description="Local visual video search using Google EmbeddingGemma 2.",
     docs_url=None,
@@ -73,7 +74,7 @@ def status():
     return {
         "model": encoder.status(),
         "max_upload_mb": MAX_UPLOAD_BYTES // (1024 * 1024),
-        "version": "0.1.0",
+        "version": "0.2.0",
         "mode": "visual_frames",
     }
 
@@ -143,6 +144,16 @@ def delete_video(video_id: str):
     return {"status": "removing"}
 
 
+@app.post("/api/videos/{video_id}/resume", status_code=202)
+def resume_video(video_id: str):
+    item = require_video(video_id)
+    if item["status"] not in {"error", "paused"}:
+        raise HTTPException(409, "Only interrupted or failed indexes can be resumed.")
+    if not indexer.submit(video_id):
+        raise HTTPException(409, "This video already has an indexing job.")
+    return {"id": video_id, "status": "queued"}
+
+
 @app.get("/api/videos/{video_id}/media")
 def video_media(video_id: str):
     item = require_video(video_id)
@@ -190,16 +201,11 @@ class SearchRequest(BaseModel):
 
 def search(vector_content, video_id, limit, prompt_name=None):
     started = time.perf_counter()
-    with store.connection() as db:
-        sql = """SELECT s.id,s.video_id,s.timestamp,s.vector,v.name,v.duration,v.interval
-                 FROM scenes s JOIN videos v ON v.id=s.video_id WHERE v.status='ready'"""
-        params = ()
-        if video_id:
-            require_video(video_id)
-            sql += " AND v.id=?"
-            params = (video_id,)
-        rows = list(db.execute(sql, params))
-    if not rows:
+    if video_id:
+        require_video(video_id)
+    if not any(
+        v["status"] == "ready" and (not video_id or v["id"] == video_id) for v in store.videos()
+    ):
         return {"results": [], "elapsed_ms": 0, "searched_frames": 0}
     try:
         vector = encoder.encode(vector_content, prompt_name)
@@ -208,31 +214,9 @@ def search(vector_content, video_id, limit, prompt_name=None):
         raise HTTPException(
             503, "Model inference failed. Check the server log and available RAM."
         ) from exc
-    matrix = np.stack([np.frombuffer(row["vector"], dtype="<f4") for row in rows])
-    scores = matrix @ vector
-    picked = []
-    for index in np.argsort(-scores):
-        row = rows[index]
-        # Adjacent sampled frames often repeat the same moment. Keep a diverse shortlist.
-        if any(
-            item["video_id"] == row["video_id"]
-            and abs(item["timestamp"] - row["timestamp"]) < row["interval"] * 2
-            for item in picked
-        ):
-            continue
-        picked.append(
-            {
-                "id": row["id"],
-                "video_id": row["video_id"],
-                "name": row["name"],
-                "timestamp": row["timestamp"],
-                "duration": row["duration"],
-                "score": round(float(scores[index]), 4),
-                "thumbnail": f"/api/thumbnails/{row['id']}",
-            }
-        )
-        if len(picked) == limit:
-            break
+    # Read after inference: it may have waited while a video was removed or finished indexing.
+    rows, matrix = retrieval.snapshot(video_id)
+    picked = rank(rows, matrix, vector, limit)
     return {
         "results": picked,
         "elapsed_ms": round((time.perf_counter() - started) * 1000),

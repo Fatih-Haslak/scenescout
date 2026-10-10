@@ -1,0 +1,4271 @@
+{
+  "recorded_utc": "2026-10-10T17:19:15Z",
+  "model_revision": "914f7f89142e33e77833254d9c9b90c3cef7303b",
+  "annotation_sha256": "30d69a84c582d1d4b87ee240e49819b7e397de964b3ff120763a0ea81edb5a33",
+  "environment": {
+    "os": "Windows-11-10.0.26200-SP0",
+    "python": "3.13.9",
+    "torch": "2.14.1+cpu",
+    "device": "cpu",
+    "gpu": null,
+    "batch_size": 2,
+    "logical_cpus": 12
+  },
+  "media": [
+    {
+      "id": "bunny",
+      "name": "Big Buck Bunny",
+      "clip_start": 30,
+      "duration": 60.0,
+      "sha256": "c24fd22364552223c81852d854f5cb6c713caec7d3ab8a8f9a9e49491f54e9d2"
+    },
+    {
+      "id": "sintel",
+      "name": "Sintel trailer",
+      "clip_start": 0,
+      "duration": 45.0,
+      "sha256": "575b834a1ab9671e97a6a9c2e5d0acdcd08e95131223dd195dc3f795918b438d"
+    },
+    {
+      "id": "dream",
+      "name": "Elephants Dream",
+      "clip_start": 30,
+      "duration": 60.0,
+      "sha256": "f923894da4a96981f187b03b773f75850d211930054cb52a06afe026550f1105"
+    }
+  ],
+  "indexes": [
+    {
+      "video": "bunny",
+      "frames": 20,
+      "duration_seconds": 60.0,
+      "index_seconds_model_already_loaded": 63.304667600023095
+    },
+    {
+      "video": "sintel",
+      "frames": 15,
+      "duration_seconds": 45.0,
+      "index_seconds_model_already_loaded": 47.348743200011086
+    },
+    {
+      "video": "dream",
+      "frames": 20,
+      "duration_seconds": 60.0,
+      "index_seconds_model_already_loaded": 66.7494206999545
+    }
+  ],
+  "cold_query_ms_cached_weights": 10580.100700026378,
+  "cached_model_load_seconds": 10.5,
+  "warm_latency_ms": {
+    "samples": 108,
+    "p50": 66.0,
+    "p95": 73.0
+  },
+  "process_rss_mib_after_run": 2485.796875,
+  "cuda_peak_allocated_mib": null,
+  "quality": {
+    "all": {
+      "queries": 36,
+      "hit_at_1": 0.6666666666666666,
+      "hit_at_5": 1.0,
+      "mrr_at_12": 0.8009259259259259
+    },
+    "en": {
+      "queries": 18,
+      "hit_at_1": 0.6666666666666666,
+      "hit_at_5": 1.0,
+      "mrr_at_12": 0.8055555555555556
+    },
+    "tr": {
+      "queries": 18,
+      "hit_at_1": 0.6666666666666666,
+      "hit_at_5": 1.0,
+      "mrr_at_12": 0.7962962962962963
+    }
+  },
+  "outcomes": [
+    {
+      "id": "b1",
+      "language": "en",
+      "query": "A wide view of a mossy tree with a hole at its base",
+      "first_relevant_rank": 1,
+      "results": [
+        {
+          "id": "bunny-00000",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 0.0,
+          "duration": 60.0,
+          "score": 0.7255,
+          "thumbnail": "/api/thumbnails/bunny-00000"
+        },
+        {
+          "id": "bunny-00003",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 9.0,
+          "duration": 60.0,
+          "score": 0.6657,
+          "thumbnail": "/api/thumbnails/bunny-00003"
+        },
+        {
+          "id": "bunny-00005",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.6429,
+          "thumbnail": "/api/thumbnails/bunny-00005"
+        },
+        {
+          "id": "bunny-00014",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 42.0,
+          "duration": 60.0,
+          "score": 0.6296,
+          "thumbnail": "/api/thumbnails/bunny-00014"
+        },
+        {
+          "id": "bunny-00007",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 21.0,
+          "duration": 60.0,
+          "score": 0.6243,
+          "thumbnail": "/api/thumbnails/bunny-00007"
+        },
+        {
+          "id": "dream-00013",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 39.0,
+          "duration": 60.0,
+          "score": 0.6199,
+          "thumbnail": "/api/thumbnails/dream-00013"
+        },
+        {
+          "id": "bunny-00009",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 27.0,
+          "duration": 60.0,
+          "score": 0.6062,
+          "thumbnail": "/api/thumbnails/bunny-00009"
+        },
+        {
+          "id": "dream-00001",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 3.0,
+          "duration": 60.0,
+          "score": 0.5976,
+          "thumbnail": "/api/thumbnails/dream-00001"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.5952,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        },
+        {
+          "id": "sintel-00006",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 18.0,
+          "duration": 45.0,
+          "score": 0.5952,
+          "thumbnail": "/api/thumbnails/sintel-00006"
+        },
+        {
+          "id": "bunny-00012",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 36.0,
+          "duration": 60.0,
+          "score": 0.5923,
+          "thumbnail": "/api/thumbnails/bunny-00012"
+        },
+        {
+          "id": "sintel-00014",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 42.0,
+          "duration": 45.0,
+          "score": 0.59,
+          "thumbnail": "/api/thumbnails/sintel-00014"
+        }
+      ]
+    },
+    {
+      "id": "b1",
+      "language": "tr",
+      "query": "Tabanında oyuk bulunan yosunlu bir ağacın geniş görüntüsü",
+      "first_relevant_rank": 1,
+      "results": [
+        {
+          "id": "bunny-00000",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 0.0,
+          "duration": 60.0,
+          "score": 0.69,
+          "thumbnail": "/api/thumbnails/bunny-00000"
+        },
+        {
+          "id": "bunny-00002",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 6.0,
+          "duration": 60.0,
+          "score": 0.6586,
+          "thumbnail": "/api/thumbnails/bunny-00002"
+        },
+        {
+          "id": "bunny-00005",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.6321,
+          "thumbnail": "/api/thumbnails/bunny-00005"
+        },
+        {
+          "id": "bunny-00014",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 42.0,
+          "duration": 60.0,
+          "score": 0.6229,
+          "thumbnail": "/api/thumbnails/bunny-00014"
+        },
+        {
+          "id": "sintel-00014",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 42.0,
+          "duration": 45.0,
+          "score": 0.6083,
+          "thumbnail": "/api/thumbnails/sintel-00014"
+        },
+        {
+          "id": "bunny-00007",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 21.0,
+          "duration": 60.0,
+          "score": 0.6049,
+          "thumbnail": "/api/thumbnails/bunny-00007"
+        },
+        {
+          "id": "dream-00013",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 39.0,
+          "duration": 60.0,
+          "score": 0.6028,
+          "thumbnail": "/api/thumbnails/dream-00013"
+        },
+        {
+          "id": "bunny-00009",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 27.0,
+          "duration": 60.0,
+          "score": 0.5929,
+          "thumbnail": "/api/thumbnails/bunny-00009"
+        },
+        {
+          "id": "dream-00001",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 3.0,
+          "duration": 60.0,
+          "score": 0.5885,
+          "thumbnail": "/api/thumbnails/dream-00001"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.5866,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        },
+        {
+          "id": "sintel-00006",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 18.0,
+          "duration": 45.0,
+          "score": 0.5866,
+          "thumbnail": "/api/thumbnails/sintel-00006"
+        },
+        {
+          "id": "bunny-00018",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 54.0,
+          "duration": 60.0,
+          "score": 0.5817,
+          "thumbnail": "/api/thumbnails/bunny-00018"
+        }
+      ]
+    },
+    {
+      "id": "b2",
+      "language": "en",
+      "query": "A large rabbit sitting in the grass outside its burrow",
+      "first_relevant_rank": 2,
+      "results": [
+        {
+          "id": "bunny-00005",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.7529,
+          "thumbnail": "/api/thumbnails/bunny-00005"
+        },
+        {
+          "id": "bunny-00008",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 24.0,
+          "duration": 60.0,
+          "score": 0.7413,
+          "thumbnail": "/api/thumbnails/bunny-00008"
+        },
+        {
+          "id": "bunny-00018",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 54.0,
+          "duration": 60.0,
+          "score": 0.7121,
+          "thumbnail": "/api/thumbnails/bunny-00018"
+        },
+        {
+          "id": "bunny-00016",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 48.0,
+          "duration": 60.0,
+          "score": 0.6967,
+          "thumbnail": "/api/thumbnails/bunny-00016"
+        },
+        {
+          "id": "bunny-00003",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 9.0,
+          "duration": 60.0,
+          "score": 0.6881,
+          "thumbnail": "/api/thumbnails/bunny-00003"
+        },
+        {
+          "id": "bunny-00000",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 0.0,
+          "duration": 60.0,
+          "score": 0.6855,
+          "thumbnail": "/api/thumbnails/bunny-00000"
+        },
+        {
+          "id": "bunny-00011",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 33.0,
+          "duration": 60.0,
+          "score": 0.6846,
+          "thumbnail": "/api/thumbnails/bunny-00011"
+        },
+        {
+          "id": "bunny-00013",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 39.0,
+          "duration": 60.0,
+          "score": 0.6537,
+          "thumbnail": "/api/thumbnails/bunny-00013"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.6142,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        },
+        {
+          "id": "sintel-00006",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 18.0,
+          "duration": 45.0,
+          "score": 0.6142,
+          "thumbnail": "/api/thumbnails/sintel-00006"
+        },
+        {
+          "id": "sintel-00004",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 12.0,
+          "duration": 45.0,
+          "score": 0.5781,
+          "thumbnail": "/api/thumbnails/sintel-00004"
+        },
+        {
+          "id": "sintel-00010",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 30.0,
+          "duration": 45.0,
+          "score": 0.5743,
+          "thumbnail": "/api/thumbnails/sintel-00010"
+        }
+      ]
+    },
+    {
+      "id": "b2",
+      "language": "tr",
+      "query": "Yuvasının dışında çimenlerde oturan büyük bir tavşan",
+      "first_relevant_rank": 2,
+      "results": [
+        {
+          "id": "bunny-00005",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.7362,
+          "thumbnail": "/api/thumbnails/bunny-00005"
+        },
+        {
+          "id": "bunny-00008",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 24.0,
+          "duration": 60.0,
+          "score": 0.7299,
+          "thumbnail": "/api/thumbnails/bunny-00008"
+        },
+        {
+          "id": "bunny-00017",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 51.0,
+          "duration": 60.0,
+          "score": 0.7068,
+          "thumbnail": "/api/thumbnails/bunny-00017"
+        },
+        {
+          "id": "bunny-00019",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 57.0,
+          "duration": 60.0,
+          "score": 0.7067,
+          "thumbnail": "/api/thumbnails/bunny-00019"
+        },
+        {
+          "id": "bunny-00011",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 33.0,
+          "duration": 60.0,
+          "score": 0.6816,
+          "thumbnail": "/api/thumbnails/bunny-00011"
+        },
+        {
+          "id": "bunny-00003",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 9.0,
+          "duration": 60.0,
+          "score": 0.6666,
+          "thumbnail": "/api/thumbnails/bunny-00003"
+        },
+        {
+          "id": "bunny-00000",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 0.0,
+          "duration": 60.0,
+          "score": 0.6556,
+          "thumbnail": "/api/thumbnails/bunny-00000"
+        },
+        {
+          "id": "bunny-00013",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 39.0,
+          "duration": 60.0,
+          "score": 0.6491,
+          "thumbnail": "/api/thumbnails/bunny-00013"
+        },
+        {
+          "id": "bunny-00015",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 45.0,
+          "duration": 60.0,
+          "score": 0.6467,
+          "thumbnail": "/api/thumbnails/bunny-00015"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.5967,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        },
+        {
+          "id": "sintel-00006",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 18.0,
+          "duration": 45.0,
+          "score": 0.5967,
+          "thumbnail": "/api/thumbnails/sintel-00006"
+        },
+        {
+          "id": "dream-00010",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 30.0,
+          "duration": 60.0,
+          "score": 0.5838,
+          "thumbnail": "/api/thumbnails/dream-00010"
+        }
+      ]
+    },
+    {
+      "id": "b3",
+      "language": "en",
+      "query": "A rabbit smelling white daisy flowers",
+      "first_relevant_rank": 1,
+      "results": [
+        {
+          "id": "bunny-00013",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 39.0,
+          "duration": 60.0,
+          "score": 0.7463,
+          "thumbnail": "/api/thumbnails/bunny-00013"
+        },
+        {
+          "id": "bunny-00015",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 45.0,
+          "duration": 60.0,
+          "score": 0.7094,
+          "thumbnail": "/api/thumbnails/bunny-00015"
+        },
+        {
+          "id": "bunny-00008",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 24.0,
+          "duration": 60.0,
+          "score": 0.6916,
+          "thumbnail": "/api/thumbnails/bunny-00008"
+        },
+        {
+          "id": "bunny-00018",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 54.0,
+          "duration": 60.0,
+          "score": 0.6832,
+          "thumbnail": "/api/thumbnails/bunny-00018"
+        },
+        {
+          "id": "bunny-00005",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.6808,
+          "thumbnail": "/api/thumbnails/bunny-00005"
+        },
+        {
+          "id": "bunny-00011",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 33.0,
+          "duration": 60.0,
+          "score": 0.6561,
+          "thumbnail": "/api/thumbnails/bunny-00011"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.6169,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        },
+        {
+          "id": "sintel-00006",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 18.0,
+          "duration": 45.0,
+          "score": 0.6169,
+          "thumbnail": "/api/thumbnails/sintel-00006"
+        },
+        {
+          "id": "bunny-00003",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 9.0,
+          "duration": 60.0,
+          "score": 0.6022,
+          "thumbnail": "/api/thumbnails/bunny-00003"
+        },
+        {
+          "id": "bunny-00000",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 0.0,
+          "duration": 60.0,
+          "score": 0.598,
+          "thumbnail": "/api/thumbnails/bunny-00000"
+        },
+        {
+          "id": "dream-00010",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 30.0,
+          "duration": 60.0,
+          "score": 0.5976,
+          "thumbnail": "/api/thumbnails/dream-00010"
+        },
+        {
+          "id": "dream-00001",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 3.0,
+          "duration": 60.0,
+          "score": 0.5691,
+          "thumbnail": "/api/thumbnails/dream-00001"
+        }
+      ]
+    },
+    {
+      "id": "b3",
+      "language": "tr",
+      "query": "Beyaz papatya çiçeklerini koklayan bir tavşan",
+      "first_relevant_rank": 1,
+      "results": [
+        {
+          "id": "bunny-00013",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 39.0,
+          "duration": 60.0,
+          "score": 0.7221,
+          "thumbnail": "/api/thumbnails/bunny-00013"
+        },
+        {
+          "id": "bunny-00008",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 24.0,
+          "duration": 60.0,
+          "score": 0.6995,
+          "thumbnail": "/api/thumbnails/bunny-00008"
+        },
+        {
+          "id": "bunny-00015",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 45.0,
+          "duration": 60.0,
+          "score": 0.6954,
+          "thumbnail": "/api/thumbnails/bunny-00015"
+        },
+        {
+          "id": "bunny-00017",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 51.0,
+          "duration": 60.0,
+          "score": 0.6951,
+          "thumbnail": "/api/thumbnails/bunny-00017"
+        },
+        {
+          "id": "bunny-00019",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 57.0,
+          "duration": 60.0,
+          "score": 0.6802,
+          "thumbnail": "/api/thumbnails/bunny-00019"
+        },
+        {
+          "id": "bunny-00005",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.6729,
+          "thumbnail": "/api/thumbnails/bunny-00005"
+        },
+        {
+          "id": "bunny-00011",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 33.0,
+          "duration": 60.0,
+          "score": 0.6664,
+          "thumbnail": "/api/thumbnails/bunny-00011"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.6137,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        },
+        {
+          "id": "sintel-00006",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 18.0,
+          "duration": 45.0,
+          "score": 0.6137,
+          "thumbnail": "/api/thumbnails/sintel-00006"
+        },
+        {
+          "id": "dream-00010",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 30.0,
+          "duration": 60.0,
+          "score": 0.6095,
+          "thumbnail": "/api/thumbnails/dream-00010"
+        },
+        {
+          "id": "bunny-00003",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 9.0,
+          "duration": 60.0,
+          "score": 0.6028,
+          "thumbnail": "/api/thumbnails/bunny-00003"
+        },
+        {
+          "id": "bunny-00000",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 0.0,
+          "duration": 60.0,
+          "score": 0.594,
+          "thumbnail": "/api/thumbnails/bunny-00000"
+        }
+      ]
+    },
+    {
+      "id": "b4",
+      "language": "en",
+      "query": "A pink butterfly near a white rabbit's face",
+      "first_relevant_rank": 1,
+      "results": [
+        {
+          "id": "bunny-00016",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 48.0,
+          "duration": 60.0,
+          "score": 0.7852,
+          "thumbnail": "/api/thumbnails/bunny-00016"
+        },
+        {
+          "id": "bunny-00013",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 39.0,
+          "duration": 60.0,
+          "score": 0.7022,
+          "thumbnail": "/api/thumbnails/bunny-00013"
+        },
+        {
+          "id": "bunny-00008",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 24.0,
+          "duration": 60.0,
+          "score": 0.7,
+          "thumbnail": "/api/thumbnails/bunny-00008"
+        },
+        {
+          "id": "bunny-00019",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 57.0,
+          "duration": 60.0,
+          "score": 0.6959,
+          "thumbnail": "/api/thumbnails/bunny-00019"
+        },
+        {
+          "id": "bunny-00011",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 33.0,
+          "duration": 60.0,
+          "score": 0.675,
+          "thumbnail": "/api/thumbnails/bunny-00011"
+        },
+        {
+          "id": "bunny-00005",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.672,
+          "thumbnail": "/api/thumbnails/bunny-00005"
+        },
+        {
+          "id": "sintel-00010",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 30.0,
+          "duration": 45.0,
+          "score": 0.613,
+          "thumbnail": "/api/thumbnails/sintel-00010"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.6114,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        },
+        {
+          "id": "sintel-00006",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 18.0,
+          "duration": 45.0,
+          "score": 0.6114,
+          "thumbnail": "/api/thumbnails/sintel-00006"
+        },
+        {
+          "id": "dream-00010",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 30.0,
+          "duration": 60.0,
+          "score": 0.5874,
+          "thumbnail": "/api/thumbnails/dream-00010"
+        },
+        {
+          "id": "bunny-00003",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 9.0,
+          "duration": 60.0,
+          "score": 0.5843,
+          "thumbnail": "/api/thumbnails/bunny-00003"
+        },
+        {
+          "id": "bunny-00000",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 0.0,
+          "duration": 60.0,
+          "score": 0.5787,
+          "thumbnail": "/api/thumbnails/bunny-00000"
+        }
+      ]
+    },
+    {
+      "id": "b4",
+      "language": "tr",
+      "query": "Beyaz bir tavşanın yüzünün yakınında pembe bir kelebek",
+      "first_relevant_rank": 1,
+      "results": [
+        {
+          "id": "bunny-00016",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 48.0,
+          "duration": 60.0,
+          "score": 0.7557,
+          "thumbnail": "/api/thumbnails/bunny-00016"
+        },
+        {
+          "id": "bunny-00008",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 24.0,
+          "duration": 60.0,
+          "score": 0.6835,
+          "thumbnail": "/api/thumbnails/bunny-00008"
+        },
+        {
+          "id": "bunny-00013",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 39.0,
+          "duration": 60.0,
+          "score": 0.68,
+          "thumbnail": "/api/thumbnails/bunny-00013"
+        },
+        {
+          "id": "bunny-00019",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 57.0,
+          "duration": 60.0,
+          "score": 0.6744,
+          "thumbnail": "/api/thumbnails/bunny-00019"
+        },
+        {
+          "id": "bunny-00011",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 33.0,
+          "duration": 60.0,
+          "score": 0.6552,
+          "thumbnail": "/api/thumbnails/bunny-00011"
+        },
+        {
+          "id": "bunny-00005",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.652,
+          "thumbnail": "/api/thumbnails/bunny-00005"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.6106,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        },
+        {
+          "id": "sintel-00006",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 18.0,
+          "duration": 45.0,
+          "score": 0.6106,
+          "thumbnail": "/api/thumbnails/sintel-00006"
+        },
+        {
+          "id": "sintel-00010",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 30.0,
+          "duration": 45.0,
+          "score": 0.5933,
+          "thumbnail": "/api/thumbnails/sintel-00010"
+        },
+        {
+          "id": "dream-00010",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 30.0,
+          "duration": 60.0,
+          "score": 0.5826,
+          "thumbnail": "/api/thumbnails/dream-00010"
+        },
+        {
+          "id": "dream-00016",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 48.0,
+          "duration": 60.0,
+          "score": 0.5776,
+          "thumbnail": "/api/thumbnails/dream-00016"
+        },
+        {
+          "id": "dream-00014",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 42.0,
+          "duration": 60.0,
+          "score": 0.5748,
+          "thumbnail": "/api/thumbnails/dream-00014"
+        }
+      ]
+    },
+    {
+      "id": "b5",
+      "language": "en",
+      "query": "A low angle close-up of a rabbit against a blue sky",
+      "first_relevant_rank": 1,
+      "results": [
+        {
+          "id": "bunny-00010",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 30.0,
+          "duration": 60.0,
+          "score": 0.7079,
+          "thumbnail": "/api/thumbnails/bunny-00010"
+        },
+        {
+          "id": "bunny-00005",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.6843,
+          "thumbnail": "/api/thumbnails/bunny-00005"
+        },
+        {
+          "id": "bunny-00016",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 48.0,
+          "duration": 60.0,
+          "score": 0.6793,
+          "thumbnail": "/api/thumbnails/bunny-00016"
+        },
+        {
+          "id": "bunny-00019",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 57.0,
+          "duration": 60.0,
+          "score": 0.6748,
+          "thumbnail": "/api/thumbnails/bunny-00019"
+        },
+        {
+          "id": "bunny-00008",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 24.0,
+          "duration": 60.0,
+          "score": 0.6698,
+          "thumbnail": "/api/thumbnails/bunny-00008"
+        },
+        {
+          "id": "bunny-00013",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 39.0,
+          "duration": 60.0,
+          "score": 0.6693,
+          "thumbnail": "/api/thumbnails/bunny-00013"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.6119,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        },
+        {
+          "id": "sintel-00006",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 18.0,
+          "duration": 45.0,
+          "score": 0.6119,
+          "thumbnail": "/api/thumbnails/sintel-00006"
+        },
+        {
+          "id": "sintel-00011",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 33.0,
+          "duration": 45.0,
+          "score": 0.6088,
+          "thumbnail": "/api/thumbnails/sintel-00011"
+        },
+        {
+          "id": "sintel-00009",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 27.0,
+          "duration": 45.0,
+          "score": 0.5999,
+          "thumbnail": "/api/thumbnails/sintel-00009"
+        },
+        {
+          "id": "dream-00010",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 30.0,
+          "duration": 60.0,
+          "score": 0.5976,
+          "thumbnail": "/api/thumbnails/dream-00010"
+        },
+        {
+          "id": "bunny-00003",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 9.0,
+          "duration": 60.0,
+          "score": 0.5851,
+          "thumbnail": "/api/thumbnails/bunny-00003"
+        }
+      ]
+    },
+    {
+      "id": "b5",
+      "language": "tr",
+      "query": "Mavi gökyüzünün önünde aşağıdan görülen bir tavşanın yakın çekimi",
+      "first_relevant_rank": 4,
+      "results": [
+        {
+          "id": "bunny-00009",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 27.0,
+          "duration": 60.0,
+          "score": 0.6835,
+          "thumbnail": "/api/thumbnails/bunny-00009"
+        },
+        {
+          "id": "bunny-00005",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.6827,
+          "thumbnail": "/api/thumbnails/bunny-00005"
+        },
+        {
+          "id": "bunny-00016",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 48.0,
+          "duration": 60.0,
+          "score": 0.6776,
+          "thumbnail": "/api/thumbnails/bunny-00016"
+        },
+        {
+          "id": "bunny-00011",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 33.0,
+          "duration": 60.0,
+          "score": 0.6618,
+          "thumbnail": "/api/thumbnails/bunny-00011"
+        },
+        {
+          "id": "bunny-00019",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 57.0,
+          "duration": 60.0,
+          "score": 0.6615,
+          "thumbnail": "/api/thumbnails/bunny-00019"
+        },
+        {
+          "id": "bunny-00007",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 21.0,
+          "duration": 60.0,
+          "score": 0.6615,
+          "thumbnail": "/api/thumbnails/bunny-00007"
+        },
+        {
+          "id": "bunny-00013",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 39.0,
+          "duration": 60.0,
+          "score": 0.6534,
+          "thumbnail": "/api/thumbnails/bunny-00013"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.6162,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        },
+        {
+          "id": "sintel-00006",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 18.0,
+          "duration": 45.0,
+          "score": 0.6162,
+          "thumbnail": "/api/thumbnails/sintel-00006"
+        },
+        {
+          "id": "bunny-00003",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 9.0,
+          "duration": 60.0,
+          "score": 0.6016,
+          "thumbnail": "/api/thumbnails/bunny-00003"
+        },
+        {
+          "id": "dream-00013",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 39.0,
+          "duration": 60.0,
+          "score": 0.5989,
+          "thumbnail": "/api/thumbnails/dream-00013"
+        },
+        {
+          "id": "sintel-00011",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 33.0,
+          "duration": 45.0,
+          "score": 0.5985,
+          "thumbnail": "/api/thumbnails/sintel-00011"
+        }
+      ]
+    },
+    {
+      "id": "b6",
+      "language": "en",
+      "query": "A small brown animal in the foreground watching a rabbit",
+      "first_relevant_rank": 3,
+      "results": [
+        {
+          "id": "bunny-00005",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.7335,
+          "thumbnail": "/api/thumbnails/bunny-00005"
+        },
+        {
+          "id": "bunny-00008",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 24.0,
+          "duration": 60.0,
+          "score": 0.7044,
+          "thumbnail": "/api/thumbnails/bunny-00008"
+        },
+        {
+          "id": "bunny-00014",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 42.0,
+          "duration": 60.0,
+          "score": 0.6979,
+          "thumbnail": "/api/thumbnails/bunny-00014"
+        },
+        {
+          "id": "bunny-00016",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 48.0,
+          "duration": 60.0,
+          "score": 0.6839,
+          "thumbnail": "/api/thumbnails/bunny-00016"
+        },
+        {
+          "id": "bunny-00019",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 57.0,
+          "duration": 60.0,
+          "score": 0.6724,
+          "thumbnail": "/api/thumbnails/bunny-00019"
+        },
+        {
+          "id": "bunny-00012",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 36.0,
+          "duration": 60.0,
+          "score": 0.6511,
+          "thumbnail": "/api/thumbnails/bunny-00012"
+        },
+        {
+          "id": "sintel-00009",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 27.0,
+          "duration": 45.0,
+          "score": 0.6431,
+          "thumbnail": "/api/thumbnails/sintel-00009"
+        },
+        {
+          "id": "bunny-00010",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 30.0,
+          "duration": 60.0,
+          "score": 0.6362,
+          "thumbnail": "/api/thumbnails/bunny-00010"
+        },
+        {
+          "id": "bunny-00003",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 9.0,
+          "duration": 60.0,
+          "score": 0.6334,
+          "thumbnail": "/api/thumbnails/bunny-00003"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.6323,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        },
+        {
+          "id": "sintel-00006",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 18.0,
+          "duration": 45.0,
+          "score": 0.6323,
+          "thumbnail": "/api/thumbnails/sintel-00006"
+        },
+        {
+          "id": "dream-00016",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 48.0,
+          "duration": 60.0,
+          "score": 0.6297,
+          "thumbnail": "/api/thumbnails/dream-00016"
+        }
+      ]
+    },
+    {
+      "id": "b6",
+      "language": "tr",
+      "query": "Ön planda bir tavşanı izleyen küçük kahverengi bir hayvan",
+      "first_relevant_rank": 4,
+      "results": [
+        {
+          "id": "bunny-00005",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.7057,
+          "thumbnail": "/api/thumbnails/bunny-00005"
+        },
+        {
+          "id": "bunny-00008",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 24.0,
+          "duration": 60.0,
+          "score": 0.6717,
+          "thumbnail": "/api/thumbnails/bunny-00008"
+        },
+        {
+          "id": "bunny-00016",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 48.0,
+          "duration": 60.0,
+          "score": 0.6671,
+          "thumbnail": "/api/thumbnails/bunny-00016"
+        },
+        {
+          "id": "bunny-00014",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 42.0,
+          "duration": 60.0,
+          "score": 0.6598,
+          "thumbnail": "/api/thumbnails/bunny-00014"
+        },
+        {
+          "id": "bunny-00019",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 57.0,
+          "duration": 60.0,
+          "score": 0.6506,
+          "thumbnail": "/api/thumbnails/bunny-00019"
+        },
+        {
+          "id": "bunny-00011",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 33.0,
+          "duration": 60.0,
+          "score": 0.6299,
+          "thumbnail": "/api/thumbnails/bunny-00011"
+        },
+        {
+          "id": "sintel-00009",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 27.0,
+          "duration": 45.0,
+          "score": 0.6244,
+          "thumbnail": "/api/thumbnails/sintel-00009"
+        },
+        {
+          "id": "bunny-00003",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 9.0,
+          "duration": 60.0,
+          "score": 0.6178,
+          "thumbnail": "/api/thumbnails/bunny-00003"
+        },
+        {
+          "id": "dream-00016",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 48.0,
+          "duration": 60.0,
+          "score": 0.616,
+          "thumbnail": "/api/thumbnails/dream-00016"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.6129,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        },
+        {
+          "id": "sintel-00006",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 18.0,
+          "duration": 45.0,
+          "score": 0.6129,
+          "thumbnail": "/api/thumbnails/sintel-00006"
+        },
+        {
+          "id": "sintel-00011",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 33.0,
+          "duration": 45.0,
+          "score": 0.6118,
+          "thumbnail": "/api/thumbnails/sintel-00011"
+        }
+      ]
+    },
+    {
+      "id": "s1",
+      "language": "en",
+      "query": "A woman holding a staff in snowy mountains",
+      "first_relevant_rank": 1,
+      "results": [
+        {
+          "id": "sintel-00002",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 6.0,
+          "duration": 45.0,
+          "score": 0.7769,
+          "thumbnail": "/api/thumbnails/sintel-00002"
+        },
+        {
+          "id": "dream-00002",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 6.0,
+          "duration": 60.0,
+          "score": 0.6278,
+          "thumbnail": "/api/thumbnails/dream-00002"
+        },
+        {
+          "id": "bunny-00007",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 21.0,
+          "duration": 60.0,
+          "score": 0.6228,
+          "thumbnail": "/api/thumbnails/bunny-00007"
+        },
+        {
+          "id": "dream-00010",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 30.0,
+          "duration": 60.0,
+          "score": 0.6152,
+          "thumbnail": "/api/thumbnails/dream-00010"
+        },
+        {
+          "id": "sintel-00010",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 30.0,
+          "duration": 45.0,
+          "score": 0.6137,
+          "thumbnail": "/api/thumbnails/sintel-00010"
+        },
+        {
+          "id": "dream-00013",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 39.0,
+          "duration": 60.0,
+          "score": 0.6122,
+          "thumbnail": "/api/thumbnails/dream-00013"
+        },
+        {
+          "id": "bunny-00005",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.6109,
+          "thumbnail": "/api/thumbnails/bunny-00005"
+        },
+        {
+          "id": "sintel-00007",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 21.0,
+          "duration": 45.0,
+          "score": 0.6099,
+          "thumbnail": "/api/thumbnails/sintel-00007"
+        },
+        {
+          "id": "sintel-00004",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 12.0,
+          "duration": 45.0,
+          "score": 0.6089,
+          "thumbnail": "/api/thumbnails/sintel-00004"
+        },
+        {
+          "id": "bunny-00009",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 27.0,
+          "duration": 60.0,
+          "score": 0.605,
+          "thumbnail": "/api/thumbnails/bunny-00009"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.6036,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        },
+        {
+          "id": "dream-00006",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 18.0,
+          "duration": 60.0,
+          "score": 0.6005,
+          "thumbnail": "/api/thumbnails/dream-00006"
+        }
+      ]
+    },
+    {
+      "id": "s1",
+      "language": "tr",
+      "query": "Karlı dağlarda asa tutan bir kadın",
+      "first_relevant_rank": 1,
+      "results": [
+        {
+          "id": "sintel-00002",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 6.0,
+          "duration": 45.0,
+          "score": 0.7056,
+          "thumbnail": "/api/thumbnails/sintel-00002"
+        },
+        {
+          "id": "sintel-00011",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 33.0,
+          "duration": 45.0,
+          "score": 0.6254,
+          "thumbnail": "/api/thumbnails/sintel-00011"
+        },
+        {
+          "id": "bunny-00005",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.6204,
+          "thumbnail": "/api/thumbnails/bunny-00005"
+        },
+        {
+          "id": "dream-00002",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 6.0,
+          "duration": 60.0,
+          "score": 0.6127,
+          "thumbnail": "/api/thumbnails/dream-00002"
+        },
+        {
+          "id": "sintel-00008",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 24.0,
+          "duration": 45.0,
+          "score": 0.6102,
+          "thumbnail": "/api/thumbnails/sintel-00008"
+        },
+        {
+          "id": "bunny-00008",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 24.0,
+          "duration": 60.0,
+          "score": 0.6051,
+          "thumbnail": "/api/thumbnails/bunny-00008"
+        },
+        {
+          "id": "dream-00010",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 30.0,
+          "duration": 60.0,
+          "score": 0.6032,
+          "thumbnail": "/api/thumbnails/dream-00010"
+        },
+        {
+          "id": "sintel-00004",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 12.0,
+          "duration": 45.0,
+          "score": 0.6023,
+          "thumbnail": "/api/thumbnails/sintel-00004"
+        },
+        {
+          "id": "dream-00005",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.6011,
+          "thumbnail": "/api/thumbnails/dream-00005"
+        },
+        {
+          "id": "dream-00013",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 39.0,
+          "duration": 60.0,
+          "score": 0.5974,
+          "thumbnail": "/api/thumbnails/dream-00013"
+        },
+        {
+          "id": "bunny-00003",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 9.0,
+          "duration": 60.0,
+          "score": 0.5955,
+          "thumbnail": "/api/thumbnails/bunny-00003"
+        },
+        {
+          "id": "dream-00015",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 45.0,
+          "duration": 60.0,
+          "score": 0.5932,
+          "thumbnail": "/api/thumbnails/dream-00015"
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "language": "en",
+      "query": "A close-up of a red-haired woman in a dark room",
+      "first_relevant_rank": 1,
+      "results": [
+        {
+          "id": "sintel-00005",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 15.0,
+          "duration": 45.0,
+          "score": 0.7648,
+          "thumbnail": "/api/thumbnails/sintel-00005"
+        },
+        {
+          "id": "sintel-00010",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 30.0,
+          "duration": 45.0,
+          "score": 0.6634,
+          "thumbnail": "/api/thumbnails/sintel-00010"
+        },
+        {
+          "id": "sintel-00007",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 21.0,
+          "duration": 45.0,
+          "score": 0.6615,
+          "thumbnail": "/api/thumbnails/sintel-00007"
+        },
+        {
+          "id": "dream-00015",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 45.0,
+          "duration": 60.0,
+          "score": 0.655,
+          "thumbnail": "/api/thumbnails/dream-00015"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.6464,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        },
+        {
+          "id": "sintel-00003",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 9.0,
+          "duration": 45.0,
+          "score": 0.6414,
+          "thumbnail": "/api/thumbnails/sintel-00003"
+        },
+        {
+          "id": "dream-00010",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 30.0,
+          "duration": 60.0,
+          "score": 0.6248,
+          "thumbnail": "/api/thumbnails/dream-00010"
+        },
+        {
+          "id": "dream-00018",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 54.0,
+          "duration": 60.0,
+          "score": 0.6208,
+          "thumbnail": "/api/thumbnails/dream-00018"
+        },
+        {
+          "id": "bunny-00005",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.6136,
+          "thumbnail": "/api/thumbnails/bunny-00005"
+        },
+        {
+          "id": "bunny-00002",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 6.0,
+          "duration": 60.0,
+          "score": 0.6092,
+          "thumbnail": "/api/thumbnails/bunny-00002"
+        },
+        {
+          "id": "dream-00007",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 21.0,
+          "duration": 60.0,
+          "score": 0.6,
+          "thumbnail": "/api/thumbnails/dream-00007"
+        },
+        {
+          "id": "dream-00002",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 6.0,
+          "duration": 60.0,
+          "score": 0.5989,
+          "thumbnail": "/api/thumbnails/dream-00002"
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "language": "tr",
+      "query": "Karanlık bir odada kızıl saçlı bir kadının yakın çekimi",
+      "first_relevant_rank": 1,
+      "results": [
+        {
+          "id": "sintel-00005",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 15.0,
+          "duration": 45.0,
+          "score": 0.6955,
+          "thumbnail": "/api/thumbnails/sintel-00005"
+        },
+        {
+          "id": "sintel-00007",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 21.0,
+          "duration": 45.0,
+          "score": 0.6348,
+          "thumbnail": "/api/thumbnails/sintel-00007"
+        },
+        {
+          "id": "dream-00018",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 54.0,
+          "duration": 60.0,
+          "score": 0.6256,
+          "thumbnail": "/api/thumbnails/dream-00018"
+        },
+        {
+          "id": "dream-00015",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 45.0,
+          "duration": 60.0,
+          "score": 0.6219,
+          "thumbnail": "/api/thumbnails/dream-00015"
+        },
+        {
+          "id": "sintel-00003",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 9.0,
+          "duration": 45.0,
+          "score": 0.6106,
+          "thumbnail": "/api/thumbnails/sintel-00003"
+        },
+        {
+          "id": "sintel-00010",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 30.0,
+          "duration": 45.0,
+          "score": 0.6093,
+          "thumbnail": "/api/thumbnails/sintel-00010"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.6088,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        },
+        {
+          "id": "bunny-00002",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 6.0,
+          "duration": 60.0,
+          "score": 0.5899,
+          "thumbnail": "/api/thumbnails/bunny-00002"
+        },
+        {
+          "id": "dream-00010",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 30.0,
+          "duration": 60.0,
+          "score": 0.5854,
+          "thumbnail": "/api/thumbnails/dream-00010"
+        },
+        {
+          "id": "bunny-00004",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 12.0,
+          "duration": 60.0,
+          "score": 0.5829,
+          "thumbnail": "/api/thumbnails/bunny-00004"
+        },
+        {
+          "id": "dream-00002",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 6.0,
+          "duration": 60.0,
+          "score": 0.5795,
+          "thumbnail": "/api/thumbnails/dream-00002"
+        },
+        {
+          "id": "dream-00005",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.5777,
+          "thumbnail": "/api/thumbnails/dream-00005"
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "language": "en",
+      "query": "A narrow empty alley between old buildings",
+      "first_relevant_rank": 1,
+      "results": [
+        {
+          "id": "sintel-00007",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 21.0,
+          "duration": 45.0,
+          "score": 0.7148,
+          "thumbnail": "/api/thumbnails/sintel-00007"
+        },
+        {
+          "id": "dream-00016",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 48.0,
+          "duration": 60.0,
+          "score": 0.6371,
+          "thumbnail": "/api/thumbnails/dream-00016"
+        },
+        {
+          "id": "dream-00013",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 39.0,
+          "duration": 60.0,
+          "score": 0.631,
+          "thumbnail": "/api/thumbnails/dream-00013"
+        },
+        {
+          "id": "dream-00018",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 54.0,
+          "duration": 60.0,
+          "score": 0.6232,
+          "thumbnail": "/api/thumbnails/dream-00018"
+        },
+        {
+          "id": "dream-00010",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 30.0,
+          "duration": 60.0,
+          "score": 0.6055,
+          "thumbnail": "/api/thumbnails/dream-00010"
+        },
+        {
+          "id": "dream-00006",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 18.0,
+          "duration": 60.0,
+          "score": 0.601,
+          "thumbnail": "/api/thumbnails/dream-00006"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.6001,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        },
+        {
+          "id": "dream-00002",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 6.0,
+          "duration": 60.0,
+          "score": 0.5895,
+          "thumbnail": "/api/thumbnails/dream-00002"
+        },
+        {
+          "id": "sintel-00005",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 15.0,
+          "duration": 45.0,
+          "score": 0.5857,
+          "thumbnail": "/api/thumbnails/sintel-00005"
+        },
+        {
+          "id": "dream-00008",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 24.0,
+          "duration": 60.0,
+          "score": 0.5844,
+          "thumbnail": "/api/thumbnails/dream-00008"
+        },
+        {
+          "id": "dream-00004",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 12.0,
+          "duration": 60.0,
+          "score": 0.5837,
+          "thumbnail": "/api/thumbnails/dream-00004"
+        },
+        {
+          "id": "sintel-00012",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 36.0,
+          "duration": 45.0,
+          "score": 0.5752,
+          "thumbnail": "/api/thumbnails/sintel-00012"
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "language": "tr",
+      "query": "Eski binalar arasında dar ve boş bir sokak",
+      "first_relevant_rank": 1,
+      "results": [
+        {
+          "id": "sintel-00007",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 21.0,
+          "duration": 45.0,
+          "score": 0.6907,
+          "thumbnail": "/api/thumbnails/sintel-00007"
+        },
+        {
+          "id": "dream-00016",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 48.0,
+          "duration": 60.0,
+          "score": 0.6286,
+          "thumbnail": "/api/thumbnails/dream-00016"
+        },
+        {
+          "id": "dream-00013",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 39.0,
+          "duration": 60.0,
+          "score": 0.6281,
+          "thumbnail": "/api/thumbnails/dream-00013"
+        },
+        {
+          "id": "dream-00018",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 54.0,
+          "duration": 60.0,
+          "score": 0.616,
+          "thumbnail": "/api/thumbnails/dream-00018"
+        },
+        {
+          "id": "dream-00010",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 30.0,
+          "duration": 60.0,
+          "score": 0.6131,
+          "thumbnail": "/api/thumbnails/dream-00010"
+        },
+        {
+          "id": "dream-00006",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 18.0,
+          "duration": 60.0,
+          "score": 0.6041,
+          "thumbnail": "/api/thumbnails/dream-00006"
+        },
+        {
+          "id": "dream-00008",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 24.0,
+          "duration": 60.0,
+          "score": 0.5981,
+          "thumbnail": "/api/thumbnails/dream-00008"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.5976,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        },
+        {
+          "id": "dream-00002",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 6.0,
+          "duration": 60.0,
+          "score": 0.5926,
+          "thumbnail": "/api/thumbnails/dream-00002"
+        },
+        {
+          "id": "dream-00004",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 12.0,
+          "duration": 60.0,
+          "score": 0.5882,
+          "thumbnail": "/api/thumbnails/dream-00004"
+        },
+        {
+          "id": "sintel-00005",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 15.0,
+          "duration": 45.0,
+          "score": 0.5806,
+          "thumbnail": "/api/thumbnails/sintel-00005"
+        },
+        {
+          "id": "dream-00000",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 0.0,
+          "duration": 60.0,
+          "score": 0.5803,
+          "thumbnail": "/api/thumbnails/dream-00000"
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "language": "en",
+      "query": "A dragon flying against orange clouds",
+      "first_relevant_rank": 2,
+      "results": [
+        {
+          "id": "sintel-00011",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 33.0,
+          "duration": 45.0,
+          "score": 0.7458,
+          "thumbnail": "/api/thumbnails/sintel-00011"
+        },
+        {
+          "id": "sintel-00009",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 27.0,
+          "duration": 45.0,
+          "score": 0.7239,
+          "thumbnail": "/api/thumbnails/sintel-00009"
+        },
+        {
+          "id": "bunny-00009",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 27.0,
+          "duration": 60.0,
+          "score": 0.6361,
+          "thumbnail": "/api/thumbnails/bunny-00009"
+        },
+        {
+          "id": "bunny-00019",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 57.0,
+          "duration": 60.0,
+          "score": 0.6148,
+          "thumbnail": "/api/thumbnails/bunny-00019"
+        },
+        {
+          "id": "bunny-00005",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.6132,
+          "thumbnail": "/api/thumbnails/bunny-00005"
+        },
+        {
+          "id": "sintel-00013",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 39.0,
+          "duration": 45.0,
+          "score": 0.6125,
+          "thumbnail": "/api/thumbnails/sintel-00013"
+        },
+        {
+          "id": "sintel-00001",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 3.0,
+          "duration": 45.0,
+          "score": 0.6116,
+          "thumbnail": "/api/thumbnails/sintel-00001"
+        },
+        {
+          "id": "bunny-00007",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 21.0,
+          "duration": 60.0,
+          "score": 0.6104,
+          "thumbnail": "/api/thumbnails/bunny-00007"
+        },
+        {
+          "id": "sintel-00006",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 18.0,
+          "duration": 45.0,
+          "score": 0.6101,
+          "thumbnail": "/api/thumbnails/sintel-00006"
+        },
+        {
+          "id": "bunny-00016",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 48.0,
+          "duration": 60.0,
+          "score": 0.6061,
+          "thumbnail": "/api/thumbnails/bunny-00016"
+        },
+        {
+          "id": "bunny-00014",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 42.0,
+          "duration": 60.0,
+          "score": 0.6052,
+          "thumbnail": "/api/thumbnails/bunny-00014"
+        },
+        {
+          "id": "sintel-00003",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 9.0,
+          "duration": 45.0,
+          "score": 0.5928,
+          "thumbnail": "/api/thumbnails/sintel-00003"
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "language": "tr",
+      "query": "Turuncu bulutların önünde uçan bir ejderha",
+      "first_relevant_rank": 2,
+      "results": [
+        {
+          "id": "sintel-00011",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 33.0,
+          "duration": 45.0,
+          "score": 0.7041,
+          "thumbnail": "/api/thumbnails/sintel-00011"
+        },
+        {
+          "id": "sintel-00009",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 27.0,
+          "duration": 45.0,
+          "score": 0.6824,
+          "thumbnail": "/api/thumbnails/sintel-00009"
+        },
+        {
+          "id": "bunny-00009",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 27.0,
+          "duration": 60.0,
+          "score": 0.6448,
+          "thumbnail": "/api/thumbnails/bunny-00009"
+        },
+        {
+          "id": "bunny-00018",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 54.0,
+          "duration": 60.0,
+          "score": 0.6297,
+          "thumbnail": "/api/thumbnails/bunny-00018"
+        },
+        {
+          "id": "bunny-00005",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.6283,
+          "thumbnail": "/api/thumbnails/bunny-00005"
+        },
+        {
+          "id": "bunny-00007",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 21.0,
+          "duration": 60.0,
+          "score": 0.6247,
+          "thumbnail": "/api/thumbnails/bunny-00007"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.6159,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        },
+        {
+          "id": "sintel-00006",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 18.0,
+          "duration": 45.0,
+          "score": 0.6159,
+          "thumbnail": "/api/thumbnails/sintel-00006"
+        },
+        {
+          "id": "bunny-00016",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 48.0,
+          "duration": 60.0,
+          "score": 0.6098,
+          "thumbnail": "/api/thumbnails/bunny-00016"
+        },
+        {
+          "id": "bunny-00002",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 6.0,
+          "duration": 60.0,
+          "score": 0.6003,
+          "thumbnail": "/api/thumbnails/bunny-00002"
+        },
+        {
+          "id": "sintel-00002",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 6.0,
+          "duration": 45.0,
+          "score": 0.6,
+          "thumbnail": "/api/thumbnails/sintel-00002"
+        },
+        {
+          "id": "sintel-00013",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 39.0,
+          "duration": 45.0,
+          "score": 0.5981,
+          "thumbnail": "/api/thumbnails/sintel-00013"
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "language": "en",
+      "query": "A woman reaching out to touch a small dragon",
+      "first_relevant_rank": 1,
+      "results": [
+        {
+          "id": "sintel-00011",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 33.0,
+          "duration": 45.0,
+          "score": 0.7289,
+          "thumbnail": "/api/thumbnails/sintel-00011"
+        },
+        {
+          "id": "sintel-00009",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 27.0,
+          "duration": 45.0,
+          "score": 0.6756,
+          "thumbnail": "/api/thumbnails/sintel-00009"
+        },
+        {
+          "id": "bunny-00005",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.6475,
+          "thumbnail": "/api/thumbnails/bunny-00005"
+        },
+        {
+          "id": "bunny-00014",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 42.0,
+          "duration": 60.0,
+          "score": 0.6456,
+          "thumbnail": "/api/thumbnails/bunny-00014"
+        },
+        {
+          "id": "sintel-00007",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 21.0,
+          "duration": 45.0,
+          "score": 0.6405,
+          "thumbnail": "/api/thumbnails/sintel-00007"
+        },
+        {
+          "id": "sintel-00005",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 15.0,
+          "duration": 45.0,
+          "score": 0.6363,
+          "thumbnail": "/api/thumbnails/sintel-00005"
+        },
+        {
+          "id": "bunny-00002",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 6.0,
+          "duration": 60.0,
+          "score": 0.6361,
+          "thumbnail": "/api/thumbnails/bunny-00002"
+        },
+        {
+          "id": "bunny-00007",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 21.0,
+          "duration": 60.0,
+          "score": 0.6359,
+          "thumbnail": "/api/thumbnails/bunny-00007"
+        },
+        {
+          "id": "bunny-00016",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 48.0,
+          "duration": 60.0,
+          "score": 0.6347,
+          "thumbnail": "/api/thumbnails/bunny-00016"
+        },
+        {
+          "id": "dream-00006",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 18.0,
+          "duration": 60.0,
+          "score": 0.6333,
+          "thumbnail": "/api/thumbnails/dream-00006"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.6298,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        },
+        {
+          "id": "sintel-00002",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 6.0,
+          "duration": 45.0,
+          "score": 0.6266,
+          "thumbnail": "/api/thumbnails/sintel-00002"
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "language": "tr",
+      "query": "Küçük bir ejderhaya dokunmak için elini uzatan bir kadın",
+      "first_relevant_rank": 1,
+      "results": [
+        {
+          "id": "sintel-00011",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 33.0,
+          "duration": 45.0,
+          "score": 0.6889,
+          "thumbnail": "/api/thumbnails/sintel-00011"
+        },
+        {
+          "id": "sintel-00009",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 27.0,
+          "duration": 45.0,
+          "score": 0.6381,
+          "thumbnail": "/api/thumbnails/sintel-00009"
+        },
+        {
+          "id": "bunny-00005",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.6201,
+          "thumbnail": "/api/thumbnails/bunny-00005"
+        },
+        {
+          "id": "bunny-00002",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 6.0,
+          "duration": 60.0,
+          "score": 0.6114,
+          "thumbnail": "/api/thumbnails/bunny-00002"
+        },
+        {
+          "id": "dream-00006",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 18.0,
+          "duration": 60.0,
+          "score": 0.6113,
+          "thumbnail": "/api/thumbnails/dream-00006"
+        },
+        {
+          "id": "sintel-00007",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 21.0,
+          "duration": 45.0,
+          "score": 0.6101,
+          "thumbnail": "/api/thumbnails/sintel-00007"
+        },
+        {
+          "id": "sintel-00002",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 6.0,
+          "duration": 45.0,
+          "score": 0.6091,
+          "thumbnail": "/api/thumbnails/sintel-00002"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.6089,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        },
+        {
+          "id": "sintel-00005",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 15.0,
+          "duration": 45.0,
+          "score": 0.6053,
+          "thumbnail": "/api/thumbnails/sintel-00005"
+        },
+        {
+          "id": "bunny-00007",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 21.0,
+          "duration": 60.0,
+          "score": 0.6043,
+          "thumbnail": "/api/thumbnails/bunny-00007"
+        },
+        {
+          "id": "dream-00010",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 30.0,
+          "duration": 60.0,
+          "score": 0.604,
+          "thumbnail": "/api/thumbnails/dream-00010"
+        },
+        {
+          "id": "bunny-00014",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 42.0,
+          "duration": 60.0,
+          "score": 0.5991,
+          "thumbnail": "/api/thumbnails/bunny-00014"
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "language": "en",
+      "query": "Golden desert sand dunes beneath a cloudy sky",
+      "first_relevant_rank": 1,
+      "results": [
+        {
+          "id": "sintel-00012",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 36.0,
+          "duration": 45.0,
+          "score": 0.7703,
+          "thumbnail": "/api/thumbnails/sintel-00012"
+        },
+        {
+          "id": "sintel-00002",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 6.0,
+          "duration": 45.0,
+          "score": 0.6141,
+          "thumbnail": "/api/thumbnails/sintel-00002"
+        },
+        {
+          "id": "bunny-00005",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.6063,
+          "thumbnail": "/api/thumbnails/bunny-00005"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.6026,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        },
+        {
+          "id": "sintel-00006",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 18.0,
+          "duration": 45.0,
+          "score": 0.6026,
+          "thumbnail": "/api/thumbnails/sintel-00006"
+        },
+        {
+          "id": "sintel-00009",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 27.0,
+          "duration": 45.0,
+          "score": 0.5996,
+          "thumbnail": "/api/thumbnails/sintel-00009"
+        },
+        {
+          "id": "bunny-00009",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 27.0,
+          "duration": 60.0,
+          "score": 0.5838,
+          "thumbnail": "/api/thumbnails/bunny-00009"
+        },
+        {
+          "id": "bunny-00001",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 3.0,
+          "duration": 60.0,
+          "score": 0.5808,
+          "thumbnail": "/api/thumbnails/bunny-00001"
+        },
+        {
+          "id": "bunny-00007",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 21.0,
+          "duration": 60.0,
+          "score": 0.5697,
+          "thumbnail": "/api/thumbnails/bunny-00007"
+        },
+        {
+          "id": "bunny-00003",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 9.0,
+          "duration": 60.0,
+          "score": 0.5694,
+          "thumbnail": "/api/thumbnails/bunny-00003"
+        },
+        {
+          "id": "dream-00017",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 51.0,
+          "duration": 60.0,
+          "score": 0.5586,
+          "thumbnail": "/api/thumbnails/dream-00017"
+        },
+        {
+          "id": "dream-00002",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 6.0,
+          "duration": 60.0,
+          "score": 0.5533,
+          "thumbnail": "/api/thumbnails/dream-00002"
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "language": "tr",
+      "query": "Bulutlu gökyüzünün altında altın renkli çöl kumulları",
+      "first_relevant_rank": 1,
+      "results": [
+        {
+          "id": "sintel-00012",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 36.0,
+          "duration": 45.0,
+          "score": 0.7124,
+          "thumbnail": "/api/thumbnails/sintel-00012"
+        },
+        {
+          "id": "bunny-00005",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.6195,
+          "thumbnail": "/api/thumbnails/bunny-00005"
+        },
+        {
+          "id": "bunny-00009",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 27.0,
+          "duration": 60.0,
+          "score": 0.5982,
+          "thumbnail": "/api/thumbnails/bunny-00009"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.5977,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        },
+        {
+          "id": "sintel-00006",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 18.0,
+          "duration": 45.0,
+          "score": 0.5977,
+          "thumbnail": "/api/thumbnails/sintel-00006"
+        },
+        {
+          "id": "sintel-00002",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 6.0,
+          "duration": 45.0,
+          "score": 0.595,
+          "thumbnail": "/api/thumbnails/sintel-00002"
+        },
+        {
+          "id": "sintel-00009",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 27.0,
+          "duration": 45.0,
+          "score": 0.5907,
+          "thumbnail": "/api/thumbnails/sintel-00009"
+        },
+        {
+          "id": "bunny-00002",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 6.0,
+          "duration": 60.0,
+          "score": 0.5893,
+          "thumbnail": "/api/thumbnails/bunny-00002"
+        },
+        {
+          "id": "bunny-00007",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 21.0,
+          "duration": 60.0,
+          "score": 0.5849,
+          "thumbnail": "/api/thumbnails/bunny-00007"
+        },
+        {
+          "id": "bunny-00000",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 0.0,
+          "duration": 60.0,
+          "score": 0.5795,
+          "thumbnail": "/api/thumbnails/bunny-00000"
+        },
+        {
+          "id": "bunny-00018",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 54.0,
+          "duration": 60.0,
+          "score": 0.5689,
+          "thumbnail": "/api/thumbnails/bunny-00018"
+        },
+        {
+          "id": "dream-00006",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 18.0,
+          "duration": 60.0,
+          "score": 0.5666,
+          "thumbnail": "/api/thumbnails/dream-00006"
+        }
+      ]
+    },
+    {
+      "id": "d1",
+      "language": "en",
+      "query": "Mechanical pipes and circular machinery crossed by black cables",
+      "first_relevant_rank": 2,
+      "results": [
+        {
+          "id": "dream-00017",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 51.0,
+          "duration": 60.0,
+          "score": 0.7441,
+          "thumbnail": "/api/thumbnails/dream-00017"
+        },
+        {
+          "id": "dream-00001",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 3.0,
+          "duration": 60.0,
+          "score": 0.7324,
+          "thumbnail": "/api/thumbnails/dream-00001"
+        },
+        {
+          "id": "dream-00019",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 57.0,
+          "duration": 60.0,
+          "score": 0.7196,
+          "thumbnail": "/api/thumbnails/dream-00019"
+        },
+        {
+          "id": "dream-00013",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 39.0,
+          "duration": 60.0,
+          "score": 0.6898,
+          "thumbnail": "/api/thumbnails/dream-00013"
+        },
+        {
+          "id": "dream-00006",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 18.0,
+          "duration": 60.0,
+          "score": 0.6592,
+          "thumbnail": "/api/thumbnails/dream-00006"
+        },
+        {
+          "id": "dream-00003",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 9.0,
+          "duration": 60.0,
+          "score": 0.6551,
+          "thumbnail": "/api/thumbnails/dream-00003"
+        },
+        {
+          "id": "dream-00010",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 30.0,
+          "duration": 60.0,
+          "score": 0.642,
+          "thumbnail": "/api/thumbnails/dream-00010"
+        },
+        {
+          "id": "sintel-00008",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 24.0,
+          "duration": 45.0,
+          "score": 0.5994,
+          "thumbnail": "/api/thumbnails/sintel-00008"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.5916,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        },
+        {
+          "id": "sintel-00006",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 18.0,
+          "duration": 45.0,
+          "score": 0.5916,
+          "thumbnail": "/api/thumbnails/sintel-00006"
+        },
+        {
+          "id": "bunny-00003",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 9.0,
+          "duration": 60.0,
+          "score": 0.5842,
+          "thumbnail": "/api/thumbnails/bunny-00003"
+        },
+        {
+          "id": "bunny-00005",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.5765,
+          "thumbnail": "/api/thumbnails/bunny-00005"
+        }
+      ]
+    },
+    {
+      "id": "d1",
+      "language": "tr",
+      "query": "Siyah kabloların geçtiği mekanik borular ve dairesel makineler",
+      "first_relevant_rank": 1,
+      "results": [
+        {
+          "id": "dream-00001",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 3.0,
+          "duration": 60.0,
+          "score": 0.6805,
+          "thumbnail": "/api/thumbnails/dream-00001"
+        },
+        {
+          "id": "dream-00017",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 51.0,
+          "duration": 60.0,
+          "score": 0.6761,
+          "thumbnail": "/api/thumbnails/dream-00017"
+        },
+        {
+          "id": "dream-00019",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 57.0,
+          "duration": 60.0,
+          "score": 0.658,
+          "thumbnail": "/api/thumbnails/dream-00019"
+        },
+        {
+          "id": "dream-00013",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 39.0,
+          "duration": 60.0,
+          "score": 0.635,
+          "thumbnail": "/api/thumbnails/dream-00013"
+        },
+        {
+          "id": "dream-00006",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 18.0,
+          "duration": 60.0,
+          "score": 0.6095,
+          "thumbnail": "/api/thumbnails/dream-00006"
+        },
+        {
+          "id": "dream-00003",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 9.0,
+          "duration": 60.0,
+          "score": 0.6022,
+          "thumbnail": "/api/thumbnails/dream-00003"
+        },
+        {
+          "id": "dream-00010",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 30.0,
+          "duration": 60.0,
+          "score": 0.5993,
+          "thumbnail": "/api/thumbnails/dream-00010"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.5851,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        },
+        {
+          "id": "sintel-00006",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 18.0,
+          "duration": 45.0,
+          "score": 0.5851,
+          "thumbnail": "/api/thumbnails/sintel-00006"
+        },
+        {
+          "id": "bunny-00003",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 9.0,
+          "duration": 60.0,
+          "score": 0.5819,
+          "thumbnail": "/api/thumbnails/bunny-00003"
+        },
+        {
+          "id": "bunny-00005",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.5621,
+          "thumbnail": "/api/thumbnails/bunny-00005"
+        },
+        {
+          "id": "sintel-00008",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 24.0,
+          "duration": 45.0,
+          "score": 0.5581,
+          "thumbnail": "/api/thumbnails/sintel-00008"
+        }
+      ]
+    },
+    {
+      "id": "d2",
+      "language": "en",
+      "query": "Two men on a metal platform in a bright industrial room",
+      "first_relevant_rank": 3,
+      "results": [
+        {
+          "id": "dream-00012",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 36.0,
+          "duration": 60.0,
+          "score": 0.7407,
+          "thumbnail": "/api/thumbnails/dream-00012"
+        },
+        {
+          "id": "dream-00019",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 57.0,
+          "duration": 60.0,
+          "score": 0.7159,
+          "thumbnail": "/api/thumbnails/dream-00019"
+        },
+        {
+          "id": "dream-00003",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 9.0,
+          "duration": 60.0,
+          "score": 0.7156,
+          "thumbnail": "/api/thumbnails/dream-00003"
+        },
+        {
+          "id": "dream-00006",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 18.0,
+          "duration": 60.0,
+          "score": 0.7078,
+          "thumbnail": "/api/thumbnails/dream-00006"
+        },
+        {
+          "id": "dream-00000",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 0.0,
+          "duration": 60.0,
+          "score": 0.7016,
+          "thumbnail": "/api/thumbnails/dream-00000"
+        },
+        {
+          "id": "dream-00010",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 30.0,
+          "duration": 60.0,
+          "score": 0.6774,
+          "thumbnail": "/api/thumbnails/dream-00010"
+        },
+        {
+          "id": "dream-00017",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 51.0,
+          "duration": 60.0,
+          "score": 0.6577,
+          "thumbnail": "/api/thumbnails/dream-00017"
+        },
+        {
+          "id": "dream-00014",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 42.0,
+          "duration": 60.0,
+          "score": 0.6304,
+          "thumbnail": "/api/thumbnails/dream-00014"
+        },
+        {
+          "id": "dream-00008",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 24.0,
+          "duration": 60.0,
+          "score": 0.602,
+          "thumbnail": "/api/thumbnails/dream-00008"
+        },
+        {
+          "id": "sintel-00008",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 24.0,
+          "duration": 45.0,
+          "score": 0.5857,
+          "thumbnail": "/api/thumbnails/sintel-00008"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.58,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        },
+        {
+          "id": "sintel-00006",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 18.0,
+          "duration": 45.0,
+          "score": 0.58,
+          "thumbnail": "/api/thumbnails/sintel-00006"
+        }
+      ]
+    },
+    {
+      "id": "d2",
+      "language": "tr",
+      "query": "Aydınlık endüstriyel bir odada metal platform üzerindeki iki adam",
+      "first_relevant_rank": 3,
+      "results": [
+        {
+          "id": "dream-00012",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 36.0,
+          "duration": 60.0,
+          "score": 0.7043,
+          "thumbnail": "/api/thumbnails/dream-00012"
+        },
+        {
+          "id": "dream-00019",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 57.0,
+          "duration": 60.0,
+          "score": 0.7018,
+          "thumbnail": "/api/thumbnails/dream-00019"
+        },
+        {
+          "id": "dream-00006",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 18.0,
+          "duration": 60.0,
+          "score": 0.6832,
+          "thumbnail": "/api/thumbnails/dream-00006"
+        },
+        {
+          "id": "dream-00003",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 9.0,
+          "duration": 60.0,
+          "score": 0.6823,
+          "thumbnail": "/api/thumbnails/dream-00003"
+        },
+        {
+          "id": "dream-00017",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 51.0,
+          "duration": 60.0,
+          "score": 0.6623,
+          "thumbnail": "/api/thumbnails/dream-00017"
+        },
+        {
+          "id": "dream-00000",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 0.0,
+          "duration": 60.0,
+          "score": 0.6605,
+          "thumbnail": "/api/thumbnails/dream-00000"
+        },
+        {
+          "id": "dream-00010",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 30.0,
+          "duration": 60.0,
+          "score": 0.6373,
+          "thumbnail": "/api/thumbnails/dream-00010"
+        },
+        {
+          "id": "dream-00015",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 45.0,
+          "duration": 60.0,
+          "score": 0.6173,
+          "thumbnail": "/api/thumbnails/dream-00015"
+        },
+        {
+          "id": "dream-00008",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 24.0,
+          "duration": 60.0,
+          "score": 0.5752,
+          "thumbnail": "/api/thumbnails/dream-00008"
+        },
+        {
+          "id": "sintel-00005",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 15.0,
+          "duration": 45.0,
+          "score": 0.568,
+          "thumbnail": "/api/thumbnails/sintel-00005"
+        },
+        {
+          "id": "sintel-00011",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 33.0,
+          "duration": 45.0,
+          "score": 0.5639,
+          "thumbnail": "/api/thumbnails/sintel-00011"
+        },
+        {
+          "id": "sintel-00008",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 24.0,
+          "duration": 45.0,
+          "score": 0.5633,
+          "thumbnail": "/api/thumbnails/sintel-00008"
+        }
+      ]
+    },
+    {
+      "id": "d3",
+      "language": "en",
+      "query": "A close-up of a young man with short dark hair",
+      "first_relevant_rank": 1,
+      "results": [
+        {
+          "id": "dream-00007",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 21.0,
+          "duration": 60.0,
+          "score": 0.6781,
+          "thumbnail": "/api/thumbnails/dream-00007"
+        },
+        {
+          "id": "sintel-00005",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 15.0,
+          "duration": 45.0,
+          "score": 0.6489,
+          "thumbnail": "/api/thumbnails/sintel-00005"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.6433,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        },
+        {
+          "id": "sintel-00003",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 9.0,
+          "duration": 45.0,
+          "score": 0.6345,
+          "thumbnail": "/api/thumbnails/sintel-00003"
+        },
+        {
+          "id": "dream-00016",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 48.0,
+          "duration": 60.0,
+          "score": 0.6286,
+          "thumbnail": "/api/thumbnails/dream-00016"
+        },
+        {
+          "id": "bunny-00005",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.6248,
+          "thumbnail": "/api/thumbnails/bunny-00005"
+        },
+        {
+          "id": "bunny-00002",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 6.0,
+          "duration": 60.0,
+          "score": 0.6225,
+          "thumbnail": "/api/thumbnails/bunny-00002"
+        },
+        {
+          "id": "dream-00009",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 27.0,
+          "duration": 60.0,
+          "score": 0.6178,
+          "thumbnail": "/api/thumbnails/dream-00009"
+        },
+        {
+          "id": "dream-00011",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 33.0,
+          "duration": 60.0,
+          "score": 0.6167,
+          "thumbnail": "/api/thumbnails/dream-00011"
+        },
+        {
+          "id": "dream-00001",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 3.0,
+          "duration": 60.0,
+          "score": 0.6111,
+          "thumbnail": "/api/thumbnails/dream-00001"
+        },
+        {
+          "id": "dream-00014",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 42.0,
+          "duration": 60.0,
+          "score": 0.6074,
+          "thumbnail": "/api/thumbnails/dream-00014"
+        },
+        {
+          "id": "sintel-00011",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 33.0,
+          "duration": 45.0,
+          "score": 0.5992,
+          "thumbnail": "/api/thumbnails/sintel-00011"
+        }
+      ]
+    },
+    {
+      "id": "d3",
+      "language": "tr",
+      "query": "Kısa koyu saçlı genç bir adamın yakın çekimi",
+      "first_relevant_rank": 1,
+      "results": [
+        {
+          "id": "dream-00007",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 21.0,
+          "duration": 60.0,
+          "score": 0.6264,
+          "thumbnail": "/api/thumbnails/dream-00007"
+        },
+        {
+          "id": "bunny-00002",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 6.0,
+          "duration": 60.0,
+          "score": 0.6198,
+          "thumbnail": "/api/thumbnails/bunny-00002"
+        },
+        {
+          "id": "bunny-00004",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 12.0,
+          "duration": 60.0,
+          "score": 0.6116,
+          "thumbnail": "/api/thumbnails/bunny-00004"
+        },
+        {
+          "id": "sintel-00003",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 9.0,
+          "duration": 45.0,
+          "score": 0.6112,
+          "thumbnail": "/api/thumbnails/sintel-00003"
+        },
+        {
+          "id": "sintel-00005",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 15.0,
+          "duration": 45.0,
+          "score": 0.6095,
+          "thumbnail": "/api/thumbnails/sintel-00005"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.6068,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        },
+        {
+          "id": "dream-00016",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 48.0,
+          "duration": 60.0,
+          "score": 0.6033,
+          "thumbnail": "/api/thumbnails/dream-00016"
+        },
+        {
+          "id": "dream-00019",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 57.0,
+          "duration": 60.0,
+          "score": 0.5921,
+          "thumbnail": "/api/thumbnails/dream-00019"
+        },
+        {
+          "id": "dream-00010",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 30.0,
+          "duration": 60.0,
+          "score": 0.5886,
+          "thumbnail": "/api/thumbnails/dream-00010"
+        },
+        {
+          "id": "dream-00014",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 42.0,
+          "duration": 60.0,
+          "score": 0.5861,
+          "thumbnail": "/api/thumbnails/dream-00014"
+        },
+        {
+          "id": "dream-00002",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 6.0,
+          "duration": 60.0,
+          "score": 0.5783,
+          "thumbnail": "/api/thumbnails/dream-00002"
+        },
+        {
+          "id": "sintel-00011",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 33.0,
+          "duration": 45.0,
+          "score": 0.5707,
+          "thumbnail": "/api/thumbnails/sintel-00011"
+        }
+      ]
+    },
+    {
+      "id": "d4",
+      "language": "en",
+      "query": "A close-up of a pale balding older man",
+      "first_relevant_rank": 1,
+      "results": [
+        {
+          "id": "dream-00010",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 30.0,
+          "duration": 60.0,
+          "score": 0.7272,
+          "thumbnail": "/api/thumbnails/dream-00010"
+        },
+        {
+          "id": "dream-00016",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 48.0,
+          "duration": 60.0,
+          "score": 0.7058,
+          "thumbnail": "/api/thumbnails/dream-00016"
+        },
+        {
+          "id": "dream-00014",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 42.0,
+          "duration": 60.0,
+          "score": 0.7041,
+          "thumbnail": "/api/thumbnails/dream-00014"
+        },
+        {
+          "id": "dream-00007",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 21.0,
+          "duration": 60.0,
+          "score": 0.6902,
+          "thumbnail": "/api/thumbnails/dream-00007"
+        },
+        {
+          "id": "sintel-00004",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 12.0,
+          "duration": 45.0,
+          "score": 0.6713,
+          "thumbnail": "/api/thumbnails/sintel-00004"
+        },
+        {
+          "id": "dream-00005",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.6508,
+          "thumbnail": "/api/thumbnails/dream-00005"
+        },
+        {
+          "id": "dream-00003",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 9.0,
+          "duration": 60.0,
+          "score": 0.627,
+          "thumbnail": "/api/thumbnails/dream-00003"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.6259,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        },
+        {
+          "id": "sintel-00006",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 18.0,
+          "duration": 45.0,
+          "score": 0.6259,
+          "thumbnail": "/api/thumbnails/sintel-00006"
+        },
+        {
+          "id": "bunny-00016",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 48.0,
+          "duration": 60.0,
+          "score": 0.6236,
+          "thumbnail": "/api/thumbnails/bunny-00016"
+        },
+        {
+          "id": "bunny-00005",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.6197,
+          "thumbnail": "/api/thumbnails/bunny-00005"
+        },
+        {
+          "id": "dream-00018",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 54.0,
+          "duration": 60.0,
+          "score": 0.6179,
+          "thumbnail": "/api/thumbnails/dream-00018"
+        }
+      ]
+    },
+    {
+      "id": "d4",
+      "language": "tr",
+      "query": "Solgun ve saçları dökülmüş yaşlı bir adamın yakın çekimi",
+      "first_relevant_rank": 1,
+      "results": [
+        {
+          "id": "dream-00010",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 30.0,
+          "duration": 60.0,
+          "score": 0.6852,
+          "thumbnail": "/api/thumbnails/dream-00010"
+        },
+        {
+          "id": "sintel-00004",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 12.0,
+          "duration": 45.0,
+          "score": 0.6477,
+          "thumbnail": "/api/thumbnails/sintel-00004"
+        },
+        {
+          "id": "dream-00015",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 45.0,
+          "duration": 60.0,
+          "score": 0.6394,
+          "thumbnail": "/api/thumbnails/dream-00015"
+        },
+        {
+          "id": "dream-00008",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 24.0,
+          "duration": 60.0,
+          "score": 0.637,
+          "thumbnail": "/api/thumbnails/dream-00008"
+        },
+        {
+          "id": "bunny-00002",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 6.0,
+          "duration": 60.0,
+          "score": 0.6315,
+          "thumbnail": "/api/thumbnails/bunny-00002"
+        },
+        {
+          "id": "bunny-00004",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 12.0,
+          "duration": 60.0,
+          "score": 0.6232,
+          "thumbnail": "/api/thumbnails/bunny-00004"
+        },
+        {
+          "id": "dream-00005",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.62,
+          "thumbnail": "/api/thumbnails/dream-00005"
+        },
+        {
+          "id": "dream-00018",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 54.0,
+          "duration": 60.0,
+          "score": 0.6137,
+          "thumbnail": "/api/thumbnails/dream-00018"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.5988,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        },
+        {
+          "id": "sintel-00006",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 18.0,
+          "duration": 45.0,
+          "score": 0.5988,
+          "thumbnail": "/api/thumbnails/sintel-00006"
+        },
+        {
+          "id": "dream-00003",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 9.0,
+          "duration": 60.0,
+          "score": 0.5933,
+          "thumbnail": "/api/thumbnails/dream-00003"
+        },
+        {
+          "id": "dream-00001",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 3.0,
+          "duration": 60.0,
+          "score": 0.5904,
+          "thumbnail": "/api/thumbnails/dream-00001"
+        }
+      ]
+    },
+    {
+      "id": "d5",
+      "language": "en",
+      "query": "A small circular metal platform suspended beside many cables",
+      "first_relevant_rank": 3,
+      "results": [
+        {
+          "id": "dream-00017",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 51.0,
+          "duration": 60.0,
+          "score": 0.7279,
+          "thumbnail": "/api/thumbnails/dream-00017"
+        },
+        {
+          "id": "dream-00019",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 57.0,
+          "duration": 60.0,
+          "score": 0.7083,
+          "thumbnail": "/api/thumbnails/dream-00019"
+        },
+        {
+          "id": "dream-00013",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 39.0,
+          "duration": 60.0,
+          "score": 0.6978,
+          "thumbnail": "/api/thumbnails/dream-00013"
+        },
+        {
+          "id": "dream-00001",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 3.0,
+          "duration": 60.0,
+          "score": 0.6851,
+          "thumbnail": "/api/thumbnails/dream-00001"
+        },
+        {
+          "id": "dream-00005",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.6564,
+          "thumbnail": "/api/thumbnails/dream-00005"
+        },
+        {
+          "id": "dream-00003",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 9.0,
+          "duration": 60.0,
+          "score": 0.6535,
+          "thumbnail": "/api/thumbnails/dream-00003"
+        },
+        {
+          "id": "dream-00010",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 30.0,
+          "duration": 60.0,
+          "score": 0.6397,
+          "thumbnail": "/api/thumbnails/dream-00010"
+        },
+        {
+          "id": "dream-00007",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 21.0,
+          "duration": 60.0,
+          "score": 0.6086,
+          "thumbnail": "/api/thumbnails/dream-00007"
+        },
+        {
+          "id": "sintel-00005",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 15.0,
+          "duration": 45.0,
+          "score": 0.5923,
+          "thumbnail": "/api/thumbnails/sintel-00005"
+        },
+        {
+          "id": "sintel-00014",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 42.0,
+          "duration": 45.0,
+          "score": 0.5852,
+          "thumbnail": "/api/thumbnails/sintel-00014"
+        },
+        {
+          "id": "bunny-00005",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.5834,
+          "thumbnail": "/api/thumbnails/bunny-00005"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.5816,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        }
+      ]
+    },
+    {
+      "id": "d5",
+      "language": "tr",
+      "query": "Çok sayıda kablonun yanında asılı küçük dairesel metal platform",
+      "first_relevant_rank": 2,
+      "results": [
+        {
+          "id": "dream-00017",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 51.0,
+          "duration": 60.0,
+          "score": 0.6785,
+          "thumbnail": "/api/thumbnails/dream-00017"
+        },
+        {
+          "id": "dream-00013",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 39.0,
+          "duration": 60.0,
+          "score": 0.6677,
+          "thumbnail": "/api/thumbnails/dream-00013"
+        },
+        {
+          "id": "dream-00019",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 57.0,
+          "duration": 60.0,
+          "score": 0.6615,
+          "thumbnail": "/api/thumbnails/dream-00019"
+        },
+        {
+          "id": "dream-00001",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 3.0,
+          "duration": 60.0,
+          "score": 0.6503,
+          "thumbnail": "/api/thumbnails/dream-00001"
+        },
+        {
+          "id": "dream-00006",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 18.0,
+          "duration": 60.0,
+          "score": 0.62,
+          "thumbnail": "/api/thumbnails/dream-00006"
+        },
+        {
+          "id": "dream-00003",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 9.0,
+          "duration": 60.0,
+          "score": 0.6188,
+          "thumbnail": "/api/thumbnails/dream-00003"
+        },
+        {
+          "id": "dream-00010",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 30.0,
+          "duration": 60.0,
+          "score": 0.605,
+          "thumbnail": "/api/thumbnails/dream-00010"
+        },
+        {
+          "id": "dream-00008",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 24.0,
+          "duration": 60.0,
+          "score": 0.573,
+          "thumbnail": "/api/thumbnails/dream-00008"
+        },
+        {
+          "id": "sintel-00014",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 42.0,
+          "duration": 45.0,
+          "score": 0.5726,
+          "thumbnail": "/api/thumbnails/sintel-00014"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.5666,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        },
+        {
+          "id": "sintel-00006",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 18.0,
+          "duration": 45.0,
+          "score": 0.5666,
+          "thumbnail": "/api/thumbnails/sintel-00006"
+        },
+        {
+          "id": "bunny-00005",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 15.0,
+          "duration": 60.0,
+          "score": 0.5597,
+          "thumbnail": "/api/thumbnails/bunny-00005"
+        }
+      ]
+    },
+    {
+      "id": "d6",
+      "language": "en",
+      "query": "A dark metal walkway surrounded by wires and cables",
+      "first_relevant_rank": 1,
+      "results": [
+        {
+          "id": "dream-00017",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 51.0,
+          "duration": 60.0,
+          "score": 0.7848,
+          "thumbnail": "/api/thumbnails/dream-00017"
+        },
+        {
+          "id": "dream-00019",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 57.0,
+          "duration": 60.0,
+          "score": 0.7628,
+          "thumbnail": "/api/thumbnails/dream-00019"
+        },
+        {
+          "id": "dream-00001",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 3.0,
+          "duration": 60.0,
+          "score": 0.7001,
+          "thumbnail": "/api/thumbnails/dream-00001"
+        },
+        {
+          "id": "dream-00013",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 39.0,
+          "duration": 60.0,
+          "score": 0.6963,
+          "thumbnail": "/api/thumbnails/dream-00013"
+        },
+        {
+          "id": "dream-00003",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 9.0,
+          "duration": 60.0,
+          "score": 0.6674,
+          "thumbnail": "/api/thumbnails/dream-00003"
+        },
+        {
+          "id": "dream-00006",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 18.0,
+          "duration": 60.0,
+          "score": 0.6614,
+          "thumbnail": "/api/thumbnails/dream-00006"
+        },
+        {
+          "id": "dream-00011",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 33.0,
+          "duration": 60.0,
+          "score": 0.6384,
+          "thumbnail": "/api/thumbnails/dream-00011"
+        },
+        {
+          "id": "dream-00009",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 27.0,
+          "duration": 60.0,
+          "score": 0.6085,
+          "thumbnail": "/api/thumbnails/dream-00009"
+        },
+        {
+          "id": "bunny-00003",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 9.0,
+          "duration": 60.0,
+          "score": 0.605,
+          "thumbnail": "/api/thumbnails/bunny-00003"
+        },
+        {
+          "id": "sintel-00007",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 21.0,
+          "duration": 45.0,
+          "score": 0.6037,
+          "thumbnail": "/api/thumbnails/sintel-00007"
+        },
+        {
+          "id": "dream-00015",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 45.0,
+          "duration": 60.0,
+          "score": 0.5949,
+          "thumbnail": "/api/thumbnails/dream-00015"
+        },
+        {
+          "id": "sintel-00000",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 0.0,
+          "duration": 45.0,
+          "score": 0.592,
+          "thumbnail": "/api/thumbnails/sintel-00000"
+        }
+      ]
+    },
+    {
+      "id": "d6",
+      "language": "tr",
+      "query": "Teller ve kablolarla çevrili karanlık bir metal geçit",
+      "first_relevant_rank": 1,
+      "results": [
+        {
+          "id": "dream-00017",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 51.0,
+          "duration": 60.0,
+          "score": 0.7445,
+          "thumbnail": "/api/thumbnails/dream-00017"
+        },
+        {
+          "id": "dream-00019",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 57.0,
+          "duration": 60.0,
+          "score": 0.7291,
+          "thumbnail": "/api/thumbnails/dream-00019"
+        },
+        {
+          "id": "dream-00002",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 6.0,
+          "duration": 60.0,
+          "score": 0.683,
+          "thumbnail": "/api/thumbnails/dream-00002"
+        },
+        {
+          "id": "dream-00013",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 39.0,
+          "duration": 60.0,
+          "score": 0.6783,
+          "thumbnail": "/api/thumbnails/dream-00013"
+        },
+        {
+          "id": "dream-00006",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 18.0,
+          "duration": 60.0,
+          "score": 0.6632,
+          "thumbnail": "/api/thumbnails/dream-00006"
+        },
+        {
+          "id": "dream-00000",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 0.0,
+          "duration": 60.0,
+          "score": 0.6572,
+          "thumbnail": "/api/thumbnails/dream-00000"
+        },
+        {
+          "id": "dream-00004",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 12.0,
+          "duration": 60.0,
+          "score": 0.6478,
+          "thumbnail": "/api/thumbnails/dream-00004"
+        },
+        {
+          "id": "dream-00011",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 33.0,
+          "duration": 60.0,
+          "score": 0.6385,
+          "thumbnail": "/api/thumbnails/dream-00011"
+        },
+        {
+          "id": "dream-00015",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 45.0,
+          "duration": 60.0,
+          "score": 0.6194,
+          "thumbnail": "/api/thumbnails/dream-00015"
+        },
+        {
+          "id": "dream-00009",
+          "video_id": "dream",
+          "name": "dream.mp4",
+          "timestamp": 27.0,
+          "duration": 60.0,
+          "score": 0.6128,
+          "thumbnail": "/api/thumbnails/dream-00009"
+        },
+        {
+          "id": "sintel-00007",
+          "video_id": "sintel",
+          "name": "sintel.mp4",
+          "timestamp": 21.0,
+          "duration": 45.0,
+          "score": 0.6086,
+          "thumbnail": "/api/thumbnails/sintel-00007"
+        },
+        {
+          "id": "bunny-00003",
+          "video_id": "bunny",
+          "name": "bunny.mp4",
+          "timestamp": 9.0,
+          "duration": 60.0,
+          "score": 0.6069,
+          "thumbnail": "/api/thumbnails/bunny-00003"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Small development set: three animated film excerpts, 55 sampled frames.",
+    "18 paired scene descriptions (36 language queries); not independent translations.",
+    "Single annotator, sampled-frame relevance; no human adjudication or blind held-out set.",
+    "Timing excludes download, HTTP transport and browser rendering.",
+    "Warm query latency measured without concurrent indexing; p95 is a sample percentile."
+  ]
+}

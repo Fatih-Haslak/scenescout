@@ -1,16 +1,22 @@
-# Source checks
+# Checks and verification
 
-The release was checked locally with Ruff lint/format, Python compilation, JavaScript syntax validation, Prettier and Python package build. These checks do not evaluate retrieval accuracy or replace behavioral tests.
+v0.2 includes 40 automated behavioral tests, 89.1% observed line coverage on Windows Python 3.13.9, and a CI coverage floor of 80%. Coverage measures exercised lines, not model quality or correctness guarantees. Tests use isolated temporary libraries; they do not modify the user's `.data`. They cover connection closure/rollback, atomic checkpoints, restart/removal recovery, resume without repeating committed frames, cancelled queued jobs, corrupt media, duplicate/invalid uploads, local request guards, inference failures, stale deletion/search results, temporal diversity, cache invalidation, launch options and BF16/FP32 selection.
 
 ```sh
-uvx ruff@0.17.0 check src examples
-uvx ruff@0.17.0 format --check src examples
-uv run python -m compileall -q src examples
+uv sync --frozen --extra cpu --group dev
+uv run --no-sync pytest --cov=scenescout --cov-report=term-missing --cov-fail-under=80
+uv run --no-sync ruff check src examples scripts evaluation tests
+uv run --no-sync ruff format --check src examples scripts evaluation tests
+uv run --no-sync python -m compileall -q src examples scripts evaluation
 node --check src/scenescout/static/app.js
 npx --yes prettier@3.9.10 --check "src/scenescout/static/*.{js,css,html}"
 uv build
 ```
 
-`docs/ci-workflow.yml` is a ready-to-use GitHub Actions template. **It is not active** in this repository: the publishing connection did not have workflow-write permission, and the GitHub integration also rejected creation. Local checks succeeded; no hosted CI run is claimed.
+The [Checks workflow](https://github.com/Fatih-Haslak/scenescout/actions/workflows/checks.yml) is configured for Windows/Linux × Python 3.12/3.13 on pushes, pull requests and manual dispatch. Each job runs locked CPU dependency installation, behavioral tests and coverage, formatting, syntax checks and distribution build. Workflow permissions are read-only; actions are pinned to immutable commit SHAs. The editable source is mirrored in `docs/ci-workflow.yml`. Check the linked run's conclusion for hosted results; a configuration file alone does not prove that CI passed.
 
-To activate it using an account connection that can write workflows, place it at `.github/workflows/checks.yml`. It runs source checks only, with read-only repository permissions. It does not download the model, process media or run an automated behavioral suite.
+CI avoids model downloads by using explicit test doubles for inference; small generated media still exercises actual OpenCV decoding. [Separate evaluation](evaluation.md) records real CPU/CUDA model inference, labelled queries and scaling.
+
+The Windows starter package was extracted into a separate writable folder with only managed Python allowed. It downloaded Python 3.13.16, installed locked CPU dependencies, started the server and served its API/UI. This checks the Python bootstrap path on Windows x64, not every Windows machine or security-software configuration.
+
+Actual browser verification also imported a full licensed film, stopped the app during indexing, reopened the library with 56/199 saved frames, clicked the resume action, and reached `ready` at 199 frames. [Paused UI evidence](resume-paused.jpg). A separate Turkish query selected the rabbit at 00:18 with real GPU inference. The paused and resumed states are backed by persisted model embeddings, not injected UI state.

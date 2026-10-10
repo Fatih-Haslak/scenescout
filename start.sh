@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 set -eu
 cd "$(dirname "$0")"
-exec uv run --frozen scenescout --open-browser
+exec uv run --frozen --extra cpu scenescout --open-browser

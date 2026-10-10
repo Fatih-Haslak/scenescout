@@ -1,0 +1,66 @@
+{
+  "full_video": {
+    "duration_seconds": 596.4583333333334,
+    "frames": 199,
+    "index_seconds_model_already_loaded": 23.553360000019893,
+    "device": "cuda",
+    "cuda_peak_allocated_mib": 1005.53955078125
+  },
+  "synthetic_retrieval": [
+    {
+      "vectors": 1000,
+      "raw_matrix_mib": 2.9296875,
+      "first_snapshot_ms": 14.868900005239993,
+      "warm_cached_exact_rank": {
+        "p50_ms": 0.13864997890777886,
+        "p95_ms": 0.2550399891333665,
+        "samples": 20
+      },
+      "uncached_snapshot_plus_rank": {
+        "p50_ms": 13.906800013501197,
+        "p95_ms": 14.09071998205036,
+        "samples": 5
+      },
+      "process_rss_mib_after_size": 2051.14453125
+    },
+    {
+      "vectors": 10000,
+      "raw_matrix_mib": 29.296875,
+      "first_snapshot_ms": 133.46109999110922,
+      "warm_cached_exact_rank": {
+        "p50_ms": 0.7944499957375228,
+        "p95_ms": 1.0655749880243095,
+        "samples": 20
+      },
+      "uncached_snapshot_plus_rank": {
+        "p50_ms": 124.37689997022972,
+        "p95_ms": 125.57937999954447,
+        "samples": 5
+      },
+      "process_rss_mib_after_size": 2142.95703125
+    },
+    {
+      "vectors": 50000,
+      "raw_matrix_mib": 146.484375,
+      "first_snapshot_ms": 632.2932000039145,
+      "warm_cached_exact_rank": {
+        "p50_ms": 5.880849988898262,
+        "p95_ms": 6.510915001854301,
+        "samples": 20
+      },
+      "uncached_snapshot_plus_rank": {
+        "p50_ms": 650.1541000325233,
+        "p95_ms": 653.3610999817029,
+        "samples": 5
+      },
+      "process_rss_mib_after_size": 2470.44140625
+    }
+  ],
+  "recorded_utc": "2026-10-10T17:22:34Z",
+  "limitations": [
+    "Full-video throughput is one run of one animated film, no quality labels.",
+    "Synthetic vectors measure CPU exact scan/cache costs, not retrieval quality or media indexing.",
+    "RSS includes the loaded model and allocator retention; it is not per-query memory.",
+    "Timing excludes model load, installation, download, HTTP and UI."
+  ]
+}
