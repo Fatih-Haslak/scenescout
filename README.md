@@ -12,6 +12,8 @@ You remember a scene, not its filename. Add a video, describe what you saw, and 
 
 **v0.3.1 fixes:** one fresh public HLS attempt after a YouTube HTTP 403, shared audio/video download budgets, Windows progress-file retry, and an optional similarity threshold for text/image search. Low-scoring results can now be hidden, with an explicit empty-result message. Library refreshes share a single polling loop.
 
+**v0.3.2:** stalled HTTP/media requests have a 10-second graceful shutdown deadline before cancellation and application cleanup, so disconnected previews cannot hold the server indefinitely.
+
 SceneScout uses real embeddings from `google/embeddinggemma-2`. No hosted inference API, generated captions, or canned search result fallback.
 
 ## See it work
@@ -34,7 +36,7 @@ This animation combines three real application screenshots. The demo uses a 30-s
 
 Source installation uses **Python 3.12 or 3.13** and [uv](https://docs.astral.sh/uv/getting-started/installation/). Leave several GB of RAM and disk space free. CPU inference works; indexing is slower than text search.
 
-**Windows without a manual Python setup:** download the [v0.3.1 starter ZIP](https://github.com/Fatih-Haslak/scenescout/releases/tag/v0.3.1), extract it, and double-click `Start.cmd`. It prepares Python, locked dependencies and the YouTube JS runtime automatically. `Start-GPU.cmd` selects CUDA on a supported NVIDIA machine. [Installation details](docs/installation.md).
+**Windows without a manual Python setup:** download the [v0.3.2 starter ZIP](https://github.com/Fatih-Haslak/scenescout/releases/tag/v0.3.2), extract it, and double-click `Start.cmd`. It prepares Python, locked dependencies and the YouTube JS runtime automatically. `Start-GPU.cmd` selects CUDA on a supported NVIDIA machine. [Installation details](docs/installation.md).
 
 ```sh
 git clone https://github.com/Fatih-Haslak/scenescout.git

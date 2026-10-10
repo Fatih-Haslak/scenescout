@@ -54,6 +54,8 @@ Search scope and current preview are independent. A library-wide query can previ
 
 Offline HTML docs and an OpenAPI schema expose the API. Browser cross-origin requests and unexpected hosts are rejected. This is a local application, without multi-user authentication. See `SECURITY.md`.
 
+The CLI grants HTTP connections/tasks ten seconds to finish on shutdown, then cancels stalled requests before the application lifespan shuts down import/index workers. This bounds media connection draining, not inference itself: workers still finish the current batch and preserve checkpoints before exiting.
+
 ## Observed release scope
 
 Source lint/format, Python compilation, JavaScript syntax and distribution packaging are checked. The app walkthrough used a real model and licensed video for import, indexing, English/Turkish search, image search, timecode seeking and export. Screenshots are from the running app.

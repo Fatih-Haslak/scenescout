@@ -1,6 +1,6 @@
 # Windows starter package
 
-Download `SceneScout-0.3.1-Windows-x64.zip` from [the release](https://github.com/Fatih-Haslak/scenescout/releases/tag/v0.3.1), extract into a writable folder, and double-click `Start.cmd`.
+Download `SceneScout-0.3.2-Windows-x64.zip` from [the release](https://github.com/Fatih-Haslak/scenescout/releases/tag/v0.3.2), extract into a writable folder, and double-click `Start.cmd`.
 Python and uv do not need to be installed manually. The ZIP bundles official uv 0.13.0; uv downloads a compatible Python if needed and installs locked dependencies. The model downloads on first inference. First use needs internet and several GB of free space. Later launches reuse the environment and cached model.
 
 `Start.cmd` selects CPU. `Start-GPU.cmd` selects CUDA 13.0 PyTorch on a supported NVIDIA GPU/driver. Both use the same `.venv`; switching changes the PyTorch variant. GPU packages are significantly larger. No administrator access, registry changes or global Python changes are needed. Package and model caches use their libraries' cache directories outside the application folder.

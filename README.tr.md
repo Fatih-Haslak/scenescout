@@ -10,7 +10,7 @@ Video ekle, gördüğün sahneyi tarif et ve sonuçtan o ana git. İstersen örn
 
 ## Kurulum
 
-**Windows için kolay kurulum:** [v0.3.1 paketini](https://github.com/Fatih-Haslak/scenescout/releases/tag/v0.3.1) indir, ZIP’i bir klasöre çıkart ve `Start.cmd` dosyasına çift tıkla. Python, bağımlılıklar ve YouTube çalışma ortamı otomatik hazırlanır; elle Python/uv kurmak gerekmez. İlk açılış internet ve birkaç GB boş alan gerektirir. NVIDIA GPU için `Start-GPU.cmd` kullanılabilir. [Kurulum ayrıntıları](docs/installation.md).
+**Windows için kolay kurulum:** [v0.3.2 paketini](https://github.com/Fatih-Haslak/scenescout/releases/tag/v0.3.2) indir, ZIP’i bir klasöre çıkart ve `Start.cmd` dosyasına çift tıkla. Python, bağımlılıklar ve YouTube çalışma ortamı otomatik hazırlanır; elle Python/uv kurmak gerekmez. İlk açılış internet ve birkaç GB boş alan gerektirir. NVIDIA GPU için `Start-GPU.cmd` kullanılabilir. [Kurulum ayrıntıları](docs/installation.md).
 
 Kaynak koddan kurmak için Python 3.12/3.13 ve [uv](https://docs.astral.sh/uv/getting-started/installation/) kullan:
 
@@ -32,6 +32,8 @@ Görsel simgesiyle bir referans görsel yükleyebilir, zaman çizelgesinden vide
 **En az benzerlik** filtresi zayıf sonuçları gizler. Filtreyi geçen kare bulunamazsa uygulama bunu açıkça gösterir. Eşik doğruluk yüzdesi değildir; yüksek bir eşik doğru sahneleri de gizleyebilir. Varsayılan seçenek en yakın sahneleri gösterir.
 
 v0.3.1, YouTube 403 hatasından sonra herkese açık alternatif akışı bir kez dener. İndirme boyutu ses ve görüntü akışlarının toplamında denetlenir; Windows ilerleme dosyasındaki geçici kilitler yeniden denenir. Kitaplık yenilemelerinin birden fazla sorgulama döngüsü başlatması da giderildi.
+
+v0.3.2, takılı kalan video/HTTP bağlantıları için kapanış beklemesini 10 saniyeyle sınırlar. Ardından bağlantılar iptal edilir ve işçilerin güvenli kapanışı yapılır; eski önizleme bağlantıları sunucuyu süresiz açık tutmaz.
 
 Yarım kalan indeksler kayıtlı kareleri korur. Kitaplıktaki **İndekslemeye devam et** düğmesiyle yeniden yüklemeden devam edebilirsin. Silme sırasında uygulama kapanırsa temizlik sonraki açılışta tamamlanır.
 

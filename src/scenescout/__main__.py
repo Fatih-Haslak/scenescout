@@ -57,7 +57,13 @@ def main(argv=None):
                     time.sleep(0.3)
 
         threading.Thread(target=open_when_ready, daemon=True).start()
-    uvicorn.run("scenescout.api:app", host="127.0.0.1", port=args.port, access_log=False)
+    uvicorn.run(
+        "scenescout.api:app",
+        host="127.0.0.1",
+        port=args.port,
+        access_log=False,
+        timeout_graceful_shutdown=10,
+    )
 
 
 if __name__ == "__main__":
