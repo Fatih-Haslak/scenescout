@@ -1,6 +1,7 @@
 import json
 import sys
 import threading
+from pathlib import Path
 
 import cv2
 import numpy as np
@@ -280,3 +281,117 @@ def test_link_runtime_and_downloader_limits(tmp_path, monkeypatch):
         config["match_filter"]({"duration": 8000}, incomplete=False)
     with pytest.raises(ValueError, match="512 MB"):
         config["progress_hooks"][0]({"downloaded_bytes": link_download.MAX_UPLOAD_BYTES + 1})
+
+
+@pytest.mark.parametrize("fail_again", [False, True])
+def test_youtube_403_uses_one_fresh_hls_attempt(tmp_path, monkeypatch, fail_again):
+    calls = []
+    unrelated = tmp_path / "keep.txt"
+    unrelated.write_text("keep")
+
+    class Downloader:
+        def __init__(self, config):
+            calls.append(dict(config))
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *_):
+            pass
+
+        def extract_info(self, url, download):
+            assert download
+            if len(calls) == 1:
+                (tmp_path / "source.f140.m4a.part").write_bytes(b"partial")
+                raise link_download.yt_dlp.utils.DownloadError("HTTP Error 403: Forbidden")
+            assert not list(tmp_path.glob("source.*"))
+            assert json.loads((tmp_path / "progress.json").read_text())["downloaded"] == 0
+            if fail_again:
+                raise link_download.yt_dlp.utils.DownloadError("HTTP Error 403: Forbidden")
+            (tmp_path / "source.mp4").write_bytes(b"complete")
+            return {"title": "Public video"}
+
+    monkeypatch.setattr(link_download.yt_dlp, "YoutubeDL", Downloader)
+    if fail_again:
+        with pytest.raises(link_download.yt_dlp.utils.DownloadError):
+            link_download.download("https://www.youtube.com/watch?v=YE7VzlLtp-4", tmp_path, 3)
+        assert not (tmp_path / "result.json").exists()
+    else:
+        link_download.download("https://www.youtube.com/watch?v=YE7VzlLtp-4", tmp_path, 3)
+        assert json.loads((tmp_path / "result.json").read_text())["hls_fallback"]
+    assert len(calls) == 2
+    assert "protocol^=m3u8" not in calls[0]["format"]
+    assert "protocol^=m3u8" in calls[1]["format"]
+    for key in ["max_filesize", "allowed_extractors", "match_filter", "js_runtimes"]:
+        assert calls[0][key] == calls[1][key]
+    assert unrelated.read_text() == "keep"
+
+
+@pytest.mark.parametrize(
+    "url,error",
+    [
+        ("https://x.com/NASA/status/1", "HTTP Error 403: Forbidden"),
+        ("https://www.youtube.com/watch?v=YE7VzlLtp-4", "Sign in to confirm your age"),
+        ("https://www.youtube.com/watch?v=YE7VzlLtp-4", "HTTP Error 503"),
+    ],
+)
+def test_unrelated_platform_errors_are_not_retried(tmp_path, monkeypatch, url, error):
+    calls = []
+
+    class Downloader:
+        def __init__(self, config):
+            calls.append(config)
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *_):
+            pass
+
+        def extract_info(self, *_args, **_kwargs):
+            raise link_download.yt_dlp.utils.DownloadError(error)
+
+    monkeypatch.setattr(link_download.yt_dlp, "YoutubeDL", Downloader)
+    with pytest.raises(link_download.yt_dlp.utils.DownloadError):
+        link_download.download(url, tmp_path, 3)
+    assert len(calls) == 1
+
+
+def test_download_streams_share_size_budget(tmp_path, monkeypatch):
+    class Downloader:
+        def __init__(self, config):
+            self.progress = config["progress_hooks"][0]
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *_):
+            pass
+
+        def extract_info(self, *_args, **_kwargs):
+            (tmp_path / "source.f136.mp4").write_bytes(b"12345678")
+            (tmp_path / "source.f140.m4a.part").write_bytes(b"1234")
+            self.progress({"downloaded_bytes": 4})
+
+    monkeypatch.setattr(link_download, "MAX_UPLOAD_BYTES", 10)
+    monkeypatch.setattr(link_download.yt_dlp, "YoutubeDL", Downloader)
+    with pytest.raises(ValueError, match="512 MB"):
+        link_download.download("https://www.youtube.com/watch?v=YE7VzlLtp-4", tmp_path, 3)
+    assert not (tmp_path / "result.json").exists()
+
+
+def test_progress_write_recovers_from_transient_windows_reader_lock(tmp_path, monkeypatch):
+    original = Path.replace
+    calls = []
+
+    def locked(path, destination):
+        calls.append(path)
+        if len(calls) < 3:
+            raise PermissionError("reader is closing")
+        return original(path, destination)
+
+    monkeypatch.setattr(Path, "replace", locked)
+    monkeypatch.setattr(link_download.time, "sleep", lambda delay: None)
+    link_download.write_json(tmp_path / "progress.json", {"downloaded": 10})
+    assert json.loads((tmp_path / "progress.json").read_text()) == {"downloaded": 10}
+    assert not (tmp_path / "progress.tmp").exists()

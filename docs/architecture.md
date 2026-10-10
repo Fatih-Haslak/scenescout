@@ -32,6 +32,8 @@ Each operation owns a SQLite connection and explicitly closes it in `finally` af
 
 Text uses `SearchQuery`; reference images use the vision encoder. Cosine similarity scores both against the same frame vectors. Hits within twice the sampling interval are deduplicated per video.
 
+Both search endpoints accept `min_score`, default -1 (no cutoff). The raw cosine score is filtered before temporal diversity and display rounding. The UI explains an empty filtered result separately from an empty library. Thresholds are user controls, not calibrated confidence or a claim of scene absence.
+
 The exact cosine scan costs O(N × 768) work, with O(N log N) stable score sorting. A library-generation cache reuses metadata and the dense vector matrix across queries. Publish/removal/status transitions invalidate it; incomplete frames are never cached. Queries take the snapshot after inference to avoid returning a video removed while query encoding was waiting. The UI also discards responses belonging to a search started before a removal action. The cache is process-local: one application process owns one library. External database writers/multiple servers sharing a data directory are unsupported. A dedicated vector index remains a future scaling change. Scores are not confidence guarantees; unrelated queries still return nearest neighbors.
 
 Only image frames carry visual information. This release does not use native video-sequence or audio encoding and cannot reliably infer motion solely from temporal relationships.
@@ -46,7 +48,7 @@ The audio tower is disabled. CPU uses float32, compatible CUDA uses bfloat16; CU
 
 ## UI and boundaries
 
-Static assets ship in the Python wheel, without a frontend build step. User names and queries use text nodes. Polling exposes job progress; HTTP range requests support playback seeking.
+Static assets ship in the Python wheel, without a frontend build step. User names and queries use text nodes. Polling exposes job progress; manual refreshes reuse an in-flight request and a single next-poll timer. HTTP range requests support playback seeking.
 
 Search scope and current preview are independent. A library-wide query can preview any video; selecting a library item narrows subsequent searches. JSON exports include query, model, scores, timecodes and server latency.
 
@@ -56,4 +58,4 @@ Offline HTML docs and an OpenAPI schema expose the API. Browser cross-origin req
 
 Source lint/format, Python compilation, JavaScript syntax and distribution packaging are checked. The app walkthrough used a real model and licensed video for import, indexing, English/Turkish search, image search, timecode seeking and export. Screenshots are from the running app.
 
-66 automated behavioral tests cover link imports, actual conversion, cancellation, persistence, restart/removal recovery, resume checkpoints, invalid uploads, duplicates, local boundaries, model failures, stale search results, ranking, cache invalidation, launch behavior and dtype safety. Model tests use explicit doubles; they do not prove real-model quality. Separate real CPU/CUDA inference measurements, labelled development queries, a full-film index and synthetic vector scaling are documented in [evaluation.md](evaluation.md). Hosted CI covers Windows/Linux and Python 3.12/3.13. macOS real inference remains unverified.
+74 automated behavioral tests cover link imports, bounded YouTube fallback, shared stream budgets, progress-file locks, thresholds, actual conversion, cancellation, persistence, restart/removal recovery, resume checkpoints, invalid uploads, duplicates, local boundaries, model failures, stale search results, ranking, cache invalidation, launch behavior and dtype safety. Model tests use explicit doubles; they do not prove real-model quality. Separate real CPU/CUDA inference measurements, labelled development queries, a full-film index and synthetic vector scaling are documented in [evaluation.md](evaluation.md). Hosted CI covers Windows/Linux and Python 3.12/3.13. macOS real inference remains unverified.

@@ -72,7 +72,11 @@
   -d '{"query":"a rabbit sitting in the grass","limit":12}'</code></pre>
       <p>
         Text queries accept optional <code>video_id</code> and <code>limit</code> (1–30). The model
-        applies its <code>SearchQuery</code> prompt. Only complete indexes are searched.
+        applies its <code>SearchQuery</code> prompt. Only complete indexes are searched. Optional
+        <code>min_score</code> (-1 to 1, default -1) rejects frames below the raw cosine score
+        before temporal deduplication. It applies to image searches too, as a multipart field. An
+        empty result with nonzero <code>searched_frames</code> means no frame passed the filter, not
+        that the library is empty. The response echoes <code>min_score</code>.
       </p>
       <pre><code>{
   "results": [{

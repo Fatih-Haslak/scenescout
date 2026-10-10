@@ -210,11 +210,12 @@ def fetch_video(item, folder, event):
     )
     if code:
         error_file = folder / "error.json"
-        message = (
-            json.loads(error_file.read_text(encoding="utf-8"))["error"]
-            if error_file.exists()
-            else "Download failed. Check the link and your internet connection."
-        )
+        if error_file.exists():
+            error = json.loads(error_file.read_text(encoding="utf-8"))
+            logger.warning("Link downloader failed (%s)", error.get("error_type", "unknown"))
+            message = error["error"]
+        else:
+            message = "Download failed. Check the link and your internet connection."
         raise ValueError(message)
     result = json.loads((folder / "result.json").read_text(encoding="utf-8"))
     # The subprocess writes a basename, never a user-supplied file path.

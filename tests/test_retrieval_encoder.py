@@ -25,6 +25,10 @@ def test_temporal_diversity_and_score_order(vector):
     hits = rank(rows, matrix, vector, 2)
     assert [hit["timestamp"] for hit in hits] == [3, 9]
     assert [hit["score"] for hit in hits] == [1, 0.7]
+    assert len(rank(rows, matrix, vector, 2, min_score=0.8)) == 1
+    assert rank(rows, matrix * 0.4, vector, min_score=0.7) == []
+    # Apply the raw score threshold before rounding the displayed score.
+    assert rank(rows, matrix * 0.69999, vector, min_score=0.7) == []
 
 
 def test_cached_vectors_refresh_after_publish_and_removal(add_video, vector):

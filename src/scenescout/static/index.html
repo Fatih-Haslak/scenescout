@@ -118,6 +118,18 @@
         <span id="scope-label" data-i18n="scopeAll">Searching across your library</span
         ><span data-i18n="shortcut">Press / to search</span>
       </div>
+      <div class="search-filter">
+        <label for="min-score" data-i18n="minSimilarity">Minimum similarity</label>
+        <select id="min-score" aria-describedby="filter-help">
+          <option value="-1" data-i18n="allSimilarities">Show closest scenes</option>
+          <option value="0.6">0.60+</option>
+          <option value="0.7">0.70+</option>
+          <option value="0.8">0.80+</option>
+        </select>
+        <span id="filter-help" data-i18n="filterHelp"
+          >A higher threshold hides weaker results; it is not a confidence percentage.</span
+        >
+      </div>
       <div id="notice" class="notice" role="status" hidden></div>
       <div class="workspace">
         <section class="viewer-section" aria-label="Video preview">
@@ -206,7 +218,7 @@
       <footer>
         <span data-i18n="footer"
           >Built for the scenes you remember, not the filenames you forgot.</span
-        ><span>SceneScout v0.3</span>
+        ><span>SceneScout v0.3.1</span>
       </footer>
     </main>
     <dialog id="link-dialog">

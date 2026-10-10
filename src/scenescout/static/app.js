@@ -47,14 +47,20 @@ const translations = {
     filmstrip: "At a glance",
     timelineEmpty: "Your video’s visual timeline",
     stripEmpty: "Indexed frames appear here. Click one to explore.",
-    moments: "Matching moments",
+    moments: "Closest moments",
+    minSimilarity: "Minimum similarity",
+    allSimilarities: "Show closest scenes",
+    filterHelp: "A higher threshold hides weaker results; it is not a confidence percentage.",
+    belowThreshold:
+      "No scene passes this threshold. Lower it or try another description or reference image.",
     export: "Export",
     resultsHint: "The closest scenes, with timecodes.",
     resultsEmpty: "A scene is worth a thousand keywords.",
     resultsEmptyText: "Try “a wide mountain landscape” or use a reference image.",
     example1: "A rabbit in the grass",
     example2: "A mountain landscape",
-    scoreNote: "Results are ranked by visual similarity, not certainty. Audio is not searched.",
+    scoreNote:
+      "A nearest result does not prove the described scene is in the video. Speech is not searched.",
     footer: "Built for the scenes you remember, not the filenames you forgot.",
     removeTitle: "Remove this video?",
     removeText:
@@ -88,7 +94,7 @@ const translations = {
     matches: "moments",
     searched: "frames searched",
     similarity: "Similarity",
-    best: "Top match",
+    best: "Closest",
     copied: "Timecode copied.",
     copyFailed: "Your browser could not copy the timecode. Use the time shown on the video.",
     uploadLarge: "Each video must be smaller than 512 MB.",
@@ -150,7 +156,12 @@ const translations = {
     filmstrip: "Bir bakışta",
     timelineEmpty: "Videonun görsel zaman çizelgesi",
     stripEmpty: "İndekslenen kareler burada görünür. Keşfetmek için tıkla.",
-    moments: "Eşleşen anlar",
+    moments: "En yakın anlar",
+    minSimilarity: "En az benzerlik",
+    allSimilarities: "En yakın sahneleri göster",
+    filterHelp: "Eşiği yükseltmek zayıf sonuçları gizler; bu değer bir doğruluk yüzdesi değildir.",
+    belowThreshold:
+      "Bu eşiği geçen sahne yok. Eşiği düşür veya farklı bir tarif ya da örnek görsel dene.",
     export: "Dışa aktar",
     resultsHint: "Zaman kodlarıyla en yakın sahneler.",
     resultsEmpty: "Sahneyi hatırlaman yeterli.",
@@ -158,7 +169,7 @@ const translations = {
     example1: "Çimenlerde bir tavşan",
     example2: "Dağ manzarası",
     scoreNote:
-      "Sonuçlar görsel benzerliğe göre sıralanır, kesinlik belirtmez. Seste arama yapılmaz.",
+      "En yakın sonuç, tarif ettiğin sahnenin videoda bulunduğunu kanıtlamaz. Konuşmalarda arama yapılmaz.",
     footer: "Dosya adını değil, sahneyi hatırlayanlar için.",
     removeTitle: "Video kaldırılsın mı?",
     removeText: "İçe aktarılan kopya ve arama indeksi silinir. Orijinal dosyan değişmez.",
@@ -191,7 +202,7 @@ const translations = {
     matches: "an",
     searched: "kare arandı",
     similarity: "Benzerlik",
-    best: "İlk eşleşme",
+    best: "En yakın",
     copied: "Zaman kodu kopyalandı.",
     copyFailed: "Tarayıcı zaman kodunu kopyalayamadı. Videoda görünen zamanı kullan.",
     uploadLarge: "Her video 512 MB’den küçük olmalı.",
@@ -442,6 +453,17 @@ function renderLibrary() {
   }
 }
 async function refresh() {
+  if (refreshTask) return refreshTask;
+  clearTimeout(refreshTimer);
+  refreshTask = refreshLibrary().finally(() => {
+    refreshTask = null;
+    refreshTimer = setTimeout(refresh, 1800);
+  });
+  return refreshTask;
+}
+let refreshTimer = null;
+let refreshTask = null;
+async function refreshLibrary() {
   try {
     const [videos, status, imports] = await Promise.all([
       api("/api/videos"),
@@ -470,8 +492,6 @@ async function refresh() {
     renderModel();
   } catch (error) {
     notice(error.message, true);
-  } finally {
-    setTimeout(refresh, 1800);
   }
 }
 function clearPreview() {
@@ -565,7 +585,9 @@ function renderResults() {
     `${state.queryType === "image" ? t("imageQuery") + " · " : ""}${response.results.length} ${t("matches")} · ${response.elapsed_ms} ms · ${response.searched_frames} ${t("searched")}`;
   $("export-results").disabled = !response.results.length;
   if (!response.results.length) {
-    results.append(el("p", "result-summary", t("noResults")));
+    results.append(
+      el("p", "result-summary", t(response.searched_frames ? "belowThreshold" : "noResults")),
+    );
     return;
   }
   response.results.forEach((scene, i) => {
@@ -619,6 +641,7 @@ async function search(image) {
   const epoch = state.searchEpoch;
   $("search-button").disabled = true;
   $("reference-button").disabled = true;
+  $("min-score").disabled = true;
   $("search-button").textContent = t("finding");
   notice("");
   try {
@@ -626,6 +649,7 @@ async function search(image) {
     if (image) {
       const form = new FormData();
       form.append("file", image);
+      form.append("min_score", $("min-score").value);
       if (state.scope) form.append("video_id", state.scope);
       response = await api("/api/search/image", { method: "POST", body: form });
       state.queryLabel = t("imageQuery");
@@ -635,7 +659,11 @@ async function search(image) {
       response = await api("/api/search", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query, video_id: state.scope }),
+        body: JSON.stringify({
+          query,
+          video_id: state.scope,
+          min_score: Number($("min-score").value),
+        }),
       });
       state.queryLabel = query;
       state.queryType = "text";
@@ -652,6 +680,7 @@ async function search(image) {
     state.busy = false;
     $("search-button").disabled = false;
     $("reference-button").disabled = false;
+    $("min-score").disabled = false;
     $("search-button").textContent = t("search");
   }
 }
@@ -842,5 +871,11 @@ document.addEventListener("keydown", (event) => {
     $("query").focus();
   }
 });
+$("min-score").onchange = () => {
+  state.searchEpoch += 1;
+  state.results = null;
+  state.selected = null;
+  renderResults();
+};
 translate();
 refresh();

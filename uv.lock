@@ -3,12 +3,12 @@ revision = 3
 requires-python = ">=3.12, <3.14"
 resolution-markers = [
     "python_full_version >= '3.13' and extra != 'extra-10-scenescout-cpu' and extra == 'extra-10-scenescout-cuda'",
-    "python_full_version < '3.13' and extra != 'extra-10-scenescout-cpu' and extra == 'extra-10-scenescout-cuda'",
     "python_full_version >= '3.13' and sys_platform != 'darwin' and extra == 'extra-10-scenescout-cpu' and extra != 'extra-10-scenescout-cuda'",
-    "python_full_version < '3.13' and sys_platform != 'darwin' and extra == 'extra-10-scenescout-cpu' and extra != 'extra-10-scenescout-cuda'",
     "python_full_version >= '3.13' and sys_platform == 'darwin' and extra == 'extra-10-scenescout-cpu' and extra != 'extra-10-scenescout-cuda'",
-    "python_full_version < '3.13' and sys_platform == 'darwin' and extra == 'extra-10-scenescout-cpu' and extra != 'extra-10-scenescout-cuda'",
     "python_full_version >= '3.13' and extra != 'extra-10-scenescout-cpu' and extra != 'extra-10-scenescout-cuda'",
+    "python_full_version < '3.13' and extra != 'extra-10-scenescout-cpu' and extra == 'extra-10-scenescout-cuda'",
+    "python_full_version < '3.13' and sys_platform != 'darwin' and extra == 'extra-10-scenescout-cpu' and extra != 'extra-10-scenescout-cuda'",
+    "python_full_version < '3.13' and sys_platform == 'darwin' and extra == 'extra-10-scenescout-cpu' and extra != 'extra-10-scenescout-cuda'",
     "python_full_version < '3.13' and extra != 'extra-10-scenescout-cpu' and extra != 'extra-10-scenescout-cuda'",
 ]
 conflicts = [[
@@ -1394,7 +1394,7 @@ wheels = [
 
 [[package]]
 name = "scenescout"
-version = "0.3.0"
+version = "0.3.1"
 source = { editable = "." }
 dependencies = [
     { name = "fastapi" },

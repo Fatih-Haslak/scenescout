@@ -1,6 +1,7 @@
 import io
 
 import pytest
+import numpy as np
 from fastapi.testclient import TestClient
 from PIL import Image
 
@@ -113,3 +114,38 @@ def test_invalid_reference_image_rejected(client):
     Image.new("RGB", (8, 8)).save(buffer, format="PNG")
     response = client.post("/api/search/image", files={"file": ("x.png", buffer.getvalue())})
     assert response.json()["results"] == []
+
+
+def test_similarity_threshold_applies_to_text_and_image(client, add_video, vector, monkeypatch):
+    add_video()
+    store.checkpoint("a", [("a-00000", "a", 0, vector.tobytes())])
+    query_vector = vector.copy()
+    query_vector[0], query_vector[1] = 0.5, np.sqrt(0.75)
+    monkeypatch.setattr(api.encoder, "encode", lambda *args: query_vector)
+    assert len(client.post("/api/search", json={"query": "tree"}).json()["results"]) == 1
+    response = client.post("/api/search", json={"query": "tree", "min_score": 0.7}).json()
+    assert response["results"] == [] and response["searched_frames"] == 1
+    assert response["min_score"] == 0.7
+    buffer = io.BytesIO()
+    Image.new("RGB", (8, 8)).save(buffer, format="PNG")
+    assert (
+        client.post(
+            "/api/search/image",
+            files={"file": ("x.png", buffer.getvalue())},
+            data={"min_score": 0.7},
+        ).json()["results"]
+        == []
+    )
+    for value in ["nan", "inf", -1.01, 1.01]:
+        assert (
+            client.post("/api/search", json={"query": "tree", "min_score": value}).status_code
+            == 422
+        )
+        assert (
+            client.post(
+                "/api/search/image",
+                files={"file": ("x.png", buffer.getvalue())},
+                data={"min_score": value},
+            ).status_code
+            == 422
+        )

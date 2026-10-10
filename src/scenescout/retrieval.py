@@ -7,12 +7,14 @@ import numpy as np
 from . import store
 
 
-def rank(rows, matrix, vector, limit=12):
+def rank(rows, matrix, vector, limit=12, min_score=-1):
     if not rows:
         return []
     scores = matrix @ vector
     picked = []
     for index in np.argsort(-scores, kind="stable"):
+        if scores[index] < min_score:
+            break
         row = rows[index]
         if any(
             hit["video_id"] == row["video_id"]

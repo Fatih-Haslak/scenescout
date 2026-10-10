@@ -16,7 +16,7 @@ from fastapi.staticfiles import StaticFiles
 from PIL import Image, UnidentifiedImageError
 from pydantic import BaseModel, Field
 
-from . import store
+from . import __version__, store
 from .config import DATA_DIR, MAX_UPLOAD_BYTES, STATIC_DIR
 from .encoder import encoder
 from .indexer import indexer
@@ -38,7 +38,7 @@ async def lifespan(app):
 
 app = FastAPI(
     title="SceneScout",
-    version="0.3.0",
+    version=__version__,
     lifespan=lifespan,
     description="Local visual video search using Google EmbeddingGemma 2.",
     docs_url=None,
@@ -78,7 +78,7 @@ def status():
     return {
         "model": encoder.status(),
         "max_upload_mb": MAX_UPLOAD_BYTES // (1024 * 1024),
-        "version": "0.3.0",
+        "version": __version__,
         "mode": "visual_frames",
     }
 
@@ -237,16 +237,17 @@ class SearchRequest(BaseModel):
     query: str = Field(min_length=1, max_length=1000)
     video_id: str | None = None
     limit: int = Field(default=12, ge=1, le=30)
+    min_score: float = Field(default=-1, ge=-1, le=1, allow_inf_nan=False)
 
 
-def search(vector_content, video_id, limit, prompt_name=None):
+def search(vector_content, video_id, limit, prompt_name=None, min_score=-1):
     started = time.perf_counter()
     if video_id:
         require_video(video_id)
     if not any(
         v["status"] == "ready" and (not video_id or v["id"] == video_id) for v in store.videos()
     ):
-        return {"results": [], "elapsed_ms": 0, "searched_frames": 0}
+        return {"results": [], "elapsed_ms": 0, "searched_frames": 0, "min_score": min_score}
     try:
         vector = encoder.encode(vector_content, prompt_name)
     except Exception as exc:
@@ -256,11 +257,12 @@ def search(vector_content, video_id, limit, prompt_name=None):
         ) from exc
     # Read after inference: it may have waited while a video was removed or finished indexing.
     rows, matrix = retrieval.snapshot(video_id)
-    picked = rank(rows, matrix, vector, limit)
+    picked = rank(rows, matrix, vector, limit, min_score)
     return {
         "results": picked,
         "elapsed_ms": round((time.perf_counter() - started) * 1000),
         "searched_frames": len(rows),
+        "min_score": min_score,
     }
 
 
@@ -269,11 +271,15 @@ def text_search(body: SearchRequest):
     query = body.query.strip()
     if not query:
         raise HTTPException(400, "Describe the scene you are looking for.")
-    return search(query, body.video_id, body.limit, "SearchQuery")
+    return search(query, body.video_id, body.limit, "SearchQuery", body.min_score)
 
 
 @app.post("/api/search/image")
-def image_search(file: UploadFile = File(...), video_id: str | None = Form(None)):
+def image_search(
+    file: UploadFile = File(...),
+    video_id: str | None = Form(None),
+    min_score: float = Form(-1, ge=-1, le=1, allow_inf_nan=False),
+):
     raw = file.file.read(8 * 1024 * 1024 + 1)
     if len(raw) > 8 * 1024 * 1024:
         raise HTTPException(413, "Reference image must be smaller than 8 MB.")
@@ -287,7 +293,7 @@ def image_search(file: UploadFile = File(...), video_id: str | None = Form(None)
         raise HTTPException(400, "Use a valid JPEG, PNG or WebP image.") from exc
     finally:
         file.file.close()
-    return search({"image": image}, video_id, 12)
+    return search({"image": image}, video_id, 12, min_score=min_score)
 
 
 @app.get("/")
