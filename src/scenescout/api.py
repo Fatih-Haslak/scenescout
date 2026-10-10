@@ -17,7 +17,7 @@ from PIL import Image, UnidentifiedImageError
 from pydantic import BaseModel, Field
 
 from . import __version__, store
-from .config import DATA_DIR, MAX_UPLOAD_BYTES, STATIC_DIR
+from .config import DATA_DIR, MAX_UPLOAD_BYTES, STATIC_DIR, library_id
 from .encoder import encoder
 from .indexer import indexer
 from .imports import importer
@@ -80,6 +80,7 @@ def status():
         "max_upload_mb": MAX_UPLOAD_BYTES // (1024 * 1024),
         "version": __version__,
         "mode": "visual_frames",
+        "library_id": library_id(),
     }
 
 

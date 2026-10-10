@@ -11,6 +11,8 @@ import webbrowser
 
 import uvicorn
 
+from .config import library_id
+
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description="SceneScout local video search")
@@ -36,10 +38,14 @@ def main(argv=None):
             if (
                 status.get("mode") != "visual_frames"
                 or status.get("model", {}).get("model") != "google/embeddinggemma-2"
+                or status.get("library_id") != library_id()
             ):
                 raise ValueError("Another application owns this port")
         except (OSError, ValueError):
-            parser.error("Port is in use by another application. Choose a different --port.")
+            parser.error(
+                "Port is in use by another application or library. Stop the other copy with "
+                "Ctrl+C, or choose a different --port. / Diger kopyayi Ctrl+C ile durdurun."
+            )
         if args.open_browser:
             webbrowser.open(url)
         print(f"SceneScout is already running at {url}")

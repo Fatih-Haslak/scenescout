@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" href="src/scenescout/static/logo.svg" type="image/svg+xml" />
+    <title>SceneScout · Başlangıç / Getting started</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: "Segoe UI", system-ui, sans-serif;
+        background: #111820;
+        color: #e7eef4;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        max-width: 850px;
+        margin: auto;
+        padding: 32px 24px 60px;
+        line-height: 1.65;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+      header img {
+        width: 52px;
+      }
+      h1 {
+        font-size: 30px;
+        margin: 0;
+        letter-spacing: -0.7px;
+      }
+      h2 {
+        font-size: 24px;
+        line-height: 1.3;
+        margin-top: 0;
+      }
+      h3 {
+        font-size: 19px;
+        margin-bottom: 4px;
+      }
+      p {
+        margin: 8px 0;
+      }
+      a {
+        color: #81dec5;
+        text-underline-offset: 4px;
+      }
+      nav {
+        margin-left: auto;
+      }
+      section {
+        background: #19232e;
+        border: 1px solid #354452;
+        border-radius: 16px;
+        padding: 28px;
+        margin: 20px 0;
+      }
+      ol {
+        padding-left: 22px;
+      }
+      li {
+        padding: 7px 0 7px 6px;
+      }
+      .note {
+        border-left: 3px solid #81dec5;
+        padding-left: 16px;
+        margin: 20px 0;
+        color: #c7d4df;
+      }
+      code {
+        font-size: 0.9em;
+        color: #e3cf91;
+        overflow-wrap: anywhere;
+      }
+      summary {
+        cursor: pointer;
+        font-weight: 600;
+        padding: 8px 0;
+      }
+      details {
+        border-top: 1px solid #354452;
+        padding: 8px 0;
+      }
+      .tag {
+        color: #81dec5;
+        font-size: 13px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      footer {
+        color: #bac8d4;
+        font-size: 14px;
+      }
+      @media (max-width: 560px) {
+        body {
+          padding: 20px 16px;
+        }
+        section {
+          padding: 20px;
+        }
+        header {
+          flex-wrap: wrap;
+        }
+        nav {
+          margin-left: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <img src="src/scenescout/static/logo.svg" alt="" />
+      <h1>SceneScout</h1>
+      <nav aria-label="Language"><a href="#turkce">Türkçe</a> · <a href="#english">English</a></nav>
+    </header>
+    <section id="turkce" aria-labelledby="tr-title">
+      <p class="tag">Başlangıç rehberi · Windows 10 / 11, x64</p>
+      <h2 id="tr-title">Hatırladığın sahneyi bul.</h2>
+      <p>
+        Video ekle, sahneyi tarif et, sonucu aç. Görüntüler bilgisayarında işlenir. Python, komut
+        satırı veya API anahtarı bilgisi gerekmez.
+      </p>
+      <ol>
+        <li>
+          <strong>Kur:</strong> GitHub sürümündeki
+          <code>SceneScout-Setup-Windows-x64.exe</code> dosyasını aç. Türkçe dilini seç, kurulumu
+          tamamla. Yönetici izni gerekmez.
+        </li>
+        <li>
+          <strong>Başlat:</strong> Masaüstündeki <strong>SceneScout</strong> kısayoluna çift tıkla.
+          Python ve gerekli paketler otomatik hazırlanır. İlk açılışta internet gerekir; indirme
+          sürerken pencereyi açık tut.
+        </li>
+        <li>
+          <strong>Video ekle:</strong> Açılan tarayıcıda dosya yükle veya herkese açık YouTube / X
+          video bağlantısı yapıştır. İlk video için yaklaşık
+          <strong>1,5 GB model</strong> indirilir. İlerlemeyi izle ve
+          <strong>Hazır</strong> yazmasını bekle.
+        </li>
+        <li>
+          <strong>Sahneyi ara:</strong> “Çimenlerde oturan bir tavşan” gibi gördüğün şeyi yaz.
+          Sonuca tıklayınca video o ana gider. Referans görsel de kullanabilirsin.
+        </li>
+      </ol>
+      <p class="note">
+        Kurulum dosyasının bitmesi, modelin de indirildiği anlamına gelmez. İlk açılış ortamı
+        hazırlar; ilk video modeli indirir. Sonraki kullanımlar önbelleği kullanır. Diskte birkaç GB
+        boş alan bırak. CPU çalışır, ancak ilk indeksleme daha yavaştır.
+      </p>
+      <h3>Günlük kullanım</h3>
+      <p>
+        Uygulamayı kullanırken açılış penceresini açık tut. Durdurmak için o pencerede
+        <strong>Ctrl+C</strong> kullan. Tarayıcı sekmesini kapatmak sunucuyu durdurmaz.
+      </p>
+      <p>
+        NVIDIA GPU ve uyumlu sürücün varsa Başlat menüsündeki
+        <strong>SceneScout - NVIDIA GPU</strong> seçeneğini kullanabilirsin. Ek paketler indirir;
+        CPU ve GPU ortamları ayrıdır.
+      </p>
+      <details>
+        <summary>Açılmıyor veya indirme yarım kaldı</summary>
+        <p>
+          İnternet bağlantısını ve boş alanı kontrol et, kısayolu yeniden aç. Son hata ve kurulum
+          kaydı <code>%LOCALAPPDATA%\SceneScout\Logs\setup-cpu.log</code> dosyasındadır. GPU
+          açılışında dosya <code>setup-cuda.log</code> olur. Sorun bildirirken kişisel yolları ve
+          video adreslerini kayıttan çıkart.
+        </p>
+        <p>
+          Tarayıcı kendiliğinden açılmazsa
+          <a href="http://127.0.0.1:8765">127.0.0.1:8765</a> adresini aç. Bu adres yalnızca uygulama
+          çalışırken kullanılabilir.
+        </p>
+      </details>
+      <details>
+        <summary>Videolarım nerede? Nasıl güncellerim?</summary>
+        <p>
+          Kurulum dosyaları <code>%LOCALAPPDATA%\Programs\SceneScout</code>; video kopyaları ve
+          indeksler <code>%LOCALAPPDATA%\SceneScout\Data</code> klasöründedir. Güncellemeden önce
+          uygulamayı Ctrl+C ile durdur, yeni kurulum dosyasını çalıştır. Video arşivi korunur.
+          Windows Ayarlar → Uygulamalar üzerinden kaldırınca da veriler tutulur. Kalıcı silmek
+          istersen önce yedekle, sonra veri klasörünü kendin sil.
+        </p>
+        <p>
+          ZIP kullanıyorsan önce çıkart ve <code>Start.cmd</code> dosyasını aç. ZIP arşivi kendi
+          <code>.data</code> klasörünü kullanır; yükseltirken bu klasörü yeni klasöre kopyala. Eski
+          ZIP arşivi otomatik taşınmaz.
+        </p>
+      </details>
+      <details>
+        <summary>Bağlantı çalışmıyor veya arama sonucu zayıf</summary>
+        <p>
+          Tekil, herkese açık YouTube/Shorts ve X videoları desteklenir. Giriş isteyen, özel, canlı
+          veya platformun engellediği içerikler indirilemeyebilir. Elindeki video dosyasını
+          yükleyebilirsin.
+        </p>
+        <p>
+          Görünen nesneleri ve ortamı tarif et. Bu sürüm konuşmayı dinlemez ve özet üretmez.
+          Benzerlik puanı doğruluk yüzdesi değildir. Çok yüksek filtre doğru sonuçları da
+          gizleyebilir.
+        </p>
+      </details>
+    </section>
+    <section id="english" lang="en" aria-labelledby="en-title">
+      <p class="tag">Getting started · Windows 10 / 11, x64</p>
+      <h2 id="en-title">Find the moment you remember.</h2>
+      <p>
+        Add a video, describe a scene, open the result. Images are processed locally. No Python
+        knowledge or API key is required.
+      </p>
+      <ol>
+        <li>
+          <strong>Install:</strong> Open <code>SceneScout-Setup-Windows-x64.exe</code> from the
+          GitHub release. Choose English and finish the wizard. No administrator access is needed.
+        </li>
+        <li>
+          <strong>Launch:</strong> Double-click the <strong>SceneScout</strong> desktop shortcut.
+          Python and dependencies are prepared automatically. The first launch needs internet; keep
+          the launch window open.
+        </li>
+        <li>
+          <strong>Add a video:</strong> Upload a file or paste a public YouTube / X video link. The
+          first video downloads approximately <strong>1.5 GB of model weights</strong>. Wait for
+          <strong>Ready</strong>.
+        </li>
+        <li>
+          <strong>Search:</strong> Try “A rabbit sitting in the grass”. Click a result to jump to
+          that moment. You can also search with a reference image.
+        </li>
+      </ol>
+      <p class="note">
+        The installer copies the app. The first launch prepares its environment. The first video
+        downloads the model. Later launches reuse cached files. Leave several GB of free space. CPU
+        works; initial indexing takes longer.
+      </p>
+      <h3>Everyday use</h3>
+      <p>
+        Keep the launch window open while using the app. Stop with <strong>Ctrl+C</strong> in that
+        window. Closing the browser tab does not stop the server.
+      </p>
+      <p>
+        On a compatible NVIDIA GPU/driver, use <strong>SceneScout - NVIDIA GPU</strong> in the Start
+        menu. It downloads extra packages into a separate environment.
+      </p>
+      <details>
+        <summary>Startup or download failed</summary>
+        <p>
+          Check internet access and disk space, then launch again. Setup logs:
+          <code>%LOCALAPPDATA%\SceneScout\Logs\setup-cpu.log</code> or <code>setup-cuda.log</code>.
+          Remove personal paths and video URLs before sharing a log.
+        </p>
+        <p>
+          If the browser does not open, visit
+          <a href="http://127.0.0.1:8765">127.0.0.1:8765</a> while the app is running.
+        </p>
+      </details>
+      <details>
+        <summary>Updates, data and uninstall</summary>
+        <p>
+          App files: <code>%LOCALAPPDATA%\Programs\SceneScout</code>. Video copies and indexes:
+          <code>%LOCALAPPDATA%\SceneScout\Data</code>. Stop the app with Ctrl+C before running a
+          newer installer. Updates and uninstall preserve your library. Uninstall using Windows
+          Settings → Apps. Back up and delete the data folder yourself if you want to erase it
+          permanently.
+        </p>
+        <p>
+          For the portable ZIP, extract first and open <code>Start.cmd</code>. Its library is in
+          <code>.data</code> inside that folder. Copy it when upgrading. Existing ZIP libraries are
+          not migrated automatically.
+        </p>
+      </details>
+      <details>
+        <summary>Link or search limitations</summary>
+        <p>
+          Single public YouTube/Shorts and X videos are supported. Private, live, login-required or
+          platform-blocked videos may fail. You can upload a local copy instead. Describe visible
+          objects and surroundings. This release searches images, not speech, and does not generate
+          summaries. Similarity is not an accuracy percentage.
+        </p>
+      </details>
+    </section>
+    <footer>
+      <p>
+        <a href="https://github.com/Fatih-Haslak/scenescout/releases/latest">Download / İndir</a> ·
+        <a href="https://github.com/Fatih-Haslak/scenescout/issues"
+          >Report a problem / Sorun bildir</a
+        >
+        · <a href="https://github.com/Fatih-Haslak/scenescout">Source / Kaynak kod</a>
+      </p>
+      <p>SceneScout 0.4.0 · Fatih Haslak · MIT · Model: Google EmbeddingGemma 2</p>
+      <p>
+        The installer is unsigned; Windows may display a publisher warning. / Kurulum dosyası
+        dijital imzalı değildir; Windows yayıncı uyarısı gösterebilir.
+      </p>
+    </footer>
+  </body>
+</html>

@@ -16,3 +16,7 @@ work/
 htmlcov/
 evaluation/media/
 .bootstrap/
+.venv-cpu/
+.venv-cuda/
+Logs/
+.installed

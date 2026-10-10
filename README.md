@@ -4,15 +4,23 @@
 <p align="center"><strong>Find the moment you remember.</strong><br>Private, local visual video search with Google EmbeddingGemma 2.</p>
 <p align="center"><a href="README.tr.md">Türkçe</a> · <a href="#quick-start">Quick start</a> · <a href="docs/architecture.md">Architecture</a> · <a href="docs/evaluation.md">Measured evaluation</a> · <a href="SECURITY.md">Privacy</a></p>
 
+## Install on Windows — recommended
+
+**[Download SceneScout Setup for Windows x64](https://github.com/Fatih-Haslak/scenescout/releases/latest/download/SceneScout-Setup-Windows-x64.exe)** · [All downloads & checksums](https://github.com/Fatih-Haslak/scenescout/releases/latest)
+
+1. Open the installer, choose **English** or **Türkçe**, and finish the wizard.
+2. Double-click the **SceneScout** desktop shortcut. Python and dependencies are set up automatically; no manual Python installation or API key is needed.
+3. Add a video file or public YouTube/X video link. Wait for **Ready**, then describe a scene and open a result.
+
+Windows 10/11 x64. The first launch needs internet and several GB of free space; the first video downloads approximately **1.5 GB of model weights**. Keep the launch window open while using the app; stop with Ctrl+C. CPU is the default. An optional NVIDIA GPU shortcut is in the Start menu.
+
+The installer includes a bilingual offline **getting started guide**, desktop/Start menu shortcuts and an uninstaller. Updates preserve the library. It is unsigned, so Windows may show a publisher warning. [Installation, troubleshooting, data locations and portable/source alternatives](docs/installation.md).
+
 ![SceneScout finding a rabbit scene in a real video](docs/scenescout.jpg)
 
 You remember a scene, not its filename. Add a video, describe what you saw, and jump to the matching moment. Or use a reference image to find a visually similar frame.
 
-**New in v0.3:** paste a public YouTube/Shorts or X/Twitter video link, download it in the background, and search its scenes locally. Includes cancel/retry, source links and H.264 conversion. [Supported links and verified examples](docs/link-imports.md).
-
-**v0.3.1 fixes:** one fresh public HLS attempt after a YouTube HTTP 403, shared audio/video download budgets, Windows progress-file retry, and an optional similarity threshold for text/image search. Low-scoring results can now be hidden, with an explicit empty-result message. Library refreshes share a single polling loop.
-
-**v0.3.2:** stalled HTTP/media requests have a 10-second graceful shutdown deadline before cancellation and application cleanup, so disconnected previews cannot hold the server indefinitely.
+**New in v0.4:** a per-user Windows installer, automatic environment setup, bundled YouTube runtime, bilingual first-use guide and separate CPU/GPU environments. Public YouTube/Shorts and X video imports remain supported. [Link support and verified examples](docs/link-imports.md).
 
 SceneScout uses real embeddings from `google/embeddinggemma-2`. No hosted inference API, generated captions, or canned search result fallback.
 
@@ -34,9 +42,11 @@ This animation combines three real application screenshots. The demo uses a 30-s
 
 ## Quick start
 
-Source installation uses **Python 3.12 or 3.13** and [uv](https://docs.astral.sh/uv/getting-started/installation/). Leave several GB of RAM and disk space free. CPU inference works; indexing is slower than text search.
+For the easiest Windows setup, use the installer above. Prefer a portable folder? Download `SceneScout-0.4.0-Windows-x64.zip` from [the release](https://github.com/Fatih-Haslak/scenescout/releases/latest), **extract it first**, then double-click `Start.cmd`. Open `QUICKSTART.html` for the local guide. Do not launch files inside the ZIP preview.
 
-**Windows without a manual Python setup:** download the [v0.3.2 starter ZIP](https://github.com/Fatih-Haslak/scenescout/releases/tag/v0.3.2), extract it, and double-click `Start.cmd`. It prepares Python, locked dependencies and the YouTube JS runtime automatically. `Start-GPU.cmd` selects CUDA on a supported NVIDIA machine. [Installation details](docs/installation.md).
+### Install from source (developers / macOS / Linux)
+
+Use **Python 3.12 or 3.13** and [uv](https://docs.astral.sh/uv/getting-started/installation/). Leave several GB of RAM and disk space free. CPU inference works; indexing is slower than text search. For YouTube links on macOS/Linux, install Deno or Node 22+; the Windows launcher prepares Deno automatically.
 
 ```sh
 git clone https://github.com/Fatih-Haslak/scenescout.git
@@ -83,7 +93,7 @@ Select CPU with `--extra cpu`, or CUDA 13.0 with `--extra cuda` on a compatible 
 
 ## Evidence you can inspect
 
-74 automated behavioral tests cover link validation, bounded YouTube fallback, shared stream limits, progress-file locks, text/image thresholds, download/conversion/cancellation, interrupted jobs, resumed indexing, connection cleanup, duplicate/invalid imports, search/removal concurrency and safe dtype selection. CI runs on Windows/Linux and Python 3.12/3.13; model-loading tests use explicit doubles to avoid downloading weights in CI. Real-model evaluation is separate.
+76 automated behavioral tests cover link validation, bounded YouTube fallback, shared stream limits, progress-file locks, text/image thresholds, download/conversion/cancellation, interrupted jobs, resumed indexing, connection cleanup, duplicate/invalid imports, search/removal concurrency and safe dtype selection. CI runs on Windows/Linux and Python 3.12/3.13; model-loading tests use explicit doubles to avoid downloading weights in CI. Real-model evaluation is separate.
 
 On a small labelled development set of 3 films / 55 frames / 36 English/Turkish queries, **Hit@1 = 66.7%** and **Hit@5 = 100%** on both measured backends. Warm text-query p50/p95 was **66/73 ms CPU** and **32/34 ms GPU**. These are sample observations, not a general accuracy or speed guarantee. Raw rankings include the 12 first-result misses. [Reproduce the evaluation](docs/evaluation.md).
 

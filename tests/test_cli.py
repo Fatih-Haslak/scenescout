@@ -46,6 +46,7 @@ def test_second_launch_reuses_existing_scenescout(monkeypatch):
                 {
                     "mode": "visual_frames",
                     "model": {"model": "google/embeddinggemma-2"},
+                    "library_id": cli.library_id(),
                 }
             ).encode()
         ),
@@ -61,6 +62,24 @@ def test_second_launch_reuses_existing_scenescout(monkeypatch):
 def test_invalid_launch_options(args):
     with pytest.raises(SystemExit) as error:
         cli.main(args)
+    assert error.value.code == 2
+
+
+@pytest.mark.parametrize("identity", [None, "another-library"])
+def test_second_launch_rejects_old_or_different_library(monkeypatch, identity):
+    monkeypatch.setattr(Probe, "occupied", True)
+    monkeypatch.setattr(cli.socket, "socket", Probe)
+    payload = {"mode": "visual_frames", "model": {"model": "google/embeddinggemma-2"}}
+    if identity is not None:
+        payload["library_id"] = identity
+    monkeypatch.setattr(
+        cli.urllib.request,
+        "urlopen",
+        lambda *args, **kwargs: io.BytesIO(json.dumps(payload).encode()),
+    )
+    monkeypatch.setattr(cli.webbrowser, "open", lambda url: pytest.fail("wrong library opened"))
+    with pytest.raises(SystemExit) as error:
+        cli.main(["--open-browser"])
     assert error.value.code == 2
 
 
