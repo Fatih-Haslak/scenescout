@@ -1,0 +1,19 @@
+name: Bug report
+description: Report a reproducible SceneScout problem
+body:
+  - type: textarea
+    attributes:
+      label: What happened?
+      description: Include reproduction steps and expected behavior. Do not attach private media.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Environment
+      description: OS, Python version, CPU/GPU, SceneScout version and browser.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Relevant log
+      description: Remove private paths, credentials and personal data before sharing.

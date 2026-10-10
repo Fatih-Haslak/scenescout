@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SceneScout API</title>
+    <link rel="icon" href="/static/logo.svg" />
+    <link rel="stylesheet" href="/static/api.css" />
+  </head>
+  <body>
+    <main>
+      <a href="/" class="brand"
+        ><img src="/static/logo.svg" width="30" height="30" alt="" /> SceneScout</a
+      >
+      <h1>A small API for finding a moment.</h1>
+      <p>
+        Local, single-user endpoints. The default server listens at
+        <code>http://127.0.0.1:8765</code>. Your data is processed on this device. These docs work
+        offline.
+      </p>
+      <a href="/openapi.json">Download the OpenAPI schema</a>
+      <h2>Import and library</h2>
+      <dl>
+        <dt><code>GET /api/status</code></dt>
+        <dd>Model state, device, model revision, load time and upload limit.</dd>
+        <dt><code>GET /api/videos</code></dt>
+        <dd>Video metadata, status, indexing progress and elapsed time.</dd>
+        <dt><code>POST /api/videos</code></dt>
+        <dd>
+          Multipart <code>file</code> (MP4/WebM, max 512 MB) and <code>interval</code> (1–30
+          seconds, default 3). Returns HTTP 202 with the video ID. Duplicate content returns the
+          existing ID. Poll the library until status is <code>ready</code>.
+        </dd>
+        <dt><code>DELETE /api/videos/{id}</code></dt>
+        <dd>
+          Remove the imported copy, thumbnails and vectors. Original files remain untouched. Running
+          inference finishes its current frame before cleanup.
+        </dd>
+      </dl>
+      <h2>Search</h2>
+      <pre><code>curl http://127.0.0.1:8765/api/search \
+  -H 'Content-Type: application/json' \
+  -d '{"query":"a rabbit sitting in the grass","limit":12}'</code></pre>
+      <p>
+        Text queries accept optional <code>video_id</code> and <code>limit</code> (1–30). The model
+        applies its <code>SearchQuery</code> prompt. Only complete indexes are searched.
+      </p>
+      <pre><code>{
+  "results": [{
+    "id": "videoid-00006",
+    "video_id": "videoid",
+    "name": "example.mp4",
+    "timestamp": 18.0,
+    "duration": 30.0,
+    "score": 0.7284,
+    "thumbnail": "/api/thumbnails/videoid-00006"
+  }],
+  "elapsed_ms": 58,
+  "searched_frames": 10
+}</code></pre>
+      <p>
+        The response above illustrates the shape of an example response. Scores are cosine
+        similarities, not calibrated confidence or percentages. Timecodes are sampled visual
+        moments.
+      </p>
+      <dl>
+        <dt><code>POST /api/search/image</code></dt>
+        <dd>
+          Multipart <code>file</code> (JPEG/PNG/WebP, max 8 MB, max 20 million pixels) and optional
+          <code>video_id</code>. Search for frames resembling a reference image.
+        </dd>
+      </dl>
+      <h2>Media and timecodes</h2>
+      <dl>
+        <dt><code>GET /api/videos/{id}/media</code></dt>
+        <dd>Video bytes with range-request support for browser seeking.</dd>
+        <dt><code>GET /api/videos/{id}/scenes</code></dt>
+        <dd>Up to 80 evenly spaced filmstrip entries with timestamps and thumbnail URLs.</dd>
+        <dt><code>GET /api/thumbnails/{scene_id}</code></dt>
+        <dd>A local JPEG frame thumbnail.</dd>
+      </dl>
+      <h2>Limits and errors</h2>
+      <p>
+        Videos are limited to two hours and 2,000 sampled frames per import. Increase the sampling
+        interval for longer recordings. Error bodies have a <code>detail</code> field. Indexing
+        errors appear on the video record. Search inference errors return HTTP 503. External hosts
+        and cross-origin requests return HTTP 403.
+      </p>
+      <p>
+        Audio, transcripts, action recognition and hosted authentication are outside the current
+        release. Do not expose the server to the internet.
+      </p>
+      <footer>
+        <a href="/">Back to your library</a> ·
+        <a href="https://github.com/Fatih-Haslak/scenescout">Source on GitHub</a>
+      </footer>
+    </main>
+  </body>
+</html>

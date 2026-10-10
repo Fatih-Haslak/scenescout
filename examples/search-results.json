@@ -1,0 +1,45 @@
+{
+  "query": "Çimenlerde oturan bir tavşan",
+  "model": "google/embeddinggemma-2",
+  "exported_at": "2026-10-10T16:47:40.497Z",
+  "results": [
+    {
+      "id": "f7dd393b56494819863f9aa6d190f036-00006",
+      "video_id": "f7dd393b56494819863f9aa6d190f036",
+      "name": "demo.mp4",
+      "timestamp": 18,
+      "duration": 30,
+      "score": 0.7294,
+      "thumbnail": "/api/thumbnails/f7dd393b56494819863f9aa6d190f036-00006"
+    },
+    {
+      "id": "f7dd393b56494819863f9aa6d190f036-00008",
+      "video_id": "f7dd393b56494819863f9aa6d190f036",
+      "name": "demo.mp4",
+      "timestamp": 24,
+      "duration": 30,
+      "score": 0.7137,
+      "thumbnail": "/api/thumbnails/f7dd393b56494819863f9aa6d190f036-00008"
+    },
+    {
+      "id": "f7dd393b56494819863f9aa6d190f036-00003",
+      "video_id": "f7dd393b56494819863f9aa6d190f036",
+      "name": "demo.mp4",
+      "timestamp": 9,
+      "duration": 30,
+      "score": 0.6689,
+      "thumbnail": "/api/thumbnails/f7dd393b56494819863f9aa6d190f036-00003"
+    },
+    {
+      "id": "f7dd393b56494819863f9aa6d190f036-00000",
+      "video_id": "f7dd393b56494819863f9aa6d190f036",
+      "name": "demo.mp4",
+      "timestamp": 0,
+      "duration": 30,
+      "score": 0.6611,
+      "thumbnail": "/api/thumbnails/f7dd393b56494819863f9aa6d190f036-00000"
+    }
+  ],
+  "elapsed_ms": 61,
+  "searched_frames": 10
+}
