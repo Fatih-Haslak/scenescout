@@ -1,0 +1,21 @@
+name: Source checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python -m pip install ruff==0.17.0
+      - run: ruff check src examples
+      - run: ruff format --check src examples
+      - run: python -m compileall -q src examples
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check src/scenescout/static/app.js
+      - run: npx --yes prettier@3.9.10 --check "src/scenescout/static/*.{js,css,html}"

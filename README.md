@@ -81,7 +81,7 @@ curl http://127.0.0.1:8765/api/search \
   -d '{"query":"a rabbit sitting in the grass","limit":12}'
 ```
 
-FastAPI, SQLite, NumPy and OpenCV power the backend. Plain JavaScript and CSS ship inside the Python wheel; no frontend build or Node installation is needed. [Architecture and tradeoffs](docs/architecture.md).
+FastAPI, SQLite, NumPy and OpenCV power the backend. Plain JavaScript and CSS ship inside the Python wheel; no frontend build or Node installation is needed. [Architecture and tradeoffs](docs/architecture.md). [Local source checks and optional CI template](docs/source-checks.md).
 
 ## Current limits
 
