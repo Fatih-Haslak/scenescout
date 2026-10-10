@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "scenescout"
-version = "0.2.0"
+version = "0.3.0"
 description = "Find the moment you remember. Local visual video search with EmbeddingGemma 2."
 readme = "README.md"
 requires-python = ">=3.12,<3.14"
@@ -15,6 +15,7 @@ dependencies = [
   "numpy>=2.2,<3", "pillow>=11,<13", "opencv-python-headless>=4.11,<6",
   "sentence-transformers==6.1.0", "transformers==5.19.0",
   "torch==2.14.1", "torchvision==0.29.1",
+  "yt-dlp[default]==2026.8.19", "imageio-ffmpeg>=0.6,<1",
 ]
 
 [project.scripts]

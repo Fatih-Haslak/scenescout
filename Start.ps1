@@ -23,6 +23,15 @@ try {
     Write-Host 'Python ve bagimliliklar otomatik hazirlaniyor. Ilk acilis internet gerektirir.'
     & $uvPath sync --frozen --no-dev --extra $Backend
     if ($LASTEXITCODE -ne 0) { throw 'Dependency setup failed. Check internet access and free disk space.' }
+    $denoPath = Join-Path $bootstrapDir 'deno.exe'
+    if (-not (Test-Path -LiteralPath $denoPath)) {
+        Write-Host 'Preparing YouTube link support / YouTube baglanti destegi hazirlaniyor...'
+        $denoArchive = Join-Path $bootstrapDir 'deno.zip'
+        Invoke-WebRequest -UseBasicParsing -Uri 'https://github.com/denoland/deno/releases/download/v2.9.7/deno-x86_64-pc-windows-msvc.zip' -OutFile $denoArchive
+        $denoHash = (Get-FileHash -LiteralPath $denoArchive -Algorithm SHA256).Hash.ToLowerInvariant()
+        if ($denoHash -ne 'a0c3101b4158d1dfb7d6a78a7bf0f3de80c96bb423c152beec8beb22786f2238') { throw 'YouTube runtime checksum mismatch. Please retry.' }
+        Expand-Archive -LiteralPath $denoArchive -DestinationPath $bootstrapDir -Force
+    }
     if ($SetupOnly) { Write-Host 'SceneScout setup complete.'; exit 0 }
     & $uvPath run --frozen --no-dev --extra $Backend scenescout --open-browser --port $Port
     exit $LASTEXITCODE

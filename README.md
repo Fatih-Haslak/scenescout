@@ -8,6 +8,8 @@
 
 You remember a scene, not its filename. Add a video, describe what you saw, and jump to the matching moment. Or use a reference image to find a visually similar frame.
 
+**New in v0.3:** paste a public YouTube/Shorts or X/Twitter video link, download it in the background, and search its scenes locally. Includes cancel/retry, source links and H.264 conversion. [Supported links and verified examples](docs/link-imports.md).
+
 SceneScout uses real embeddings from `google/embeddinggemma-2`. No hosted inference API, generated captions, or canned search result fallback.
 
 ## See it work
@@ -30,7 +32,7 @@ This animation combines three real application screenshots. The demo uses a 30-s
 
 Source installation uses **Python 3.12 or 3.13** and [uv](https://docs.astral.sh/uv/getting-started/installation/). Leave several GB of RAM and disk space free. CPU inference works; indexing is slower than text search.
 
-**Windows without a manual Python setup:** download the [v0.2.0 starter ZIP](https://github.com/Fatih-Haslak/scenescout/releases/tag/v0.2.0), extract it, and double-click `Start.cmd`. It prepares Python and dependencies automatically. `Start-GPU.cmd` selects CUDA on a supported NVIDIA machine. [Installation details](docs/installation.md).
+**Windows without a manual Python setup:** download the [v0.3.0 starter ZIP](https://github.com/Fatih-Haslak/scenescout/releases/tag/v0.3.0), extract it, and double-click `Start.cmd`. It prepares Python, locked dependencies and the YouTube JS runtime automatically. `Start-GPU.cmd` selects CUDA on a supported NVIDIA machine. [Installation details](docs/installation.md).
 
 ```sh
 git clone https://github.com/Fatih-Haslak/scenescout.git
@@ -77,7 +79,7 @@ Select CPU with `--extra cpu`, or CUDA 13.0 with `--extra cuda` on a compatible 
 
 ## Evidence you can inspect
 
-40 automated behavioral tests cover interrupted jobs, resumed indexing, connection cleanup, duplicate/invalid imports, search/removal concurrency and safe dtype selection. CI runs on Windows/Linux and Python 3.12/3.13; model-loading tests use explicit doubles to avoid downloading weights in CI. Real-model evaluation is separate.
+66 automated behavioral tests cover link validation, download/conversion/cancellation, interrupted jobs, resumed indexing, connection cleanup, duplicate/invalid imports, search/removal concurrency and safe dtype selection. CI runs on Windows/Linux and Python 3.12/3.13; model-loading tests use explicit doubles to avoid downloading weights in CI. Real-model evaluation is separate.
 
 On a small labelled development set of 3 films / 55 frames / 36 English/Turkish queries, **Hit@1 = 66.7%** and **Hit@5 = 100%** on both measured backends. Warm text-query p50/p95 was **66/73 ms CPU** and **32/34 ms GPU**. These are sample observations, not a general accuracy or speed guarantee. Raw rankings include the 12 first-result misses. [Reproduce the evaluation](docs/evaluation.md).
 

@@ -1,0 +1,22 @@
+# YouTube and X/Twitter video links
+
+Choose **Import a link / Bağlantıdan ekle**, paste a public single-video URL, and click **Import video / Videoyu içe aktar**. The sidebar shows downloading and preparing status; the completed video joins the existing indexing queue. Search when the video is ready. The source button opens the original platform post. JSON result exports also preserve `source_url`.
+
+Supported inputs: HTTPS YouTube `watch?v=`, `youtu.be`, Shorts and archived `/live/` video URLs; X/Twitter `/user/status/id`, `/i/web/status/id` and `/video/n` links. Tracking parameters are stripped; YouTube playlist parameters do not import the playlist. A multi-video X post without `/video/n` imports its first video. Generic websites, local/IP URLs, embedded credentials and non-standard ports are rejected before networking.
+
+The locked downloader is yt-dlp 2026.08.19 with its packaged EJS helper. Only YouTube, Twitter and the Twitter card/amplify delegates are enabled; arbitrary extractors, user plugins and remotely downloaded EJS components are disabled. No browser cookies, account credentials or login flows are used. Deno or Node 22+ enables YouTube extraction. Windows `Start.cmd` installs official Deno 2.9.7 into `.bootstrap`, verifies its pinned ZIP SHA-256, and leaves global system settings unchanged. Source installations on other OSes should install Deno from its [official instructions](https://docs.deno.com/runtime/getting_started/installation/). See [yt-dlp runtime documentation](https://github.com/yt-dlp/yt-dlp/wiki/EJS).
+
+Downloads select up to 720p and are bounded to 512 MB. Bundled `imageio-ffmpeg` converts the finished download to H.264/AAC MP4, preserving optional audio for playback. Audio is **not indexed or transcribed**. Existing limits remain: 2 hours and 2,000 sampled frames; choose a wider frame interval for long videos. Up to five downloads may be queued, with one download/conversion worker. Each stage times out after 15 minutes. Cancel stops its subprocess tree and cleans the temporary copy; a video already published to the library is removed separately.
+
+Jobs persist in SQLite. Restart turns interrupted jobs into paused jobs; retry downloads again from the beginning. Imported videos retain normal frame-checkpoint resume. Temporary download/conversion files are removed after completion/failure/cancel and on restart. Video copies and source URLs stay in the local library until removed. Import downloads contact the platform/CDN, revealing the normal request IP and video address to it; image/text inference stays local. Import videos you own or have permission to use.
+
+Private, deleted, age-restricted, paid/DRM, live and sign-in-only content are unsupported. Public videos may still fail because of platform changes, regional availability or network restrictions. The UI exposes a retryable error and file-upload fallback. No claim that every YouTube/X video works is made.
+
+## Live observations on 2026-10-10
+
+- [Blender Foundation's Big Buck Bunny on YouTube](https://www.youtube.com/watch?v=YE7VzlLtp-4): downloaded successfully using the actual locked downloader and a supported JS runtime.
+- Later repeat attempts of that YouTube URL returned HTTP 403 after starting the download, including with the Windows-installed Deno runtime. The app retained an error/retry state and cleaned temporary media. The successful first download does not establish reliable repeated YouTube availability on this network.
+- [NASA Artemis / Orion control screens on X](https://x.com/NASAArtemis/status/2040619776100147411): imported through the actual browser form, converted to a 1,882,040-byte MP4, indexed using real EmbeddingGemma 2 on CUDA; 18.252 seconds, 7 frames at 3-second intervals. Turkish visual search and local playback were checked separately.
+- An old 2015 NASA tweet delegated to an unavailable `amp.twimg.com` resource and failed. The failure path preserved a retryable error; using the current example succeeded. Public availability is not universal.
+
+These are integration observations, not general platform availability or semantic accuracy measurements. Raw downloaded videos, credentials and CDN metadata are excluded from Git and release archives. Automated tests use explicit downloader doubles for deterministic platform-independent behavior and run a real small-video ffmpeg conversion; public-network checks are separate from CI.

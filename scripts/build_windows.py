@@ -30,7 +30,9 @@ def main():
         .decode()
         .split("\0")
     )
-    destination = ROOT / "dist" / "SceneScout-0.2.0-Windows-x64.zip"
+    from scenescout import __version__
+
+    destination = ROOT / "dist" / f"SceneScout-{__version__}-Windows-x64.zip"
     destination.parent.mkdir(exist_ok=True)
     with zipfile.ZipFile(destination, "w", compression=zipfile.ZIP_DEFLATED) as out:
         for name in sorted(set(files)):

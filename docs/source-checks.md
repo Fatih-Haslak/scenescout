@@ -1,6 +1,6 @@
 # Checks and verification
 
-v0.2 includes 40 automated behavioral tests, 89.1% observed line coverage on Windows Python 3.13.9, and a CI coverage floor of 80%. Coverage measures exercised lines, not model quality or correctness guarantees. Tests use isolated temporary libraries; they do not modify the user's `.data`. They cover connection closure/rollback, atomic checkpoints, restart/removal recovery, resume without repeating committed frames, cancelled queued jobs, corrupt media, duplicate/invalid uploads, local request guards, inference failures, stale deletion/search results, temporal diversity, cache invalidation, launch options and BF16/FP32 selection.
+v0.3 includes 66 automated behavioral tests, 88.3% observed line coverage on Windows Python 3.13.9, and a CI coverage floor of 80%. Coverage measures exercised lines, not model quality or correctness guarantees. Tests use isolated temporary libraries; they do not modify the user's `.data`. They cover link canonicalization and rejected hosts/credentials, download queue limits, actual ffmpeg conversion, subprocess cancellation/timeout, retry/removal recovery, connection closure/rollback, atomic checkpoints, resume without repeating committed frames, corrupt media, duplicate/invalid uploads, local request guards, inference failures, stale deletion/search results, temporal diversity, cache invalidation, launch options and BF16/FP32 selection.
 
 ```sh
 uv sync --frozen --extra cpu --group dev
@@ -18,5 +18,7 @@ The [Checks workflow](https://github.com/Fatih-Haslak/scenescout/actions/workflo
 CI avoids model downloads by using explicit test doubles for inference; small generated media still exercises actual OpenCV decoding. [Separate evaluation](evaluation.md) records real CPU/CUDA model inference, labelled queries and scaling.
 
 The Windows starter package was extracted into a separate writable folder with only managed Python allowed. It downloaded Python 3.13.16, installed locked CPU dependencies, started the server and served its API/UI. This checks the Python bootstrap path on Windows x64, not every Windows machine or security-software configuration.
+
+The v0.3 starter package was also extracted separately: managed Python 3.13.16 installed 65 production dependencies and the launcher downloaded official Deno 2.9.7. Its ZIP hash matched the pinned checksum and the executable reported the expected version. Real-platform observations, including YouTube repeat-download HTTP 403 and successful X import/search, are recorded in [link-imports.md](link-imports.md).
 
 Actual browser verification also imported a full licensed film, stopped the app during indexing, reopened the library with 56/199 saved frames, clicked the resume action, and reached `ready` at 199 frames. [Paused UI evidence](resume-paused.jpg). A separate Turkish query selected the rabbit at 00:18 with real GPU inference. The paused and resumed states are backed by persisted model embeddings, not injected UI state.

@@ -1,6 +1,6 @@
 import pytest
 
-from scenescout import api, indexer, store
+from scenescout import api, indexer, store, imports
 from scenescout.retrieval import retrieval
 
 
@@ -9,6 +9,7 @@ def library(tmp_path, monkeypatch):
     monkeypatch.setattr(store, "DATA_DIR", tmp_path)
     monkeypatch.setattr(api, "DATA_DIR", tmp_path)
     monkeypatch.setattr(indexer, "DATA_DIR", tmp_path)
+    monkeypatch.setattr(imports, "DATA_DIR", tmp_path)
     store.initialize()
     retrieval.cached_generation = -1
     return tmp_path

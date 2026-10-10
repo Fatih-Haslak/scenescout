@@ -20,6 +20,8 @@ from . import store
 from .config import DATA_DIR, MAX_UPLOAD_BYTES, STATIC_DIR
 from .encoder import encoder
 from .indexer import indexer
+from .imports import importer
+from . import imports
 from .retrieval import retrieval, rank
 
 logger = logging.getLogger(__name__)
@@ -28,13 +30,15 @@ logger = logging.getLogger(__name__)
 @asynccontextmanager
 async def lifespan(app):
     store.initialize()
+    imports.initialize()
     yield
+    importer.shutdown()
     indexer.shutdown()
 
 
 app = FastAPI(
     title="SceneScout",
-    version="0.2.0",
+    version="0.3.0",
     lifespan=lifespan,
     description="Local visual video search using Google EmbeddingGemma 2.",
     docs_url=None,
@@ -74,7 +78,7 @@ def status():
     return {
         "model": encoder.status(),
         "max_upload_mb": MAX_UPLOAD_BYTES // (1024 * 1024),
-        "version": "0.2.0",
+        "version": "0.3.0",
         "mode": "visual_frames",
     }
 
@@ -82,6 +86,42 @@ def status():
 @app.get("/api/videos")
 def list_videos():
     return store.videos()
+
+
+class LinkRequest(BaseModel):
+    url: str = Field(min_length=1, max_length=2048)
+    interval: float = Field(default=3.0, ge=1, le=30, allow_inf_nan=False)
+
+
+@app.get("/api/imports")
+def link_imports():
+    return imports.jobs()
+
+
+@app.post("/api/imports", status_code=202)
+def import_link(body: LinkRequest):
+    try:
+        return importer.create(body.url, body.interval)
+    except ValueError as exc:
+        raise HTTPException(400, str(exc)) from exc
+
+
+@app.post("/api/imports/{job_id}/retry", status_code=202)
+def retry_import(job_id: str):
+    item = imports.job(job_id)
+    if not item:
+        raise HTTPException(404, "Import not found")
+    if item["status"] not in {"error", "paused"} or not importer.submit(job_id):
+        raise HTTPException(409, "Only interrupted or failed link imports can be retried.")
+    return {"id": job_id, "status": "queued"}
+
+
+@app.delete("/api/imports/{job_id}", status_code=202)
+def cancel_import(job_id: str):
+    if not imports.job(job_id):
+        raise HTTPException(404, "Import not found")
+    importer.remove(job_id)
+    return {"status": "removing"}
 
 
 @app.post("/api/videos", status_code=202)

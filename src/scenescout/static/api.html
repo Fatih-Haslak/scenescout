@@ -21,6 +21,30 @@
       <a href="/openapi.json">Download the OpenAPI schema</a>
       <h2>Import and library</h2>
       <dl>
+        <dt><code>POST /api/imports</code></dt>
+        <dd>
+          JSON <code>{"url":"https://www.youtube.com/watch?v=YE7VzlLtp-4","interval":3}</code>.
+          Accepts HTTPS YouTube videos/Shorts and X/Twitter posts. Returns 202 with a download job
+          ID, or an existing video ID. Only public single videos; no cookies, live streams,
+          playlists or sign-in. Downloads are capped at 720p/512 MB and converted to H.264 MP4
+          before indexing.
+        </dd>
+        <dt><code>GET /api/imports</code></dt>
+        <dd>
+          Poll the last 20 link imports: queued, downloading, converting, completed, error or
+          paused. Completed records include <code>video_id</code>; poll that video until ready.
+          Restart preserves interrupted jobs for retry.
+        </dd>
+        <dt><code>POST /api/imports/{id}/retry</code></dt>
+        <dd>
+          Retry an error/paused download from the beginning. Returns 202; active/completed jobs
+          return 409.
+        </dd>
+        <dt><code>DELETE /api/imports/{id}</code></dt>
+        <dd>
+          Cancel/dismiss a download job and clean its temporary files. An already imported video
+          remains in the library; remove that video separately.
+        </dd>
         <dt><code>GET /api/status</code></dt>
         <dd>Model state, device, model revision, load time and upload limit.</dd>
         <dt><code>GET /api/videos</code></dt>

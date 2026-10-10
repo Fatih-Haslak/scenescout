@@ -127,6 +127,45 @@ button:hover:not(:disabled) {
   font-size: 12px;
   padding: 14px 2px 22px;
 }
+.link-button {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: white;
+  color: var(--blue);
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.link-job {
+  background: #f5f7fb;
+  border-radius: 6px;
+}
+#link-dialog label {
+  display: block;
+  font-weight: 600;
+  margin-top: 20px;
+}
+#link-url {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+}
+#link-dialog .link-note {
+  font-size: 12px;
+  line-height: 1.6;
+}
+#link-dialog .import-button {
+  width: auto;
+}
+.viewer-caption #source-link {
+  font-size: 12px;
+  text-decoration: none;
+  white-space: nowrap;
+}
 .sampling select {
   background: var(--paper);
   border: 1px solid var(--line);

@@ -4,10 +4,30 @@ const translations = {
   en: {
     library: "Your library",
     addVideo: "Add videos",
+    addLink: "Import a link",
+    linkTitle: "Import from YouTube or X",
+    linkHelp:
+      "Paste a public video link. SceneScout downloads a copy and makes its scenes searchable on your device.",
+    videoLink: "Video link",
+    linkLimits:
+      "Single videos only · up to 512 MB · no live streams or sign-in. Import videos you own or have permission to use. Speech and summaries are not searched.",
+    startLink: "Import video",
+    openSource: "Open source",
+    linkQueued: "Link queued for download.",
+    downloadQueued: "Waiting to download",
+    downloading: "Downloading",
+    converting: "Preparing video",
+    importError: "Link could not be imported",
+    platformError:
+      "The platform did not allow the download. Try a public video, retry later, or upload the video file.",
+    importPaused: "Download interrupted",
+    retryLink: "Retry download",
+    cancelLink: "Cancel / dismiss import",
     sampleEvery: "Sample every",
     allVideos: "All videos",
     local: "Processed on your device",
-    privacy: "Your videos stay here. No account. No cloud upload.",
+    privacy:
+      "Analysis stays on this device. Links contact their platforms to download videos. No cloud upload.",
     apiDocs: "Developer API",
     workspace: "Video search workspace",
     headline: "Find the moment.\nKeep the story.",
@@ -87,10 +107,30 @@ const translations = {
   tr: {
     library: "Video kitaplığın",
     addVideo: "Video ekle",
+    addLink: "Bağlantıdan ekle",
+    linkTitle: "YouTube veya X’ten video ekle",
+    linkHelp:
+      "Herkese açık bir video bağlantısı yapıştır. SceneScout videoyu indirir ve sahnelerini cihazında aranabilir yapar.",
+    videoLink: "Video bağlantısı",
+    linkLimits:
+      "Tekil video · en fazla 512 MB · canlı yayın ve hesap girişi desteklenmez. Kendine ait veya kullanma iznin olan videoları ekle. Konuşmalarda arama ve yazılı özet yoktur.",
+    startLink: "Videoyu içe aktar",
+    openSource: "Kaynağı aç",
+    linkQueued: "Bağlantı indirme sırasına eklendi.",
+    downloadQueued: "İndirme sırasında",
+    downloading: "İndiriliyor",
+    converting: "Video hazırlanıyor",
+    importError: "Bağlantı içe aktarılamadı",
+    platformError:
+      "Platform indirmeye izin vermedi. Herkese açık bir video dene, daha sonra yeniden dene veya video dosyasını yükle.",
+    importPaused: "İndirme yarım kaldı",
+    retryLink: "İndirmeyi yeniden dene",
+    cancelLink: "İçe aktarmayı iptal et / kaldır",
     sampleEvery: "Kare aralığı",
     allVideos: "Tüm videolar",
     local: "Cihazında işlenir",
-    privacy: "Videolar burada kalır. Hesap gerekmez. Buluta yüklenmez.",
+    privacy:
+      "Analiz cihazında yapılır. Bağlantıdan indirme sırasında ilgili platforma bağlanılır. Buluta yüklenmez.",
     apiDocs: "Geliştirici API’si",
     workspace: "Video arama alanı",
     headline: "O anı bul.\nHikâyeni tamamla.",
@@ -175,6 +215,7 @@ if (!translations[lang]) lang = "en";
 const t = (key) => translations[lang][key] || key;
 const state = {
   videos: [],
+  imports: [],
   scope: null,
   preview: null,
   results: null,
@@ -279,6 +320,70 @@ function renderLibrary() {
   const focused = document.activeElement?.dataset.libraryKey;
   list.replaceChildren();
   $("video-count").textContent = state.videos.length;
+  state.imports
+    .filter((item) => !["completed", "removing"].includes(item.status))
+    .forEach((item) => {
+      const row = el("div", "library-item link-job");
+      const text = el("button", "library-select");
+      text.dataset.libraryKey = `${item.id}:import`;
+      text.append(el("strong", null, item.title || new URL(item.url).hostname));
+      const key =
+        item.status === "queued"
+          ? "downloadQueued"
+          : item.status === "error"
+            ? "importError"
+            : item.status === "paused"
+              ? "importPaused"
+              : item.status;
+      text.append(
+        el(
+          "small",
+          null,
+          `${t(key)}${item.downloaded ? ` · ${(item.downloaded / 1024 / 1024).toFixed(1)} MB` : ""}`,
+        ),
+      );
+      text.title = item.error || item.url;
+      text.onclick = () =>
+        notice(
+          item.error?.startsWith("Platform refused") ? t("platformError") : item.error || item.url,
+          item.status === "error",
+        );
+      const actions = el("div", "library-actions");
+      if (["error", "paused"].includes(item.status)) {
+        const retry = el("button", "resume-button", "↻");
+        retry.dataset.libraryKey = `${item.id}:retry`;
+        retry.title = t("retryLink");
+        retry.setAttribute("aria-label", t("retryLink"));
+        retry.onclick = async () => {
+          retry.disabled = true;
+          try {
+            await api(`/api/imports/${item.id}/retry`, { method: "POST" });
+            notice(t("linkQueued"));
+          } catch (error) {
+            notice(error.message, true);
+            retry.disabled = false;
+          }
+        };
+        actions.append(retry);
+      }
+      const cancel = el("button", "remove-button", "×");
+      cancel.dataset.libraryKey = `${item.id}:cancel`;
+      cancel.setAttribute("aria-label", t("cancelLink"));
+      cancel.onclick = async () => {
+        cancel.disabled = true;
+        try {
+          await api(`/api/imports/${item.id}`, { method: "DELETE" });
+          state.imports = state.imports.filter((job) => job.id !== item.id);
+          renderLibrary();
+        } catch (error) {
+          notice(error.message, true);
+          cancel.disabled = false;
+        }
+      };
+      actions.append(cancel);
+      row.append(text, actions);
+      list.append(row);
+    });
   state.videos.forEach((video) => {
     const row = el("div", "library-item" + (state.scope === video.id ? " selected" : ""));
     const select = el("button", "library-select");
@@ -338,10 +443,15 @@ function renderLibrary() {
 }
 async function refresh() {
   try {
-    const [videos, status] = await Promise.all([api("/api/videos"), api("/api/status")]);
+    const [videos, status, imports] = await Promise.all([
+      api("/api/videos"),
+      api("/api/status"),
+      api("/api/imports"),
+    ]);
     state.videos = videos;
+    state.imports = imports;
     state.model = status.model;
-    const signature = JSON.stringify(videos);
+    const signature = JSON.stringify([videos, imports]);
     if (signature !== state.librarySignature) {
       state.librarySignature = signature;
       renderLibrary();
@@ -375,12 +485,15 @@ function clearPreview() {
   $("viewer-badge").hidden = true;
   $("current-name").textContent = t("noSelection");
   $("copy-time").disabled = true;
+  $("source-link").hidden = true;
   $("filmstrip").replaceChildren(el("div", "empty-strip", t("stripEmpty")));
   $("timeline-info").textContent = t("timelineEmpty");
 }
 async function showVideo(videoId, timestamp) {
   const item = state.videos.find((v) => v.id === videoId);
   if (!item) return;
+  $("source-link").hidden = !item.source_url;
+  if (item.source_url) $("source-link").href = item.source_url;
   const player = $("player");
   if (state.preview !== videoId) {
     state.preview = videoId;
@@ -595,6 +708,34 @@ $("video-input").onchange = async () => {
   }
 };
 $("import-button").onclick = () => $("video-input").click();
+$("link-button").onclick = () => $("link-dialog").showModal();
+$("close-link").onclick = () => $("link-dialog").close();
+$("link-form").onsubmit = async (event) => {
+  event.preventDefault();
+  $("submit-link").disabled = true;
+  try {
+    const result = await api("/api/imports", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        url: $("link-url").value.trim(),
+        interval: Number($("interval").value),
+      }),
+    });
+    $("link-dialog").close();
+    $("link-url").value = "";
+    notice(t(result.duplicate ? "duplicate" : "linkQueued"));
+    state.imports = await api("/api/imports");
+    state.videos = await api("/api/videos");
+    renderLibrary();
+    if (result.video_id) await showVideo(result.video_id, 0);
+  } catch (error) {
+    $("link-dialog").close();
+    notice(error.message, true);
+  } finally {
+    $("submit-link").disabled = false;
+  }
+};
 $("empty-import").onclick = () => $("video-input").click();
 $("reference-button").onclick = () => $("reference-input").click();
 $("reference-input").onchange = () => {
@@ -694,7 +835,8 @@ document.addEventListener("keydown", (event) => {
     !event.metaKey &&
     !event.altKey &&
     !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName) &&
-    !$("remove-dialog").open
+    !$("remove-dialog").open &&
+    !$("link-dialog").open
   ) {
     event.preventDefault();
     $("query").focus();

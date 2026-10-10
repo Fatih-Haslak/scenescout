@@ -7,6 +7,8 @@ SceneScout is a single-user loopback HTTP server with a static browser UI. Its d
 | `api.py` | Validation, streamed upload, library, search and media endpoints |
 | `encoder.py` | Lazy model load, pinned revision, serialized inference, dtype and vector checks |
 | `indexer.py` | Single background worker, batch frame sampling, checkpoints, resume and cancellation |
+| `imports.py` | Persistent public-link queue, cancellable subprocesses, conversion and publication |
+| `link_download.py` | Isolated fixed yt-dlp extractors, size/duration filters and progress protocol |
 | `retrieval.py` | Exact cosine ranking, temporal diversity and generation-based vector cache |
 | `store.py` | SQLite lifecycle, connection ownership and metadata |
 | `config.py` | Paths, model identity and resource limits |
@@ -15,6 +17,8 @@ SceneScout is a single-user loopback HTTP server with a static browser UI. Its d
 ## Import lifecycle
 
 Uploads stream to server-generated filenames while computing SHA-256. Content hashes deduplicate imports. Display names never determine storage paths.
+
+Link jobs persist separately from videos. A single import worker launches a restricted yt-dlp subprocess, validates the downloaded media, converts it to H.264, and publishes it with content-hash deduplication before handing it to the existing indexer. No video is exposed until download/conversion finishes. Cancellation serializes with publication and terminates the owned process tree. Queued/downloading/converting jobs become paused on restart; retry starts download again. See [link-imports.md](link-imports.md).
 
 OpenCV reads duration and samples one image per interval. The worker bounds image dimensions and encodes small batches (default 2). Thumbnail files are written before vectors and progress commit together in one transaction. Resume skips committed frames with existing thumbnails and repairs missing thumbnails by re-encoding the affected frame. A crash can discard the in-flight batch; already committed frames survive.
 
@@ -52,4 +56,4 @@ Offline HTML docs and an OpenAPI schema expose the API. Browser cross-origin req
 
 Source lint/format, Python compilation, JavaScript syntax and distribution packaging are checked. The app walkthrough used a real model and licensed video for import, indexing, English/Turkish search, image search, timecode seeking and export. Screenshots are from the running app.
 
-40 automated behavioral tests cover persistence, restart/removal recovery, resume checkpoints, invalid uploads, duplicates, local boundaries, model failures, stale search results, ranking, cache invalidation, launch behavior and dtype safety. Model tests use explicit doubles; they do not prove real-model quality. Separate real CPU/CUDA inference measurements, labelled development queries, a full-film index and synthetic vector scaling are documented in [evaluation.md](evaluation.md). Hosted CI covers Windows/Linux and Python 3.12/3.13. macOS real inference remains unverified.
+66 automated behavioral tests cover link imports, actual conversion, cancellation, persistence, restart/removal recovery, resume checkpoints, invalid uploads, duplicates, local boundaries, model failures, stale search results, ranking, cache invalidation, launch behavior and dtype safety. Model tests use explicit doubles; they do not prove real-model quality. Separate real CPU/CUDA inference measurements, labelled development queries, a full-film index and synthetic vector scaling are documented in [evaluation.md](evaluation.md). Hosted CI covers Windows/Linux and Python 3.12/3.13. macOS real inference remains unverified.

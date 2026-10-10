@@ -29,6 +29,7 @@ def rank(rows, matrix, vector, limit=12):
                 "duration": row["duration"],
                 "score": round(float(scores[index]), 4),
                 "thumbnail": f"/api/thumbnails/{row['id']}",
+                "source_url": row.get("source_url"),
             }
         )
         if len(picked) == limit:
@@ -50,7 +51,7 @@ class Retrieval:
                 with store.connection() as db:
                     rows = list(
                         db.execute(
-                            """SELECT s.id,s.video_id,s.timestamp,s.vector,v.name,v.duration,v.interval
+                            """SELECT s.id,s.video_id,s.timestamp,s.vector,v.name,v.duration,v.interval,v.source_url
                         FROM scenes s JOIN videos v ON v.id=s.video_id
                         WHERE v.status='ready' ORDER BY s.video_id,s.timestamp"""
                         )

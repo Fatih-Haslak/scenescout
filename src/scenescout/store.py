@@ -57,7 +57,20 @@ def initialize():
                 FOREIGN KEY(video_id) REFERENCES videos(id) ON DELETE CASCADE
             );
             CREATE INDEX IF NOT EXISTS scenes_video ON scenes(video_id);
+            CREATE TABLE IF NOT EXISTS imports (
+                id TEXT PRIMARY KEY, url TEXT NOT NULL, interval REAL NOT NULL,
+                status TEXT NOT NULL DEFAULT 'queued', downloaded INTEGER DEFAULT 0,
+                title TEXT, video_id TEXT, error TEXT,
+                created TEXT DEFAULT CURRENT_TIMESTAMP
+            );
         """)
+        columns = {row["name"] for row in db.execute("PRAGMA table_info(videos)")}
+        if "source_url" not in columns:
+            db.execute("ALTER TABLE videos ADD COLUMN source_url TEXT")
+        db.execute(
+            "UPDATE imports SET status='paused', error='Interrupted. Retry the link import.' "
+            "WHERE status IN ('queued','downloading','converting')"
+        )
         db.execute(
             """UPDATE videos SET status='paused', error=?
                       WHERE status IN ('queued','indexing')""",

@@ -21,6 +21,7 @@
         <h2 data-i18n="library">Your library</h2>
         <span id="video-count" class="count">0</span>
       </div>
+      <button class="link-button" id="link-button" data-i18n="addLink">Import a link</button>
       <button class="import-button" id="import-button">
         <span aria-hidden="true">＋</span><span data-i18n="addVideo">Add videos</span>
       </button>
@@ -143,6 +144,15 @@
             <button class="quiet-button" id="copy-time" disabled data-i18n="copyTime">
               Copy timecode
             </button>
+            <a
+              id="source-link"
+              class="quiet-button"
+              target="_blank"
+              rel="noopener noreferrer"
+              hidden
+              data-i18n="openSource"
+              >Open source</a
+            >
           </div>
           <div class="timeline-head">
             <h3 data-i18n="filmstrip">At a glance</h3>
@@ -196,9 +206,39 @@
       <footer>
         <span data-i18n="footer"
           >Built for the scenes you remember, not the filenames you forgot.</span
-        ><span>SceneScout v0.2</span>
+        ><span>SceneScout v0.3</span>
       </footer>
     </main>
+    <dialog id="link-dialog">
+      <form id="link-form">
+        <h2 data-i18n="linkTitle">Import from YouTube or X</h2>
+        <p data-i18n="linkHelp">
+          Paste a public video link. SceneScout downloads a copy and makes its scenes searchable on
+          your device.
+        </p>
+        <label for="link-url" data-i18n="videoLink">Video link</label>
+        <input
+          id="link-url"
+          type="url"
+          maxlength="2048"
+          required
+          autocomplete="off"
+          placeholder="https://www.youtube.com/watch?v=…"
+        />
+        <p class="link-note" data-i18n="linkLimits">
+          Single videos only · up to 512 MB · no live streams or sign-in. Import videos you own or
+          have permission to use. Speech and summaries are not searched.
+        </p>
+        <div class="dialog-actions">
+          <button type="button" id="close-link" class="quiet-button" data-i18n="cancel">
+            Cancel
+          </button>
+          <button type="submit" id="submit-link" class="import-button" data-i18n="startLink">
+            Import video
+          </button>
+        </div>
+      </form>
+    </dialog>
     <dialog id="remove-dialog">
       <form method="dialog">
         <h2 data-i18n="removeTitle">Remove this video?</h2>

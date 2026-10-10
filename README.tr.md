@@ -10,7 +10,7 @@ Video ekle, gördüğün sahneyi tarif et ve sonuçtan o ana git. İstersen örn
 
 ## Kurulum
 
-**Windows için kolay kurulum:** [v0.2.0 paketini](https://github.com/Fatih-Haslak/scenescout/releases/tag/v0.2.0) indir, ZIP’i bir klasöre çıkart ve `Start.cmd` dosyasına çift tıkla. Python ve bağımlılıklar otomatik hazırlanır; elle Python/uv kurmak gerekmez. İlk açılış internet ve birkaç GB boş alan gerektirir. NVIDIA GPU için `Start-GPU.cmd` kullanılabilir. [Kurulum ayrıntıları](docs/installation.md).
+**Windows için kolay kurulum:** [v0.3.0 paketini](https://github.com/Fatih-Haslak/scenescout/releases/tag/v0.3.0) indir, ZIP’i bir klasöre çıkart ve `Start.cmd` dosyasına çift tıkla. Python, bağımlılıklar ve YouTube çalışma ortamı otomatik hazırlanır; elle Python/uv kurmak gerekmez. İlk açılış internet ve birkaç GB boş alan gerektirir. NVIDIA GPU için `Start-GPU.cmd` kullanılabilir. [Kurulum ayrıntıları](docs/installation.md).
 
 Kaynak koddan kurmak için Python 3.12/3.13 ve [uv](https://docs.astral.sh/uv/getting-started/installation/) kullan:
 
@@ -22,7 +22,7 @@ uv run --frozen --extra cpu scenescout --open-browser
 
 Windows’ta **Start.cmd** dosyasına çift tıklayabilirsin. İlk açılışta bağımlılıklar, ilk videoda yaklaşık 1,5 GB model dosyası indirilir. Uygulamayı [http://127.0.0.1:8765](http://127.0.0.1:8765) adresinde kullan. Sunucuyu terminalinde Ctrl+C ile durdur.
 
-1. **Video ekle** ile H.264 MP4 veya WebM seç.
+1. **Video ekle** ile H.264 MP4 veya WebM seç; ya da **Bağlantıdan ekle** ile herkese açık YouTube/Shorts veya X/Twitter video adresi yapıştır.
 2. İndeksleme bitip **Hazır** yazmasını bekle.
 3. “Çimenlerde oturan bir tavşan” gibi bir sahne tarif et.
 4. Sonuca tıkla; oynatıcı ilgili zaman koduna gider.
@@ -33,7 +33,9 @@ Yarım kalan indeksler kayıtlı kareleri korur. Kitaplıktaki **İndekslemeye d
 
 ## Doğrulama ve ölçümler
 
-40 davranış testi; Windows/Linux ve Python 3.12/3.13 için otomatik kontroller. Gerçek model ayrıca CPU ve RTX 4060 Ti GPU üzerinde çalıştırıldı. Üç filmden 55 kare ve 36 Türkçe/İngilizce sorgudan oluşan küçük geliştirme setinde doğru sahne 24 sorguda ilk sırada, 36 sorgunun tamamında ilk beşte bulundu. Isınmış metin aramasında ortanca süre CPU’da 66 ms, GPU’da 32 ms ölçüldü.
+66 davranış testi; Windows/Linux ve Python 3.12/3.13 için otomatik kontroller. Gerçek model ayrıca CPU ve RTX 4060 Ti GPU üzerinde çalıştırıldı. Üç filmden 55 kare ve 36 Türkçe/İngilizce sorgudan oluşan küçük geliştirme setinde doğru sahne 24 sorguda ilk sırada, 36 sorgunun tamamında ilk beşte bulundu. Isınmış metin aramasında ortanca süre CPU’da 66 ms, GPU’da 32 ms ölçüldü.
+
+Bağlantı indirmeleri arka planda çalışır; iptal edilebilir ve yarım kalırsa baştan yeniden denenebilir. İndirilen kopya H.264 MP4’e dönüştürülür. **Kaynağı aç** düğmesi orijinal paylaşımı gösterir. Tekil, herkese açık videolar desteklenir; canlı yayın, hesap girişi ve konuşma/özet üretimi yoktur. Platform erişimi engellerse hata gösterilir. [Bağlantı desteği ve gerçek örnekler](docs/link-imports.md).
 
 Bu küçük set genel doğruluk garantisi değildir. Beklenen sahneler aramalardan önce kaydedildi; ilk sonucu kaçıran sorgular da raporda yer alır. [Ham sonuçlar, yöntem ve tekrar çalıştırma](docs/evaluation.md).
 
