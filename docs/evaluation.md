@@ -40,7 +40,7 @@ Synthetic normalized 768-dimensional vectors, seeded with `20261010`, distribute
 | 10,000 | 29.3 MiB | 133.46 ms | 0.79 / 1.07 ms | 124.38 ms |
 | 50,000 | 146.5 MiB | 632.29 ms | 5.88 / 6.51 ms | 650.15 ms |
 
-Cached timings use 20 repetitions; uncached timings use five. These are sample percentiles. Query encoding is excluded. Exact scanning remains O(N × 768), with O(N) sorting and additional metadata memory. 50,000 vectors require ~146 MiB for the raw matrix; very large archives still need a dedicated vector index.
+Cached timings use 20 repetitions; uncached timings use five. These are sample percentiles. Query encoding is excluded. Exact scanning remains O(N × 768), with O(N log N) sorting and additional metadata memory. 50,000 vectors require ~146 MiB for the raw matrix; very large archives still need a dedicated vector index.
 
 ## Reproduce
 

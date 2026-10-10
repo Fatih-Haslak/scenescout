@@ -75,7 +75,7 @@ Synthetic normalized 768-dimensional vectors, seeded with `20261010`, distribute
 | --- | --- | --- | --- | --- |
 {chr(10).join(scale_rows)}
 
-Cached timings use 20 repetitions; uncached timings use five. These are sample percentiles. Query encoding is excluded. Exact scanning remains O(N × 768), with O(N) sorting and additional metadata memory. 50,000 vectors require ~146 MiB for the raw matrix; very large archives still need a dedicated vector index.
+Cached timings use 20 repetitions; uncached timings use five. These are sample percentiles. Query encoding is excluded. Exact scanning remains O(N × 768), with O(N log N) sorting and additional metadata memory. 50,000 vectors require ~146 MiB for the raw matrix; very large archives still need a dedicated vector index.
 
 ## Reproduce
 
